@@ -1,0 +1,426 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>buildlogs &mdash; ipybuilder 0.0.A10 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/bldi.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="ipybuilder 0.0.A10 documentation" href="index.html"/>
+        <link rel="up" title="ipybuilder" href="indxmeth.html"/>
+        <link rel="next" title="IronPython™ compiler" href="ipypyc.html"/>
+        <link rel="prev" title="ipybuilder" href="indxmeth.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ipybuilder
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.A10
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="bld.html"><strong>ipybuild</strong></a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="indxmeth.html">ipybuilder</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">buildlogs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-build">build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-buildcheck">buildcheck</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-buildmake">buildmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-filecontrol">filecontrol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-globalstate">globalstate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-makedefault">makedefault</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-makeload">makeload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-makeparse">makeparse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-partialerror">partialerror</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-regt">regt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-required">required</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-terminalcolorlog">terminalcolorlog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-version">version</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ipypyc.html">IronPython™ compiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unit.html">unittests</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="indxexplr.html">advanced</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ipybuilder</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="indxmeth.html">ipybuilder</a> &raquo;</li>
+        
+      <li>buildlogs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/mod.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-buildlogs">
+<span id="buildlogs"></span><h1>buildlogs<a class="headerlink" href="#module-buildlogs" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="meth.html#bldlgs"><span class="std std-ref">buildlogs methods</span></a></p>
+</div>
+<div class="section" id="module-build">
+<span id="build"></span><h1>build<a class="headerlink" href="#module-build" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="meth.html#bld"><span class="std std-ref">build methods</span></a></p>
+</div>
+<div class="section" id="module-buildcheck">
+<span id="buildcheck"></span><h1>buildcheck<a class="headerlink" href="#module-buildcheck" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="meth.html#bldchk"><span class="std std-ref">buildcheck methods</span></a></p>
+</div>
+<div class="section" id="module-buildmake">
+<span id="buildmake"></span><h1>buildmake<a class="headerlink" href="#module-buildmake" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">method:</th><td class="field-body">makebuild() internal call</td>
+</tr>
+</tbody>
+</table>
+<p>Compile the exe or dll files given the user infomation</p>
+<p>Use modified pyc.py to compile with subprocess call to
+IronPython ipy.exe.</p>
+<p>Stop build on partialError that is Fatal to Compile
+Let makeBuild finish so that user can fix partialErrs</p>
+<p>Assembly setup:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="11%" />
+<col width="26%" />
+<col width="47%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">flag (exe)</th>
+<th class="head">state</th>
+<th class="head">parameter(s)</th>
+<th class="head">ipy run result</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td rowspan="2"><p class="first">standalone</p>
+<p class="last">plus embed</p>
+</td>
+<td rowspan="2">true</td>
+<td>listexe</td>
+<td>App self embedded: no AddRef
+Can run without Ironpython.</td>
+</tr>
+<tr class="row-odd"><td>listdll</td>
+<td>User libs embedded: no AddRef
+Can run without Ironpython.</td>
+</tr>
+<tr class="row-even"><td><p class="first">standalone</p>
+<p>plus embed</p>
+<p class="last">plus
+libembed</p>
+</td>
+<td>true</td>
+<td><p class="first">any or None</p>
+<p class="last">listexe/listdll</p>
+</td>
+<td><p class="first">No AddRef - any</p>
+<p class="last">can run without Ironpython.</p>
+</td>
+</tr>
+<tr class="row-odd"><td>standalone</td>
+<td>true</td>
+<td>all any or Non</td>
+<td>Distribute and AddRef Stdlib
+if Lib imports (i.e. zip, etc)
+Can run without Ironpython.</td>
+</tr>
+<tr class="row-even"><td>embed</td>
+<td>true</td>
+<td>listexe and/or
+listdll</td>
+<td>modules.py (listexe) and .dlls
+(listdll) embedded.
+No AddRef
+imports within app.exe</td>
+</tr>
+<tr class="row-odd"><td>all</td>
+<td>false</td>
+<td rowspan="2">listexe and
+listdll</td>
+<td>Import modules.py and .dlls
+(listdll) copyied to outdir.
+Distribute with app.exe.</td>
+</tr>
+<tr class="row-even"><td>libembed</td>
+<td>true</td>
+<td>Distribute and AddRef Stdlib</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="11%" />
+<col width="26%" />
+<col width="47%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">flag (dll)</th>
+<th class="head">state</th>
+<th class="head">parameter(s)</th>
+<th class="head">ipy run result</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td rowspan="2">no effect</td>
+<td rowspan="2">NA</td>
+<td>listexe</td>
+<td>App dll .py modules needed in
+path.</td>
+</tr>
+<tr class="row-odd"><td>listdll</td>
+<td>User libs need to AddRef</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="meth.html#bldmk"><span class="std std-ref">buildmake methods</span></a></p>
+</div>
+<div class="section" id="module-filecontrol">
+<span id="filecontrol"></span><h1>filecontrol<a class="headerlink" href="#module-filecontrol" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="meth.html#flcntrl"><span class="std std-ref">filecontrol methods</span></a></p>
+</div>
+<div class="section" id="module-globalstate">
+<span id="globalstate"></span><h1>globalstate<a class="headerlink" href="#module-globalstate" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="meth.html#globals"><span class="std std-ref">globalstate class</span></a></p>
+</div>
+<div class="section" id="module-makedefault">
+<span id="makedefault"></span><h1>makedefault<a class="headerlink" href="#module-makedefault" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="meth.html#mkdef"><span class="std std-ref">makedefault methods</span></a></p>
+</div>
+<div class="section" id="module-makeload">
+<span id="makeload"></span><h1>makeload<a class="headerlink" href="#module-makeload" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="meth.html#mkld"><span class="std std-ref">makeload methods</span></a></p>
+</div>
+<div class="section" id="module-makeparse">
+<span id="makeparse"></span><h1>makeparse<a class="headerlink" href="#module-makeparse" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="meth.html#mkprs"><span class="std std-ref">makeparse methods</span></a></p>
+</div>
+<div class="section" id="module-partialerror">
+<span id="partialerror"></span><h1>partialerror<a class="headerlink" href="#module-partialerror" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="meth.html#parerr"><span class="std std-ref">partialerror methods</span></a></p>
+</div>
+<div class="section" id="module-regt">
+<span id="regt"></span><h1>regt<a class="headerlink" href="#module-regt" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="meth.html#rgt"><span class="std std-ref">regt methods</span></a></p>
+</div>
+<div class="section" id="module-required">
+<span id="required"></span><h1>required<a class="headerlink" href="#module-required" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="meth.html#reqd"><span class="std std-ref">required methods</span></a></p>
+</div>
+<div class="section" id="module-terminalcolorlog">
+<span id="terminalcolorlog"></span><h1>terminalcolorlog<a class="headerlink" href="#module-terminalcolorlog" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="meth.html#termc"><span class="std std-ref">terminalcolorlog methods</span></a></p>
+</div>
+<div class="section" id="module-version">
+<span id="version"></span><h1>version<a class="headerlink" href="#module-version" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="meth.html#vertrack"><span class="std std-ref">version methods</span></a></p>
+<p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ipypyc.html" class="btn btn-neutral float-right" title="IronPython™ compiler" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="indxmeth.html" class="btn btn-neutral" title="ipybuilder" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Howard Dunn.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.A10',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

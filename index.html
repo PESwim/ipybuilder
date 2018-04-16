@@ -1,0 +1,339 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ipybuilder’s documentation &mdash; ipybuilder 0.0.A10 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/bldi.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="ipybuilder 0.0.A10 documentation" href="#"/>
+        <link rel="next" title="ipybuild" href="bld.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> ipybuilder
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.A10
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bld.html"><strong>ipybuild</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="indxmeth.html">ipybuilder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ipypyc.html">IronPython™ compiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unit.html">unittests</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="indxexplr.html">advanced</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">ipybuilder</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>ipybuilder’s documentation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ipybuilder-s-documentation">
+<span id="docs-home"></span><h1>ipybuilder’s documentation<a class="headerlink" href="#ipybuilder-s-documentation" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><strong>Version:</strong> 0.0.A10 - Apr 16, 2018</div></blockquote>
+<div class="section" id="highlights">
+<h2>Highlights<a class="headerlink" href="#highlights" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><strong>standalone</strong> - minimize third party libs <em>(no visual studio)</em>.</li>
+<li><em>IronPython</em>™ - dll and exe file build/make,
+using <em>python 2.7</em>™.</li>
+<li><em>Assembly information</em> - include user defined.</li>
+<li><em>PascalCase</em> - match C#.net™.</li>
+<li><em>Verbose</em> - check build with non-aborting confirming output.</li>
+<li><em>Parse</em> - attempt almost any reasonable full or partial input <em>(no argparse)</em>.</li>
+<li><strong>Alpha</strong> - release 0.0.A10 to get started.</li>
+<li><strong>Not Endorsed by C#.Net, IronPython, or python</strong></li>
+<li><em>see what work is already a</em> <a class="reference internal" href="todo.html#to-dos"><span class="std std-ref">ToDo next steps</span></a></li>
+</ul>
+</div></blockquote>
+<div class="section" id="semi-precious-gems">
+<h3>semi-precious gems<a class="headerlink" href="#semi-precious-gems" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><em>Cherry pick code as stanalone modules/classes</em></p>
+<dl class="docutils">
+<dt><em>add logging colors</em></dt>
+<dd><a class="reference download internal" href="_downloads/terminalcolorlog.py" download=""><code class="xref download docutils literal notranslate"><span class="pre">TerminalColorlog</span></code></a></dd>
+<dt><em>use your modified config inputs to directly run the pyc.py module</em></dt>
+<dd><a class="reference download internal" href="_downloads/pyc.py" download=""><code class="xref download docutils literal notranslate"><span class="pre">pyc</span></code></a></dd>
+</dl>
+<p><em>simple clr imports debug tool - see how to interact with IronPython/.net</em>
+<strong>runs with ipy only</strong>
+<a class="reference download internal" href="_downloads/ipyver.py" download=""><code class="xref download docutils literal notranslate"><span class="pre">ipyver</span></code></a></p>
+<p>Copy and use any code, but please attribute the author to keep license.</p>
+</div></blockquote>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bld.html"><strong>ipybuild</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="indxmeth.html">ipybuilder</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mod.html">buildlogs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mod.html#module-build">build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mod.html#module-buildcheck">buildcheck</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mod.html#module-buildmake">buildmake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mod.html#module-filecontrol">filecontrol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mod.html#module-globalstate">globalstate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mod.html#module-makedefault">makedefault</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mod.html#module-makeload">makeload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mod.html#module-makeparse">makeparse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mod.html#module-partialerror">partialerror</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mod.html#module-regt">regt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mod.html#module-required">required</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mod.html#module-terminalcolorlog">terminalcolorlog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mod.html#module-version">version</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ipypyc.html">IronPython™ compiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unit.html">unittests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="unit.html#module-testbuildconfig">testBuildConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unit.html#module-testmakeparse">testMakeParse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unit.html#module-makedefault">testJSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unit.html#module-regt">testControlSlashes In Path</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="unit-testing">
+<h1>unit testing<a class="headerlink" href="#unit-testing" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><a class="reference internal" href="unit.html#unit-tests"><span class="std std-ref">unittests</span></a></div></blockquote>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+<div class="section" id="development-status">
+<h1>development status<a class="headerlink" href="#development-status" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="versionup.html#versions-info"><span class="std std-ref">versions</span></a></li>
+<li><a class="reference internal" href="bugs.html#bugs-report"><span class="std std-ref">bugs reported</span></a></li>
+<li><a class="reference internal" href="wwwpyc.html#info-and-site-visits"><span class="std std-ref">where I’ve been</span></a></li>
+</ul>
+</div>
+<div class="section" id="advanced-example-walk-through-devops">
+<h1>advanced - example walk-through - devops<a class="headerlink" href="#advanced-example-walk-through-devops" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="indxexplr.html">advanced</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="indxexplr.html#devop-debug-explore">devop &amp; debug: explore</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p><a class="reference internal" href="todo.html#to-dos"><span class="std std-ref">ToDo next steps</span></a></p>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="bld.html" class="btn btn-neutral float-right" title="ipybuild" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Howard Dunn.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.A10',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

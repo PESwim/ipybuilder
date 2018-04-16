@@ -1,0 +1,271 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>advanced &mdash; ipybuilder 0.0.A10 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/bldi.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="ipybuilder 0.0.A10 documentation" href="index.html"/>
+        <link rel="next" title="explorlib" href="exploremod.html"/>
+        <link rel="prev" title="unittests" href="unit.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ipybuilder
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.A10
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bld.html"><strong>ipybuild</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="indxmeth.html">ipybuilder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ipypyc.html">IronPython™ compiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unit.html">unittests</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">advanced</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#devop-debug-explore">devop &amp; debug: explore</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="exploremod.html">explorlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exploremod.html#module-explorver">explorver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exploremod.html#module-libimport">libimport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exploremod.html#module-ipyver">ipyver</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ipybuilder</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>advanced</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/indxexplr.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p><a class="reference internal" href="index.html#docs-home"><span class="std std-ref">ipybuilder’s documentation</span></a></p>
+<div class="section" id="advanced">
+<h1>advanced<a class="headerlink" href="#advanced" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="devop-debug-explore">
+<h2>devop &amp; debug: explore<a class="headerlink" href="#devop-debug-explore" title="Permalink to this headline">¶</a></h2>
+<p>Uses <a class="reference internal" href="exploremod.html#module-ipyver"><span class="std std-ref">ipyver</span></a> to track the loaded Assembly and module sources.
+This was useful to see how compiled versions were loaded/imported and
+show how to use these methods. This code all came from a one-line bug
+fix in the original IronPython Lib/ code, which kept the compiled standalones
+from running in an independent system. As I could not get IronPython to
+debug trace each line had to be checked manually in the entire Lib/ code.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="exploremod.html">explorlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exploremod.html#module-explorver">explorver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exploremod.html#module-libimport">libimport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exploremod.html#module-ipyver">ipyver</a></li>
+</ul>
+</div>
+<p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="exploremod.html" class="btn btn-neutral float-right" title="explorlib" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="unit.html" class="btn btn-neutral" title="unittests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Howard Dunn.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.A10',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

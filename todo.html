@@ -1,0 +1,307 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ToDo next steps &mdash; ipybuilder 0.0.A10 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/bldi.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="ipybuilder 0.0.A10 documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ipybuilder
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.A10
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bld.html"><strong>ipybuild</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="indxmeth.html">ipybuilder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ipypyc.html">IronPython™ compiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unit.html">unittests</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="indxexplr.html">advanced</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ipybuilder</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li><strong>ToDo next steps</strong></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/todo.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p><a class="reference internal" href="index.html#docs-home"><span class="std std-ref">ipybuilder’s documentation</span></a></p>
+<div class="section" id="todo-next-steps">
+<span id="to-dos"></span><h1><strong>ToDo next steps</strong><a class="headerlink" href="#todo-next-steps" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><ul class="simple">
+<li><strong>ipybuilder works for the author using Win7 64 bit python 32/64 with
+IronPython 2.7.7.1000 - thats the only test..so far.</strong></li>
+<li><strong>This fixes several longtime running bugs in the IronPython
+pyc.py complier and then goes on to try and really help build a
+project lib or exe.</strong></li>
+<li><strong>Please keep in mind this is alpha release for help/review</strong></li>
+<li><strong>Intensional: must keep out all</strong> <em>non-IronPyhton</em> <strong>available imports</strong></li>
+<li><strong>Intensionally kept imports to a minimum at the expense of re-writing the
+wheel. Wanted to be as transparent/independent as possible.</strong></li>
+</ul>
+<dl class="docutils">
+<dt><strong>development</strong>: Developed in 32 bit python</dt>
+<dd><ul class="first last simple">
+<li>cant use set.py for IronPython code</li>
+<li>cant use pylint/enchant in 64 bit, so build with 32 bit</li>
+<li>cant sphinx in 64 bit, so built with 32 bit</li>
+</ul>
+</dd>
+</dl>
+<p><em>check - should run in both ipy and python and 32/64bit</em></p>
+</div></blockquote>
+<div class="section" id="work-to-continue">
+<h2>work to continue<a class="headerlink" href="#work-to-continue" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="docutils">
+<dt><em>on error bad arg parse may pollutes with multiple directory/file creates</em></dt>
+<dd>Add del current writes/rm dirs on exit errors.</dd>
+<dt><em>add file_version info to dll files</em></dt>
+<dd>Requires sub-classing IronPython CompileModules.</dd>
+<dt><em>clean out all globals except log</em></dt>
+<dd></dd>
+<dt><em>separate unit tests from production code completely</em></dt>
+<dd>Difficult, as wanted to test real-time run with subprocess, but
+have to run unittest from /Tests not /builder sub directory. This must
+require lots of set-up mocks into a /builder like subdirectory so that
+testing for ‘Tests’ in current working directory can be avoided in
+production code.</dd>
+<dt><em>adapt argparse (on comments, help readability, and bugs found</em></dt>
+<dd>Trying out a structure free input style cost many hours and
+is about half the code-base. Also allowed non-‘r‘“text” and both unicode and
+str.
+Originally planned on complete structured free input so user doesn’t have
+remember or learn an exact format.  Found limits on how far this works and
+that eventually a main name has to be provided so no real use in accepting
+command args that omit a main name.</dd>
+<dt><em>add a switch func to TerminalColorlog between windows and bash</em></dt>
+<dd>Right now have to manually adjust the code.</dd>
+<dt><em>clean naming to match PascalCase throughout</em></dt>
+<dd>The whole point of this program is for working with python and C#.net. When
+sub-classing a .net class it is much clearer to mirror a .Net class with a
+python PascalClass name style to visually read code back and forth.
+I really didn’t focus on naming to start as this package is only written
+in python, but is relevant for all my other work. Sorry.</dd>
+<dt><em>write a nice tutorial/how to/steps</em></dt>
+<dd></dd>
+</dl>
+</div></blockquote>
+<div class="section" id="really-kill-anti-patterns-and-bad-practice-life-long-pursuit">
+<h3>really kill anti-patterns and bad practice - life long pursuit<a class="headerlink" href="#really-kill-anti-patterns-and-bad-practice-life-long-pursuit" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="docutils">
+<dt><em>adapt where possible parsing code that already exists</em></dt>
+<dd>i.e. remove code that re-wrote the wheel.</dd>
+<dt><em>refactor if else into methods</em></dt>
+<dd>Too many if else - just takes a bit of time.</dd>
+<dt><em>wow these wonderful unittests - what to do?</em></dt>
+<dd></dd>
+</dl>
+</div></blockquote>
+<p><a class="reference internal" href="index.html#docs-home"><span class="std std-ref">ipybuilder’s documentation</span></a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Howard Dunn.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.A10',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

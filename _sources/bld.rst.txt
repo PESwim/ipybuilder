@@ -1,0 +1,14 @@
+
+.. _ipybld:
+
+**ipybuild**
+============
+
+  :ref:`Apache-License`
+  
+  :ref:`cmd ex`
+
+.. automodule:: ipybuild
+   :members: Build, ScriptBuild, logReport, helpVerbose
+    
+:ref:`docs home`

@@ -1,0 +1,22 @@
+:orphan:
+
+:ref:`docs home`
+
+.. _versions info:
+
+**versions**
+^^^^^^^^^^^^
+  |version| - current
+    - well none so far |today|
+
+  **Version v0.0.A10**
+    - Alpha release to start
+    - Tested:
+      - Window 7 64 platform - 32 bit python
+    - issues:
+      :ref:`bugs 0.0.A10`  
+ 
+ 
+:ref:`modindex`    
+
+:ref:`docs home`

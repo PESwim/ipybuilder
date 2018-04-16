@@ -1,0 +1,292 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>notice: &mdash; ipybuilder 0.0.A10 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/bldi.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="ipybuilder 0.0.A10 documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ipybuilder
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.A10
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bld.html"><strong>ipybuild</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="indxmeth.html">ipybuilder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ipypyc.html">IronPython™ compiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unit.html">unittests</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="indxexplr.html">advanced</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ipybuilder</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li><strong>notice:</strong></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/pycdoc.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="notice">
+<span id="pyc-lic"></span><h1><strong>notice:</strong><a class="headerlink" href="#notice" title="Permalink to this headline">¶</a></h1>
+<p>..###############################################################################
+|
+| Copyright (c) Microsoft Corporation. All rights reserved.
+|
+| This source code is subject to terms and conditions of the Apache License,
+| Version 2.0. A copy of the <cite>license</cite> can be found in the License.txt file at
+| the root of this distribution. If you cannot locate the Apache License,
+| Version 2.0, please send an email to <a class="reference external" href="mailto:ironpy&#37;&#52;&#48;microsoft&#46;com">ironpy<span>&#64;</span>microsoft<span>&#46;</span>com</a>. By using this
+| source code in any fashion, you are agreeing to be bound by the terms of the
+| Apache License, Version 2.0.
+|
+| Copyright 2018 - Howard Dunn - PE LLC. Apache 2.0 v.2 licensed. Modified/derivative work from original.
+| Modification not endorsed by Microsoft Corp.
+|
+| You must not remove this notice, or any other, from this software.
+|
+| <cite>license</cite></p>
+<p>..###############################################################################</p>
+<div class="section" id="pyc-the-command-line-python-compiler">
+<span id="pyc-doc"></span><h2><strong>pyc: The Command-Line Python Compiler</strong><a class="headerlink" href="#pyc-the-command-line-python-compiler" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Usage:</th><td class="field-body">ipy.exe pyc.py [options] file [file …]</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> Options:
+ /out:output_file                           Output file name (default is main_file.&lt;extension&gt;)
+ /target:dll                               Compile only into dll.  Default
+ /target:exe                               Generate console executable stub for startup in addition to dll.
+ /target:winexe           TODO             Generate windows executable stub for startup in addition to dll.
+ @&lt;file&gt;                  NOT TESTED       Specifies a response file to be parsed for input files and command line options (one per line)
+ /file_version:&lt;version&gt;  NOT IMPLEMENTED  Set the file/assembly version
+ /? /h                                     This message
+ -v - in ipybuild args                     Verbose output
+
+
+ EXE/WinEXE specific options:
+ /main:main_file.py                        Main file of the project (module to be executed first)
+ /platform:x86                             Compile for x86 only
+ /platform:x64            NOT IMPLEMENTED  Compile for x64 only
+ /embed                                    Embeds the generated DLL as a resource into the executable which is loaded at runtime
+ /libembed                                 Embeds the StdLib DLL as a resource into the executable which is loaded at runtime
+ /standalone                               Embeds the IronPython assemblies into the stub executable.
+ /mta                                      Set MTAThreadAttribute on Main instead of STAThreadAttribute, only valid for /target:winexe
+ /file_info_product:&lt;name&gt;                 Set product name in executable meta information
+ /file_info_product_version:&lt;version&gt;      Set product version in executable meta information
+ /file_info_company:&lt;name&gt;                 Set company name in executable meta information
+ /file_info_copyright:&lt;info&gt;               Set copyright information in executable meta information
+ /file_info_trademark:&lt;info&gt;               Set trademark information in executable meta information
+
+Example:
+  ipy.exe pyc.py /main:Program.py Form.py /target:winexe (original pyc.py: Not yet implemented win.exe)
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Howard Dunn.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.A10',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+
+:ref:`docs home`
+
+advanced
+--------
+
+devop & debug: explore 
+++++++++++++++++++++++
+Uses :ref:`ipyver` to track the loaded Assembly and module sources.
+This was useful to see how compiled versions were loaded/imported and
+show how to use these methods. This code all came from a one-line bug 
+fix in the original IronPython Lib/ code, which kept the compiled standalones
+from running in an independent system. As I could not get IronPython to 
+debug trace each line had to be checked manually in the entire Lib/ code.
+ 
+.. toctree::
+   :maxdepth: 2
+
+   exploremod.rst
+       
+:ref:`modindex`

@@ -1,0 +1,12 @@
+
+:ref:`docs home`
+
+ipybuilder
+==========
+
+.. toctree::
+   :maxdepth: 2
+
+   mod.rst
+       
+:ref:`modindex`

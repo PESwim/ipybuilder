@@ -1,0 +1,77 @@
+.. builder documentation master file, created by
+   sphinx-quickstart on Sat Mar 03 23:03:55 2018.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+   
+.. |trade| unicode:: U+02122
+
+.. _docs home:
+
+ipybuilder's documentation
+==========================
+   **Version:** |version| - |today|
+
+Highlights   
+**********
+   * **standalone** - minimize third party libs *(no visual studio)*.
+   * *IronPython*\ |trade| - dll and exe file build/make,
+     using *python 2.7*\ |trade|.  
+   * *Assembly information* - include user defined.     
+   * *PascalCase* - match C#.net\ |trade|.
+   * *Verbose* - check build with non-aborting confirming output.
+   * *Parse* - attempt almost any reasonable full or partial input *(no argparse)*.
+   * **Alpha** - release |version| to get started.
+   * **Not Endorsed by C#.Net, IronPython, or python**
+   
+   * *see what work is already a* :ref:`to dos`   
+   
+semi-precious gems
+------------------
+  *Cherry pick code as stanalone modules/classes*
+  
+  *add logging colors*
+    :download:`TerminalColorlog <../../builder/terminalcolorlog.py>`
+  
+  *use your modified config inputs to directly run the pyc.py module*
+    :download:`pyc <../../builder/pyc.py>`
+  
+  *simple clr imports debug tool - see how to interact with IronPython/.net*
+  **runs with ipy only**
+  :download:`ipyver <../../builder/ipyver.py>`
+  
+  Copy and use any code, but please attribute the author to keep license.
+  
+.. toctree::
+   :maxdepth: 3
+   :caption: Contents:
+   
+   bld.rst
+   indxmeth.rst
+   ipypyc.rst
+   unit.rst
+   
+unit testing
+============
+   :ref:`unit tests`
+  
+indices and tables
+==================
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+
+development status
+==================
+* :ref:`versions info`
+* :ref:`bugs report`   
+* :ref:`info and site visits`
+   
+advanced - example walk-through - devops
+========================================
+
+.. toctree::
+   :maxdepth: 2   
+
+   indxexplr.rst
+   
+:ref:`to dos`

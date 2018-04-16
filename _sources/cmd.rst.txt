@@ -1,0 +1,28 @@
+:orphan:
+
+.. _cmd ex:
+
+**cmd shell help**
+++++++++++++++++++
+  **Check ipybuild response from prompt** ``python ./ipybuild.py >>> "echo no params OK"``
+  
+  **Easier to put into a .bat file run from the /builder directory**
+    - Errors:
+ 
+      - check python and .bat paths 
+      - verify you a running .bat/.sh from /builder
+  
+  **Windows command (cmd) shell**:
+    *example.bat file content* ``example.bat``
+    
+    ``cmd /c python -m ipybuild.py ' ' examples\makehello.py
+    example\makehello_assembly.json True listdll=examples\listdll.txt``
+  
+  **Bash shell**: 
+    *example.sh file content run from /builder* ``example.sh``  
+  
+    ``#!/bin/bash``
+    ``python .ipybuild.py ' ' examples/makehello.py  examples/make_assembly.json
+    True examples/cmd listdll=examples/listdll.txt``
+
+:ref:`docs home`

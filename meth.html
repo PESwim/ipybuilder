@@ -1,0 +1,1025 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>buildlogs methods &mdash; ipybuilder 0.0.A10 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/bldi.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="ipybuilder 0.0.A10 documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ipybuilder
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.A10
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bld.html"><strong>ipybuild</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="indxmeth.html">ipybuilder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ipypyc.html">IronPython™ compiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unit.html">unittests</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="indxexplr.html">advanced</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ipybuilder</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>buildlogs methods</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/meth.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mod.html">buildlogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mod.html#module-build">build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mod.html#module-buildcheck">buildcheck</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mod.html#module-buildmake">buildmake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mod.html#module-filecontrol">filecontrol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mod.html#module-globalstate">globalstate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mod.html#module-makedefault">makedefault</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mod.html#module-makeload">makeload</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mod.html#module-makeparse">makeparse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mod.html#module-partialerror">partialerror</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mod.html#module-regt">regt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mod.html#module-required">required</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mod.html#module-terminalcolorlog">terminalcolorlog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mod.html#module-version">version</a></li>
+</ul>
+</div>
+<div class="section" id="module-buildlogs">
+<span id="buildlogs-methods"></span><span id="bldlgs"></span><h1>buildlogs methods<a class="headerlink" href="#module-buildlogs" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="buildlogs.func">
+<em class="property">class </em><code class="descclassname">buildlogs.</code><code class="descname">func</code><span class="sig-paren">(</span><em>hi</em>, <em>lo</em><span class="sig-paren">)</span><a class="headerlink" href="#buildlogs.func" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>“logging”</em> way to filter by each FILE record at lvl 45.
+Also use custom level to only send level 45 to filelog
+if log.critical = 50 then log console goes to File.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="buildlogs.dynfile">
+<code class="descclassname">buildlogs.</code><code class="descname">dynfile</code><span class="sig-paren">(</span><em>name</em>, <em>pathfilelog=None</em><span class="sig-paren">)</span><a class="headerlink" href="#buildlogs.dynfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>split log files and log console by lvl and filter</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-build">
+<span id="build-methods"></span><span id="bld"></span><h1>build methods<a class="headerlink" href="#module-build" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="build.StartBuild">
+<code class="descclassname">build.</code><code class="descname">StartBuild</code><span class="sig-paren">(</span><em>configPath</em><span class="sig-paren">)</span><a class="headerlink" href="#build.StartBuild" title="Permalink to this definition">¶</a></dt>
+<dd><p>Intermediate helper to set-up makeBuild and run</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-buildcheck">
+<span id="buildcheck-methods"></span><span id="bldchk"></span><h1>buildcheck methods<a class="headerlink" href="#module-buildcheck" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="buildcheck.checkBuildConfig">
+<code class="descclassname">buildcheck.</code><code class="descname">checkBuildConfig</code><span class="sig-paren">(</span><em>usrconfig</em>, <em>show=False</em><span class="sig-paren">)</span><a class="headerlink" href="#buildcheck.checkBuildConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Re-check to final config file</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="buildcheck.showUserConfig">
+<code class="descclassname">buildcheck.</code><code class="descname">showUserConfig</code><span class="sig-paren">(</span><em>configuration</em><span class="sig-paren">)</span><a class="headerlink" href="#buildcheck.showUserConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output the configuration file</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-buildmake">
+<span id="buildmake-methods"></span><span id="bldmk"></span><h1>buildmake methods<a class="headerlink" href="#module-buildmake" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">method:</th><td class="field-body">makebuild() internal call</td>
+</tr>
+</tbody>
+</table>
+<p>Compile the exe or dll files given the user infomation</p>
+<p>Use modified pyc.py to compile with subprocess call to
+IronPython ipy.exe.</p>
+<p>Stop build on partialError that is Fatal to Compile
+Let makeBuild finish so that user can fix partialErrs</p>
+<p>Assembly setup:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="11%" />
+<col width="26%" />
+<col width="47%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">flag (exe)</th>
+<th class="head">state</th>
+<th class="head">parameter(s)</th>
+<th class="head">ipy run result</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td rowspan="2"><p class="first">standalone</p>
+<p class="last">plus embed</p>
+</td>
+<td rowspan="2">true</td>
+<td>listexe</td>
+<td>App self embedded: no AddRef
+Can run without Ironpython.</td>
+</tr>
+<tr class="row-odd"><td>listdll</td>
+<td>User libs embedded: no AddRef
+Can run without Ironpython.</td>
+</tr>
+<tr class="row-even"><td><p class="first">standalone</p>
+<p>plus embed</p>
+<p class="last">plus
+libembed</p>
+</td>
+<td>true</td>
+<td><p class="first">any or None</p>
+<p class="last">listexe/listdll</p>
+</td>
+<td><p class="first">No AddRef - any</p>
+<p class="last">can run without Ironpython.</p>
+</td>
+</tr>
+<tr class="row-odd"><td>standalone</td>
+<td>true</td>
+<td>all any or Non</td>
+<td>Distribute and AddRef Stdlib
+if Lib imports (i.e. zip, etc)
+Can run without Ironpython.</td>
+</tr>
+<tr class="row-even"><td>embed</td>
+<td>true</td>
+<td>listexe and/or
+listdll</td>
+<td>modules.py (listexe) and .dlls
+(listdll) embedded.
+No AddRef
+imports within app.exe</td>
+</tr>
+<tr class="row-odd"><td>all</td>
+<td>false</td>
+<td rowspan="2">listexe and
+listdll</td>
+<td>Import modules.py and .dlls
+(listdll) copyied to outdir.
+Distribute with app.exe.</td>
+</tr>
+<tr class="row-even"><td>libembed</td>
+<td>true</td>
+<td>Distribute and AddRef Stdlib</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="11%" />
+<col width="26%" />
+<col width="47%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">flag (dll)</th>
+<th class="head">state</th>
+<th class="head">parameter(s)</th>
+<th class="head">ipy run result</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td rowspan="2">no effect</td>
+<td rowspan="2">NA</td>
+<td>listexe</td>
+<td>App dll .py modules needed in
+path.</td>
+</tr>
+<tr class="row-odd"><td>listdll</td>
+<td>User libs need to AddRef</td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="buildmake.CompileVars">
+<em class="property">class </em><code class="descclassname">buildmake.</code><code class="descname">CompileVars</code><a class="headerlink" href="#buildmake.CompileVars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Consolidate all system and user input values for compile run.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="buildmake.makeBuild">
+<code class="descclassname">buildmake.</code><code class="descname">makeBuild</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span><a class="headerlink" href="#buildmake.makeBuild" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Compile the exe or dll files based on:</dt>
+<dd><ul class="first last simple">
+<li>user args</li>
+<li>user assembly flags (f_embed, f_libembed, f_standalone)</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="buildmake.createUserLibs">
+<code class="descclassname">buildmake.</code><code class="descname">createUserLibs</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span><a class="headerlink" href="#buildmake.createUserLibs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads files from user arg “listdll”.
+If .py file creates .dll then/else adds
+created or listdll .dll file to to compiler config.dlls.</p>
+<dl class="docutils">
+<dt>If assembly f_embed or f_standalone:</dt>
+<dd><dl class="first last docutils">
+<dt>is true:</dt>
+<dd>Agglomerates all dll libraries into one dll
+that is embeded and then removed from
+user arg “outDir” or or auto-named outdir.</dd>
+<dt>else:</dt>
+<dd>Add each lib .dll file to “outDir” or outdir.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-filecontrol">
+<span id="filecontrol-methods"></span><span id="flcntrl"></span><h1>filecontrol methods<a class="headerlink" href="#module-filecontrol" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="filecontrol.checkRequired">
+<code class="descclassname">filecontrol.</code><code class="descname">checkRequired</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#filecontrol.checkRequired" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read file list of required files and check they
+if exist or partial error.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first simple">
+<li>path [str] - of file to read list</li>
+<li>tag= [opt][str] - writelog tag for filtering</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of files <strong>not</strong> found - should be empty [list]</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raise:</th><td class="field-body"><p class="first last">partialError - sink errors for stdout in PartialErrors [list]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="filecontrol.delTestFileWrites">
+<code class="descclassname">filecontrol.</code><code class="descname">delTestFileWrites</code><span class="sig-paren">(</span><em>dellst</em><span class="sig-paren">)</span><a class="headerlink" href="#filecontrol.delTestFileWrites" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle test file cleanup delete created files</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">dellst [list] - list log files filtered for deletion</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True [bool] - if all dellst files deleted</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="filecontrol.getFilesDeleted">
+<code class="descclassname">filecontrol.</code><code class="descname">getFilesDeleted</code><span class="sig-paren">(</span><em>loglst</em><span class="sig-paren">)</span><a class="headerlink" href="#filecontrol.getFilesDeleted" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle deletion of test generated files that have been
+parsed and filtered in logfile list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">loglst [list] - list log files during lookback</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">[list] - existing files</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="filecontrol.getFilesExist">
+<code class="descclassname">filecontrol.</code><code class="descname">getFilesExist</code><span class="sig-paren">(</span><em>loglst</em><span class="sig-paren">)</span><a class="headerlink" href="#filecontrol.getFilesExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle parsed and filtered logfile list</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">loglst [list] - list log files during lookback</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">[list] - existing files</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="filecontrol.CompareFilesConfirmedToRequired">
+<code class="descclassname">filecontrol.</code><code class="descname">CompareFilesConfirmedToRequired</code><span class="sig-paren">(</span><em>confirmlst</em>, <em>reqlst</em><span class="sig-paren">)</span><a class="headerlink" href="#filecontrol.CompareFilesConfirmedToRequired" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle parsed and filtered logfile list</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><ul class="first simple">
+<li><dl class="first docutils">
+<dt>confirmlst [list] - log files confirmed during lookback</dt>
+<dd><ul class="first last">
+<li>reqlst [list] - log files that should be in confirmed list</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<table class="last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">[list] - non-conformed files - should return []</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="filecontrol.getFilesWritten">
+<code class="descclassname">filecontrol.</code><code class="descname">getFilesWritten</code><span class="sig-paren">(</span><em>loglst</em><span class="sig-paren">)</span><a class="headerlink" href="#filecontrol.getFilesWritten" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle parsed and filtered logfile list</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">loglst [list] - list log files during lookback</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">[list] - written files</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="filecontrol.getFilesConfirmed">
+<code class="descclassname">filecontrol.</code><code class="descname">getFilesConfirmed</code><span class="sig-paren">(</span><em>loglst</em><span class="sig-paren">)</span><a class="headerlink" href="#filecontrol.getFilesConfirmed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle parsed and filtered logfile list</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">loglst [list] - list log files during lookback</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">[list] - existing files</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="filecontrol.delBuildFileWrites">
+<code class="descclassname">filecontrol.</code><code class="descname">delBuildFileWrites</code><span class="sig-paren">(</span><em>dellst</em><span class="sig-paren">)</span><a class="headerlink" href="#filecontrol.delBuildFileWrites" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle build file cleanup delete created files</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">dellst [list] - list log files filter for deletion</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">status True [bool] - if all dellst files deleted</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="filecontrol.setLogLookBackTimeSec">
+<code class="descclassname">filecontrol.</code><code class="descname">setLogLookBackTimeSec</code><span class="sig-paren">(</span><em>lookback=120</em><span class="sig-paren">)</span><a class="headerlink" href="#filecontrol.setLogLookBackTimeSec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set log output look-back time (sec)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">sec [int]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="filecontrol.getLogLookBackTimeSec">
+<code class="descclassname">filecontrol.</code><code class="descname">getLogLookBackTimeSec</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#filecontrol.getLogLookBackTimeSec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get log output look-back time (sec)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">sec [int]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="filecontrol.getWriteLog">
+<code class="descclassname">filecontrol.</code><code class="descname">getWriteLog</code><span class="sig-paren">(</span><em>tag=''</em><span class="sig-paren">)</span><a class="headerlink" href="#filecontrol.getWriteLog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find writelog lines matching timestamps between
+lookbacktime (default 120 sec back) and current local time</p>
+<p>logpath: cwdUserDefaultedfilewrite.log - no limit storage</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">tag= [str] - filter by tag</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">writelog data [list]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-globalstate">
+<span id="globalstate-class"></span><span id="globals"></span><h1>globalstate class<a class="headerlink" href="#module-globalstate" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="globalstate.GlobalState">
+<em class="property">class </em><code class="descclassname">globalstate.</code><code class="descname">GlobalState</code><a class="headerlink" href="#globalstate.GlobalState" title="Permalink to this definition">¶</a></dt>
+<dd><p>#TODO trying to clean up globals
+currently only used for the <em>required</em> module</p>
+<p><strong>gsBuild</strong>: Global class holding required paths and existence
+information when the install IronPython path is/is not found.</p>
+<dl class="method">
+<dt id="globalstate.GlobalState.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#globalstate.GlobalState.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__init__(…) initializes x; see help(type(x)) for signature</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="globalstate.GlobalState.__weakref__">
+<code class="descname">__weakref__</code><a class="headerlink" href="#globalstate.GlobalState.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-makedefault">
+<span id="makedefault-methods"></span><span id="mkdef"></span><h1>makedefault methods<a class="headerlink" href="#module-makedefault" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="makedefault.validatePath">
+<code class="descclassname">makedefault.</code><code class="descname">validatePath</code><span class="sig-paren">(</span><em>txt</em><span class="sig-paren">)</span><a class="headerlink" href="#makedefault.validatePath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Regex parse a valid filepath into path:name:ext group</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="makedefault.SlashArgs">
+<code class="descclassname">makedefault.</code><code class="descname">SlashArgs</code><span class="sig-paren">(</span><em>config</em>, <em>name</em>, <em>jsn</em>, <em>out</em><span class="sig-paren">)</span><a class="headerlink" href="#makedefault.SlashArgs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs SlashControl and BasePath for each user path arg:
+<em>(configPath, mainName, jsonp, outDir)</em></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="makedefault.setConfig">
+<code class="descclassname">makedefault.</code><code class="descname">setConfig</code><span class="sig-paren">(</span><em>configPath</em>, <em>mainName</em>, <em>jsonarg</em>, <em>argc</em>, <em>argm</em>, <em>argj</em><span class="sig-paren">)</span><a class="headerlink" href="#makedefault.setConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path json with assembly &gt;&gt; main &gt;&gt; if config None</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="makedefault.setMain">
+<code class="descclassname">makedefault.</code><code class="descname">setMain</code><span class="sig-paren">(</span><em>configPath</em>, <em>mainName</em>, <em>jsonarg</em>, <em>argc</em>, <em>argm</em>, <em>argj</em><span class="sig-paren">)</span><a class="headerlink" href="#makedefault.setMain" title="Permalink to this definition">¶</a></dt>
+<dd><p>path json with assembly &gt;&gt; main &gt;&gt; if config None
+reset mainName path to outDir if no arg “outDir”</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="makedefault.setPath">
+<code class="descclassname">makedefault.</code><code class="descname">setPath</code><span class="sig-paren">(</span><em>configPath</em>, <em>mainName</em>, <em>jsonarg</em>, <em>argout</em>, <em>f_type='json'</em><span class="sig-paren">)</span><a class="headerlink" href="#makedefault.setPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Well this doesn’t end - way too complex</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="makedefault.TestCaseJson">
+<em class="property">class </em><code class="descclassname">makedefault.</code><code class="descname">TestCaseJson</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="headerlink" href="#makedefault.TestCaseJson" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="classmethod">
+<dt id="makedefault.TestCaseJson.setUpClass">
+<em class="property">classmethod </em><code class="descname">setUpClass</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#makedefault.TestCaseJson.setUpClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up class fixture before running tests in the class.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="makedefault.TestCaseJson.setUp">
+<code class="descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#makedefault.TestCaseJson.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="makedefault.TestCaseJson.tearDown">
+<code class="descname">tearDown</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#makedefault.TestCaseJson.tearDown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for deconstructing the test fixture after testing it.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-makeload">
+<span id="makeload-methods"></span><span id="mkld"></span><h1>makeload methods<a class="headerlink" href="#module-makeload" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="makeload.pathRead">
+<code class="descclassname">makeload.</code><code class="descname">pathRead</code><span class="sig-paren">(</span><em>fpaths</em><span class="sig-paren">)</span><a class="headerlink" href="#makeload.pathRead" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try to read a file path or or lst of file paths.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Params:</th><td class="field-body">path[s] [str][list] - path[s] to check.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">[str] or [list] of path[s] read.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raise:</th><td class="field-body">IOError - in getTrueFilePath if fail.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="makeload.CheckConfig">
+<code class="descclassname">makeload.</code><code class="descname">CheckConfig</code><span class="sig-paren">(</span><em>uconfig</em><span class="sig-paren">)</span><a class="headerlink" href="#makeload.CheckConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check for valid config entries after parse/loading</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">config Dict from LoadConfig [OrderedDict]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">userconfig [config Dict]
+- as written to filepath shown in writefiles.log</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raise:</th><td class="field-body">FatalError or partialError [Exception] or [error sink list]</td>
+</tr>
+</tbody>
+</table>
+<p><em>user can re-run ipybuild on a partialError fix</em>
+<em>why FatalError - a user messed with defaults - error vs program error</em></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="makeload.getTrueFilePath">
+<code class="descclassname">makeload.</code><code class="descname">getTrueFilePath</code><span class="sig-paren">(</span><em>fnpath</em><span class="sig-paren">)</span><a class="headerlink" href="#makeload.getTrueFilePath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find absolute file path if exists.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">file path [str] - file path to check.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">absolute path to existing file [str].</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raise:</th><td class="field-body">[IOError] if can’t find or read.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="makeload.LoadConfig">
+<code class="descclassname">makeload.</code><code class="descname">LoadConfig</code><span class="sig-paren">(</span><em>parsedArgs</em><span class="sig-paren">)</span><a class="headerlink" href="#makeload.LoadConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load user defined “configPath” or start with auto-renamed 
+default configuration as helper,if started with “two quotes 
+no space (“”) as configPath parameter. After user adjustments 
+to default_config.config content or name or path, user will need to 
+re-run using “auto-renamed” config path. 
+The auto-renamed file is <em>shown as output</em> in the output log. 
+This will finish a build.</p>
+<p>Provides user opportunity to change defaults in an editor 
+before building on default settings and assembly information.</p>
+<p>If you use “two quotes no space (“”) as the first arg then the 
+default config path is used and buld proceeds with an 
+auto re-named appname:_config.config file or if no main name was 
+provided the default_config.config file which user can modify.</p>
+<p>If the output path (“ourDir” arg) is not resolved generated files
+go to the “/UserDefaulted” directory.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">parsredArgs from ParseArg [OrderedDict]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">[config Dict] userconfig 
+- written to filepath shown in writefiles.log</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">FatalError or partialError [Exception] or [error sink list]</td>
+</tr>
+</tbody>
+</table>
+<p><em>user can re-run ipybuild on a partialError fix</em></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="makeload.loadRes">
+<code class="descclassname">makeload.</code><code class="descname">loadRes</code><span class="sig-paren">(</span><em>arg</em><span class="sig-paren">)</span><a class="headerlink" href="#makeload.loadRes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check a filepath(s) and return path or list of paths</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">strPath to listfile of filepaths [str] or [list]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">filepaths(s) [str] or [list]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="makeload.openResListFiles">
+<code class="descclassname">makeload.</code><code class="descname">openResListFiles</code><span class="sig-paren">(</span><em>rpath</em><span class="sig-paren">)</span><a class="headerlink" href="#makeload.openResListFiles" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>#TODO always partial error in final recursive read as
+#this last try read the text content and not a valid path.
+#Even a regx match errors on “someClass.run” because it 
+#looks like a path</p>
+<p>Check if path is existing file or partial error</p>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Filters:</th><td class="field-body">.dll and .exe files to not read</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Param:</th><td class="field-body">[str] a file path</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">[str] - path if isfile</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raise:</th><td class="field-body">[IOError] sent to partialError</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-makeparse">
+<span id="makeparse-methods"></span><span id="mkprs"></span><h1>makeparse methods<a class="headerlink" href="#module-makeparse" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="makeparse.CommandLineParse">
+<code class="descclassname">makeparse.</code><code class="descname">CommandLineParse</code><span class="sig-paren">(</span><em>arguments</em><span class="sig-paren">)</span><a class="headerlink" href="#makeparse.CommandLineParse" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>space separated - use relative or absolute paths</em>
+<em>non-quoted args</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">ConfigPath:</th><td class="field-body">user .config path or ‘’ to use default_config.config [str] [opt]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">MainName:</th><td class="field-body">python/ironpython .py file to compile as library .dll or .exe [str] [opt]
+- if you leave mainName out final compile is suspended until re-run with mainName</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">OutDir:</th><td class="field-body">path output directory [str] [opt] = default “release/”</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Jsonarg:</th><td class="field-body">path to assembly and embedding flags .json file [str] [opt]
+- defaults to “defautls/”asembly_config.json” and requires the filepath 
+subdirectory “defautls/”.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">MakeEXE:</th><td class="field-body">True - make exe [bool] [opt] - default False to make dll file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Args:</th><td class="field-body">single file paths [str] to add in compile - MUST contain key word (‘exe’, ‘dll’, or ‘zip’) 
+- like mypydll.py or zip.txt</td>
+</tr>
+</tbody>
+</table>
+<p><strong>kwargs</strong> filepath - like listexe=myprojectpyfilelist.txt [opt]</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">listexe:</th><td class="field-body"><ul class="first simple">
+<li>all .py required to run the main.py file as an exe</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">listdll:</th><td class="field-body"><ul class="first simple">
+<li>pre-comiled .dlls or .py module file to add or embed in main</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">listzip:</th><td class="field-body"><ul class="first last simple">
+<li>filepath structure and file archive into output directory</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p><em>see help (-h -v) and documentation for more</em></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="makeparse.ParseArgs">
+<code class="descclassname">makeparse.</code><code class="descname">ParseArgs</code><span class="sig-paren">(</span><em>*sargs</em><span class="sig-paren">)</span><a class="headerlink" href="#makeparse.ParseArgs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse cmd or script args with ability
+to parse/accept multiple user type entries.
+:return: user args [ordered dict]</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-partialerror">
+<span id="partialerror-methods"></span><span id="parerr"></span><h1>partialerror methods<a class="headerlink" href="#module-partialerror" title="Permalink to this headline">¶</a></h1>
+<dl class="exception">
+<dt id="partialerror.FatalError">
+<em class="property">exception </em><code class="descclassname">partialerror.</code><code class="descname">FatalError</code><span class="sig-paren">(</span><em>name</em>, <em>msg</em><span class="sig-paren">)</span><a class="headerlink" href="#partialerror.FatalError" title="Permalink to this definition">¶</a></dt>
+<dd><p>ipybuild Exception catcher</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="partialerror.partialError">
+<code class="descclassname">partialerror.</code><code class="descname">partialError</code><span class="sig-paren">(</span><em>ex</em>, <em>msg</em><span class="sig-paren">)</span><a class="headerlink" href="#partialerror.partialError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aggregates (sinks) non-fatal errors that <em>may</em> require a
+re-run with fix’</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Output:</th><td class="field-body">errors to consider [list]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-regt">
+<span id="regt-methods"></span><span id="rgt"></span><h1>regt methods<a class="headerlink" href="#module-regt" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="regt.SlashContrl">
+<code class="descclassname">regt.</code><code class="descname">SlashContrl</code><span class="sig-paren">(</span><em>strpath</em><span class="sig-paren">)</span><a class="headerlink" href="#regt.SlashContrl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solves windows - os.path normalize fail
+for i.e. teststests, considers   an escape sequence.</p>
+<p>:filters:: [‘r’, ‘t’, ‘f’, ‘a’, ‘v’].</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">true path.</td>
+</tr>
+</tbody>
+</table>
+<p><em>other specific escape chars not filtered</em></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-required">
+<span id="required-methods"></span><span id="reqd"></span><h1>required methods<a class="headerlink" href="#module-required" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="required.FindIronPython">
+<code class="descclassname">required.</code><code class="descname">FindIronPython</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#required.FindIronPython" title="Permalink to this definition">¶</a></dt>
+<dd><p>Walk directories to find IronPython Install</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">[str] IronPython install path and if not main sets gsBuild.IPATH</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raise:</th><td class="field-body">NotImplementedError</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-terminalcolorlog">
+<span id="terminalcolorlog-methods"></span><span id="termc"></span><h1>terminalcolorlog methods<a class="headerlink" href="#module-terminalcolorlog" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="terminalcolorlog.terminalC">
+<em class="property">class </em><code class="descclassname">terminalcolorlog.</code><code class="descname">terminalC</code><span class="sig-paren">(</span><em>stream=&lt;colorama.ansitowin32.StreamWrapper object&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#terminalcolorlog.terminalC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sheads light on a dark subject.</p>
+<p>Uses wincon and winbase constants and handles
+or ANSI codes for platform specific awesomeness
+in concert with with logging.</p>
+<p><em>Sad note: that if you run</em> <strong>bash</strong> <em>in windows you 
+must manually tweak the “code” for bash. 
+No-way to know what tty your running</em></p>
+<p><em>Glad note: it works in bash mingw win 64</em></p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>87
+88
+89
+90
+91
+92
+93
+94</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">assignColor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s1">&#39;win&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="p">:</span>
+<span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">setColor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">emitWin</span>
+</span>    <span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setColor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">emitAnsi</span>
+                        
+<span class="p">:</span><span class="n">TODO</span><span class="p">:</span> <span class="n">add</span> <span class="n">cmd</span> <span class="n">on</span><span class="o">-</span><span class="n">the</span><span class="o">-</span><span class="n">fly</span> <span class="n">switch</span> <span class="n">to</span> <span class="n">instantiated</span> <span class="k">class</span>
+<span class="nc">between</span> <span class="n">bash</span> <span class="ow">and</span> <span class="n">windows</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-version">
+<span id="version-methods"></span><span id="vertrack"></span><h1>version methods<a class="headerlink" href="#module-version" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Howard Dunn.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.A10',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

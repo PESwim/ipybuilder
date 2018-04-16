@@ -1,0 +1,35 @@
+
+.. _unit tests:
+
+unittests
+---------
+
+testBuildConfig
+^^^^^^^^^^^^^^^
+.. automodule:: testbuildconfig
+  :members:
+
+testMakeParse
+^^^^^^^^^^^^^
+.. automodule:: testmakeparse
+  :members:
+
+testJSON
+^^^^^^^^
+.. automodule:: makedefault
+
+  .. autoclass::  TestCaseJson
+     :members: test_case_json_m0
+     :noindex:
+
+testControlSlashes In Path
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. automodule:: regt
+
+  .. autoclass::  TestCaseDoubleSlash
+     :members: test_backslash_and_Controls_0
+     :noindex:
+
+:ref:`docs home`
+
+:ref:`modindex`

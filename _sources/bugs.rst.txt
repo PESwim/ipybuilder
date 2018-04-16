@@ -1,0 +1,19 @@
+:orphan:
+
+:ref:`docs home`     
+
+.. _bugs report:
+
+bugs reported
+^^^^^^^^^^^^^
+  - well none so far |today|
+
+.. _bugs 0.0.A10:  
+
+bugs v0.0.A10
++++++++++++++  
+  :ref:`to dos`
+
+:ref:`Code of Conduct`
+  
+:ref:`modindex`

@@ -1,0 +1,122 @@
+:orphan:
+
+.. toctree::
+   :maxdepth: 1
+   
+   mod.rst
+
+.. _bldlgs:
+
+buildlogs methods
++++++++++++++++++
+
+.. automodule:: buildlogs
+  :members:
+
+.. _bld:
+
+build methods
++++++++++++++
+
+.. automodule:: build
+  :members: 
+    
+.. _bldchk:
+
+buildcheck methods
+++++++++++++++++++
+
+.. automodule:: buildcheck
+   :members:
+
+.. _bldmk:
+
+buildmake methods
++++++++++++++++++
+
+.. automodule:: buildmake
+  :members:
+      
+.. _flcntrl:
+
+filecontrol methods
++++++++++++++++++++
+
+.. automodule:: filecontrol
+  :members:
+
+.. _globals:
+
+globalstate class
++++++++++++++++++
+
+.. automodule:: globalstate
+   :members:
+   :special-members:
+
+.. _mkdef:
+
+makedefault methods
++++++++++++++++++++
+
+.. automodule:: makedefault
+   :members:
+   
+.. _mkld:
+
+makeload methods
+++++++++++++++++
+
+.. automodule:: makeload
+   :members:
+   
+.. _mkprs:
+
+makeparse methods
++++++++++++++++++
+
+.. automodule:: makeparse
+   :members:
+   
+.. _parerr:
+
+partialerror methods
+++++++++++++++++++++
+
+.. automodule:: partialerror
+   :members: 
+
+.. _rgt:
+
+regt methods
+++++++++++++
+
+.. automodule:: regt
+   :members:
+   :exclude-members: TestCaseDoubleSlash
+
+.. _reqd:
+
+required methods
+++++++++++++++++
+
+.. automodule:: required
+   :members:
+   
+.. _termc:
+   
+terminalcolorlog methods
+++++++++++++++++++++++++
+
+.. automodule:: terminalcolorlog
+   :members:
+ 
+.. _vertrack:
+
+version methods
++++++++++++++++
+
+.. automodule:: version
+   :members: 
+   
+   

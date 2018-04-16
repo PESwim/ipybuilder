@@ -1,0 +1,610 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ipybuild &mdash; ipybuilder 0.0.A10 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/bldi.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="ipybuilder 0.0.A10 documentation" href="index.html"/>
+        <link rel="next" title="ipybuilder" href="indxmeth.html"/>
+        <link rel="prev" title="ipybuilder’s documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ipybuilder
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.A10
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><strong>ipybuild</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="indxmeth.html">ipybuilder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ipypyc.html">IronPython™ compiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unit.html">unittests</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="indxexplr.html">advanced</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ipybuilder</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li><strong>ipybuild</strong></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/bld.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ipybuild">
+<span id="ipybld"></span><h1><strong>ipybuild</strong><a class="headerlink" href="#ipybuild" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p><a class="reference internal" href="License.html#apache-license"><span class="std std-ref">License-Apache v2.0</span></a></p>
+<p><a class="reference internal" href="cmd.html#cmd-ex"><span class="std std-ref">cmd shell help</span></a></p>
+</div></blockquote>
+<span class="target" id="module-ipybuild"></span><p><strong>Version:</strong> 0.0.A10 - Apr 16, 2018</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">created on:</th><td class="field-body">Wed Feb 14 19:44:03 2018</td>
+</tr>
+<tr class="field-even field"><th class="field-name">author:</th><td class="field-body">PE LLC <a class="reference external" href="mailto:peswin&#37;&#52;&#48;mindspring&#46;com">peswin<span>&#64;</span>mindspring<span>&#46;</span>com</a></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">copyright:</th><td class="field-body">2018, Howard Dunn. Apache 2.0 v2 licensed.</td>
+</tr>
+</tbody>
+</table>
+<p>Writes or reads a python compile specific config file used in buildmake.py.
+Command-line args are parsed by pseudo-ORDER.</p>
+<dl class="docutils">
+<dt><strong>cmd example</strong>:</dt>
+<dd><p class="first"><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">ipybuild.py</span> <span class="pre">''</span> <span class="pre">examples\makehello.py</span> <span class="pre">example\makehello</span>
+<span class="pre">_assembly.json</span> <span class="pre">'True'</span> <span class="pre">'listdll=examples\listdll.txt</span></code></p>
+<dl class="last docutils">
+<dt>names/outdir omitted are auto-named with the following preference;</dt>
+<dd><em>assembly.json path &gt;&gt; main name path &gt;&gt; config name path</em></dd>
+</dl>
+</dd>
+</dl>
+<p><strong>max output switch</strong>: args include -v</p>
+<p><strong>help</strong>: -h, /h, /?  +[opt] -v: verbose help</p>
+<blockquote>
+<div><p><strong>setup</strong>: [opt]: manually setup “appname”.json file: defaults to assembly.json</p>
+<dl class="docutils">
+<dt><strong>assembly json</strong></dt>
+<dd><ul class="first last simple">
+<li>User assembly info compiled into exe</li>
+<li>User assembly info (i.e. version) - Not Implemented for dll files</li>
+</ul>
+</dd>
+</dl>
+<p><strong>assembly.json file content (default):</strong>
+..code-block: json:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;company&quot;</span><span class="p">:</span> <span class="s2">&quot;Your Identifier&quot;</span>
+  <span class="s2">&quot;product_version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.0.0.1&quot;</span>
+  <span class="s2">&quot;standalone&quot;</span><span class="p">:</span> <span class="n">false</span>               <span class="o">/</span> <span class="nb">set</span> <span class="n">true</span> <span class="k">for</span> <span class="n">exe</span> <span class="n">standalone</span>
+  <span class="s2">&quot;file_version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.0.0.1&quot;</span>
+  <span class="s2">&quot;embed&quot;</span><span class="p">:</span> <span class="n">false</span>                    <span class="o">/</span> <span class="nb">set</span> <span class="n">true</span> <span class="n">to</span> <span class="n">add</span> <span class="n">dlls</span> <span class="n">to</span> <span class="n">exe</span>
+  <span class="s2">&quot;libembed&quot;</span><span class="p">:</span> <span class="n">false</span>                 <span class="o">/</span> <span class="nb">set</span> <span class="n">true</span> <span class="n">to</span> <span class="n">add</span> <span class="n">StdLib</span><span class="o">.</span><span class="n">dll</span> <span class="n">to</span> <span class="n">exe</span>
+  <span class="s2">&quot;copyright&quot;</span><span class="p">:</span> <span class="s2">&quot;Copyright Notice&quot;</span>
+  <span class="s2">&quot;product_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Application exe name&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<dl class="docutils">
+<dt><strong>args</strong>:</dt>
+<dd><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">[opt]:</th><td class="field-body"><p class="first">‘’ or configPath - user config path</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">[opt]:</th><td class="field-body"><p class="first">mainName - input main entry Name or dll Name
+- can build config but can’t compile until provided</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">[opt]:</th><td class="field-body"><p class="first">bool or makeEXE= [True,False] -default False
+- Set True for executable (exe)</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">[opt]:</th><td class="field-body">jsonp - path to assembly.json file</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">[opt]:</th><td class="field-body"><p class="first last">outDir - output dir relative or absolute path</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>no comma spearation unless inside tuple or list, no space k=v</strong></p>
+<dl class="last docutils">
+<dt><strong>configPath</strong>:</dt>
+<dd><ul class="first last simple">
+<li>if args configuration path exists reads, otherwise writes then:
+creates “app_config.config used for main name “app”.py.</li>
+<li><em>use two quotes, no space ‘’ for a default config file</em></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt><strong>extended args</strong>: abs/rel paths</dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">[opt]:</th><td class="field-body">listexe - path/ listexe.txt: exe inlcude module.py files</td>
+</tr>
+<tr class="field-even field"><th class="field-name">[opt]:</th><td class="field-body">listdll - path/ listdll.txt: dll inlcude files</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">[opt]:</th><td class="field-body">listzip - path/ listzip.txt: zip package files</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<p>ipybuild maps input based on ‘dll’, ‘exe’, or ‘zip’ as part of the arg.</p>
+<p><strong>create include file lists create with an editor</strong>: (listexe, listdll, listzip):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Do</span> <span class="ow">not</span> <span class="n">mix</span><span class="p">:</span>  <span class="n">bad</span>       <span class="o">-</span> <span class="n">listdll</span><span class="o">.</span><span class="n">zip</span><span class="p">,</span> <span class="n">listdll</span><span class="o">=</span><span class="n">exedll</span><span class="o">.</span><span class="n">txt</span>
+             <span class="n">good</span> <span class="n">use</span>  <span class="o">-</span> <span class="n">listzip</span><span class="o">.</span><span class="n">txt</span>
+                       <span class="o">-</span> <span class="n">listdll</span><span class="o">=</span><span class="n">my</span><span class="o">.</span><span class="n">py</span><span class="p">,</span><span class="n">your</span><span class="o">.</span><span class="n">py</span>
+                       <span class="o">-</span> <span class="n">listdll</span><span class="o">=</span><span class="n">my</span><span class="o">.</span><span class="n">dll</span>
+</pre></div>
+</div>
+<p>Can be one file or file list, comma or newline separated.
+Generate a list by a windows <code class="docutils literal notranslate"><span class="pre">dir</span> <span class="pre">/b</span> <span class="pre">&gt;&gt;</span> <span class="pre">mylistdll.txt</span></code> or
+bash <code class="docutils literal notranslate"><span class="pre">ll</span> <span class="pre">&gt;&gt;</span> <span class="pre">mylistexe.txt</span></code> command piped to file
+then edit to build/load exactly what you want and where it is located.</p>
+<p><strong>kwargs</strong>: [opt]: any or all as key,value pair
+<strong>result</strong>: Reads/writes a user config file “mainName”_config.config</p>
+<blockquote>
+<div><p>Builds an exe or dll file based on options makeEXE</p>
+<dl class="docutils">
+<dt>Example: <a href="#id1"><span class="problematic" id="id2">``</span></a>python ipybuild.py c:/souredir/my.config appname c:/release</dt>
+<dd>listexe=c:/dev/include.txt``</dd>
+</dl>
+<p>Same as: <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">ipybuild.py</span> <span class="pre">c:/souredir/my.config</span> <span class="pre">appname</span> <span class="pre">c:/release</span> <span class="pre">c:/dev/include.txt</span></code>
+Same as: <a href="#id3"><span class="problematic" id="id4">``</span></a>python ipybuild.py {‘configPath/my.config’:’c:/souredir’</p>
+<blockquote>
+<div>‘mainName’:’appname’ ‘outDir’:’c:/source’
+‘listexe’:’c:/dev/include.txt’}``</div></blockquote>
+</div></blockquote>
+<dl class="function">
+<dt id="ipybuild.helpVerbose">
+<code class="descclassname">ipybuild.</code><code class="descname">helpVerbose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ipybuild.helpVerbose" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p><strong>Version:</strong> 0.0.A10 - Apr 16, 2018</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">created on:</th><td class="field-body">Wed Feb 14 19:44:03 2018</td>
+</tr>
+<tr class="field-even field"><th class="field-name">author:</th><td class="field-body">PE LLC <a class="reference external" href="mailto:peswin&#37;&#52;&#48;mindspring&#46;com">peswin<span>&#64;</span>mindspring<span>&#46;</span>com</a></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">copyright:</th><td class="field-body">2018, Howard Dunn. Apache 2.0 v2 licensed.</td>
+</tr>
+</tbody>
+</table>
+<p>Writes or reads a python compile specific config file used in buildmake.py.
+Command-line args are parsed by pseudo-ORDER.</p>
+<dl class="docutils">
+<dt><strong>cmd example</strong>:</dt>
+<dd><p class="first"><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">ipybuild.py</span> <span class="pre">''</span> <span class="pre">examples\makehello.py</span> <span class="pre">example\makehello</span>
+<span class="pre">_assembly.json</span> <span class="pre">'True'</span> <span class="pre">'listdll=examples\listdll.txt</span></code></p>
+<dl class="last docutils">
+<dt>names/outdir omitted are auto-named with the following preference;</dt>
+<dd><em>assembly.json path &gt;&gt; main name path &gt;&gt; config name path</em></dd>
+</dl>
+</dd>
+</dl>
+<p><strong>max output switch</strong>: args include -v</p>
+<p><strong>help</strong>: -h, /h, /?</p>
+<p><em>help - extra</em>: -h, /h, /? plus -v</p>
+<blockquote>
+<div><p><strong>setup</strong>: [opt]: manually setup “appname”.json file: defaults to assembly.json</p>
+<dl class="docutils">
+<dt><strong>assembly json</strong></dt>
+<dd><ul class="first last simple">
+<li>User assembly info compiled into exe</li>
+<li>User assembly info (i.e. version) - Not Implemented for dll files</li>
+</ul>
+</dd>
+</dl>
+<p><strong>assembly.json file content (default):</strong>
+..code-block: json:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+ <span class="s2">&quot;company&quot;</span><span class="p">:</span> <span class="s2">&quot;Your Identifier&quot;</span>
+ <span class="s2">&quot;product_version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.0.0.1&quot;</span>
+ <span class="s2">&quot;standalone&quot;</span><span class="p">:</span> <span class="n">false</span>               <span class="o">/</span> <span class="nb">set</span> <span class="n">true</span> <span class="k">for</span> <span class="n">exe</span> <span class="n">standalone</span>
+ <span class="s2">&quot;file_version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.0.0.1&quot;</span>
+ <span class="s2">&quot;embed&quot;</span><span class="p">:</span> <span class="n">false</span>                    <span class="o">/</span> <span class="nb">set</span> <span class="n">true</span> <span class="n">to</span> <span class="n">add</span> <span class="n">dlls</span> <span class="n">to</span> <span class="n">exe</span>
+ <span class="s2">&quot;libembed&quot;</span><span class="p">:</span> <span class="n">false</span>                 <span class="o">/</span> <span class="nb">set</span> <span class="n">true</span> <span class="n">to</span> <span class="n">add</span> <span class="n">StdLib</span><span class="o">.</span><span class="n">dll</span> <span class="n">to</span> <span class="n">exe</span>
+ <span class="s2">&quot;copyright&quot;</span><span class="p">:</span> <span class="s2">&quot;Copyright Notice&quot;</span>
+ <span class="s2">&quot;product_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Application exe name&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<dl class="docutils">
+<dt><strong>args</strong>:</dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">[opt]:</th><td class="field-body">‘’ or configPath - user config path</td>
+</tr>
+<tr class="field-even field"><th class="field-name">[opt]:</th><td class="field-body">mainName - input main entry Name or dll Name
+- can build config but can’t compile until provided</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">[opt]:</th><td class="field-body">bool or makeEXE= [True,False] -default False
+- Set True for executable (exe)
+:[opt]: jsonp - path to assembly.json file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">[opt]:</th><td class="field-body">outDir - output dir relative or absolute path</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<p><strong>no comma spearation unless inside tuple or list, no space k=v</strong></p>
+<dl class="docutils">
+<dt><strong>configPath</strong>:</dt>
+<dd><ul class="first last simple">
+<li>if args configuration path exists reads, otherwise writes then:
+creates “app_config.config used for main name “app”.py.</li>
+<li><em>use two quotes, no space ‘’ for a default config file</em></li>
+</ul>
+</dd>
+<dt><strong>extended args</strong>: abs/rel paths</dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">[opt]:</th><td class="field-body">listexe - path/ listexe.txt: exe inlcude module.py files</td>
+</tr>
+<tr class="field-even field"><th class="field-name">[opt]:</th><td class="field-body">listdll - path/ listdll.txt: dll inlcude files</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">[opt]:</th><td class="field-body">listzip - path/ listzip.txt: zip package files</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<p>ipybuild maps input based on ‘dll’, ‘exe’, or ‘zip’ as part of the arg.</p>
+<p><strong>create include file lists create with an editor</strong>: (listexe, listdll, listzip):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Do</span> <span class="ow">not</span> <span class="n">mix</span><span class="p">:</span>  <span class="n">bad</span>       <span class="o">-</span> <span class="n">listdll</span><span class="o">.</span><span class="n">zip</span><span class="p">,</span> <span class="n">listdll</span><span class="o">=</span><span class="n">exedll</span><span class="o">.</span><span class="n">txt</span>
+             <span class="n">good</span> <span class="n">use</span>  <span class="o">-</span> <span class="n">listzip</span><span class="o">.</span><span class="n">txt</span>
+                       <span class="o">-</span> <span class="n">listdll</span><span class="o">=</span><span class="n">my</span><span class="o">.</span><span class="n">py</span><span class="p">,</span><span class="n">your</span><span class="o">.</span><span class="n">py</span>
+                       <span class="o">-</span> <span class="n">listdll</span><span class="o">=</span><span class="n">my</span><span class="o">.</span><span class="n">dll</span>
+</pre></div>
+</div>
+<p>Can be one file or file list, comma or newline separated.
+Generate a list by a windows <code class="docutils literal notranslate"><span class="pre">dir</span> <span class="pre">/b</span> <span class="pre">&gt;&gt;</span> <span class="pre">mylistdll.txt</span></code> or
+bash <code class="docutils literal notranslate"><span class="pre">ll</span> <span class="pre">&gt;&gt;</span> <span class="pre">mylistexe.txt</span></code> command piped to file
+then edit to build/load exactly what you want and where it is located.</p>
+<p><strong>kwargs</strong>: [opt]: any or all as key,value pair
+<strong>result</strong>: Reads/writes a user config file “mainName”_config.config</p>
+<blockquote>
+<div><p>Builds an exe or dll file based on options makeEXE</p>
+<dl class="docutils">
+<dt>Example: <a href="#id5"><span class="problematic" id="id6">``</span></a>python ipybuild.py c:/souredir/my.config appname c:/release</dt>
+<dd>listexe=c:/dev/include.txt``</dd>
+</dl>
+<p>Same as: <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">ipybuild.py</span> <span class="pre">c:/souredir/my.config</span> <span class="pre">appname</span> <span class="pre">c:/release</span> <span class="pre">c:/dev/include.txt</span></code>
+Same as: <a href="#id7"><span class="problematic" id="id8">``</span></a>python ipybuild.py {‘configPath/my.config’:’c:/souredir’</p>
+<blockquote>
+<div>‘mainName’:’appname’ ‘outDir’:’c:/source’
+‘listexe’:’c:/dev/include.txt’}``</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<p><strong>update previous run with new param</strong>: python ipybuild.py c:/souredir/my.config, ‘’, c:/debug
+<strong>see</strong>: examples/ and examples/release - user must manually set the IronPython path
+<strong>note</strong>: Make sure your .py runs (ipy.exe) from release directory then all</p>
+<blockquote>
+<div><p>references should match the compiled ver. You don’t have to
+keep the .py files in release, just use them to check.</p>
+<p><em>If unittest was run *before</em> ipybuild you MUST restart
+the python interpreter to get logging in ipybuild runs.*</p>
+<p><em>file write logs</em> can only be manually deleted after python interpreter is closed</p>
+<p><strong>Carefully read the output and File log to see find what is executing</strong></p>
+<p>#TODO Add auto-resource list creation as sideby method to run first</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipybuild.Build">
+<code class="descclassname">ipybuild.</code><code class="descname">Build</code><span class="sig-paren">(</span><em>args</em><span class="sig-paren">)</span><a class="headerlink" href="#ipybuild.Build" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>User normal call - provide filepaths and bool True to make exe</dt>
+<dd><blockquote class="first">
+<div><blockquote>
+<div><dl class="docutils">
+<dt>args, kwargs have list or str of resources to add.</dt>
+<dd><ul class="first last simple">
+<li>For lists of resource files:
+Associated py files in listexe.txt , .py or .dll
+libraries in listdll.txt files files to zip in</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<p>listzip.txt.</p>
+</div></blockquote>
+<ul class="last simple">
+<li><dl class="first docutils">
+<dt>For single resources:</dt>
+<dd>just add the filepath; listexe=module.py.</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Params:</th><td class="field-body">configPath, mainName, outDir,
+jsonp, makeEXE, <a href="#id9"><span class="problematic" id="id10">*</span></a>args, <a href="#id11"><span class="problematic" id="id12">**</span></a>kwargs</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Output:</th><td class="field-body">Status and build files</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipybuild.ScriptBuild">
+<code class="descclassname">ipybuild.</code><code class="descname">ScriptBuild</code><span class="sig-paren">(</span><em>configPath=None</em>, <em>mainName=None</em>, <em>outDir=None</em>, <em>jsonp=None</em>, <em>makeEXE=False</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#ipybuild.ScriptBuild" title="Permalink to this definition">¶</a></dt>
+<dd><p>User normal call - see Build</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Params:</th><td class="field-body">configPath=None, mainName=None, outDir=None,
+jsonp=None, makeEXE=False, <a href="#id13"><span class="problematic" id="id14">*</span></a>args, <a href="#id15"><span class="problematic" id="id16">**</span></a>kwargs</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Output:</th><td class="field-body">Status and build files</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ipybuild.logReport">
+<code class="descclassname">ipybuild.</code><code class="descname">logReport</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ipybuild.logReport" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Output filtered log files showing:</dt>
+<dd><ul class="first last simple">
+<li>files confirmed to exists during run</li>
+<li>files written during run</li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Log error:</th><td class="field-body">Unit testing run before ipybuild kills ipybuild logging</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p><a class="reference internal" href="index.html#docs-home"><span class="std std-ref">ipybuilder’s documentation</span></a></p>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="indxmeth.html" class="btn btn-neutral float-right" title="ipybuilder" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="ipybuilder’s documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Howard Dunn.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.A10',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

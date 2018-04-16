@@ -1,0 +1,56 @@
+:orphan:
+
+ 
+:method: makebuild() internal call
+
+Compile the exe or dll files given the user infomation
+
+Use modified pyc.py to compile with subprocess call to
+IronPython ipy.exe.
+
+Stop build on partialError that is Fatal to Compile
+Let makeBuild finish so that user can fix partialErrs
+
+Assembly setup:
+
++-----------+-------+-----------------+-------------------------------+
+| flag (exe)| state | parameter(s)    | ipy run result                |
++===========+=======+=================+===============================+
+|standalone |       | listexe         | App self embedded: no AddRef  |
+|           |       |                 | Can run without Ironpython.   |
+|plus embed | true  +-----------------+-------------------------------+
+|           |       | listdll         | User libs embedded: no AddRef |
+|           |       |                 | Can run without Ironpython.   |
++-----------+-------+-----------------+-------------------------------+
+|standalone |       | any or None     |                               |
+|           |       |                 |                               |
+|plus embed | true  |                 | No AddRef - any               |
+|           |       |                 |                               |
+|plus       |       |                 |                               |
+|libembed   |       | listexe/listdll | can run without Ironpython.   |
++-----------+-------+-----------------+-------------------------------+
+|           |       |                 | Distribute and AddRef Stdlib  |
+|standalone | true  | all any or Non  | if Lib imports (i.e. zip, etc)|
+|           |       |                 | Can run without Ironpython.   |
++-----------+-------+-----------------+-------------------------------+
+|           |       | listexe and/or  | modules.py (listexe) and .dlls|
+|   embed   | true  | listdll         | (listdll) embedded.           |
+|           |       |                 | No AddRef                     |
+|           |       |                 | imports within app.exe        |
++-----------+-------+-----------------+-------------------------------+
+|           |       |                 | Import modules.py and .dlls   |
+|   all     | false | listexe and     | (listdll) copyied to outdir.  |
+|           |       | listdll         | Distribute with app.exe.      |
++-----------+-------+                 +-------------------------------+
+| libembed  | true  |                 | Distribute and AddRef Stdlib  |
++-----------+-------+-----------------+-------------------------------+
+
++-----------+-------+-----------------+-------------------------------+
+| flag (dll)| state | parameter(s)    | ipy run result                |
++===========+=======+=================+===============================+
+|           |       | listexe         | App dll .py modules needed in |
+| no effect |       |                 | path.                         |
+|           |  NA   +-----------------+-------------------------------+
+|           |       | listdll         | User libs need to AddRef      |
+|           |       |                 |                               |
++-----------+-------+-----------------+-------------------------------+

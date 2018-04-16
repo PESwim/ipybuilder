@@ -1,0 +1,86 @@
+
+buildlogs
+^^^^^^^^^
+.. automodule:: buildlogs
+ 
+  :ref:`bldlgs`
+  
+build
+^^^^^
+.. automodule:: build
+  
+  :ref:`bld`
+  
+buildcheck
+^^^^^^^^^^
+.. automodule:: buildcheck
+  
+   :ref:`bldchk`
+
+buildmake
+^^^^^^^^^
+.. automodule:: buildmake
+  
+  :ref:`bldmk`
+
+filecontrol
+^^^^^^^^^^^
+.. automodule:: filecontrol
+    
+  :ref:`flcntrl`
+
+globalstate
+^^^^^^^^^^^
+.. automodule:: globalstate
+
+   :ref:`globals`
+   
+makedefault
+^^^^^^^^^^^
+.. automodule:: makedefault
+   
+   :ref:`mkdef`
+
+makeload
+^^^^^^^^
+.. automodule:: makeload
+
+   :ref:`mkld`
+
+makeparse
+^^^^^^^^^
+.. automodule:: makeparse
+
+   :ref:`mkprs`
+
+partialerror
+^^^^^^^^^^^^
+.. automodule:: partialerror
+
+   :ref:`parerr`
+
+regt
+^^^^
+.. automodule:: regt
+
+   :ref:`rgt`
+
+required
+^^^^^^^^
+.. automodule:: required
+
+   :ref:`reqd`
+
+terminalcolorlog
+^^^^^^^^^^^^^^^^
+.. automodule:: terminalcolorlog
+
+   :ref:`termc`
+
+version
+^^^^^^^
+.. automodule:: version
+
+   :ref:`vertrack`
+
+:ref:`modindex`

@@ -1,0 +1,18 @@
+:orphan:
+
+.. _info and site visits:
+     
+where I've been
+---------------
+  - <https://ironpython-test.readthedocs.io/en/latest/tutorial/index.html>
+  - <https://stackoverflow.com/questions/1578010/ironpython-2-6-py-exe>
+  - <https://stackoverflow.com/questions/6195781/ironpython-exe-compiled-using-pyc-py-cannot-import-module-os>
+  - <https://thesesergio.wordpress.com/2013/09/11/how-to-generate-and-use-a-exe-that-uses-net-dlls-with-ironpython-pyc-py/>
+  - <https://dbaportal.eu/2009/12/21/ironpython-how-to-compile-exe/>
+  - <https://stackoverflow.com/questions/1578010/ironpython-2-6-py-exe>
+  - <https://stackoverflow.com/questions/6997832/ironpython-sys-getframe-not-found>
+  - <http://ironpython.net/documentation/dotnet/dotnet.html>
+  - <https://gist.github.com/tomthepythonist/278127>
+  - <https://stackoverflow.com/questions/8184253/how-do-i-compile-an-ironpython-app-into-an-exe-without-visual-studios-and-possi?rq=1>
+  - <https://github.com/Microsoft/PTVS/issues/2494>
+  - *IronPython in Action*, 1st Edition, Michael J. Foord, Manning, 2009.

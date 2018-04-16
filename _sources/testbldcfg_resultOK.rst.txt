@@ -1,0 +1,37 @@
+:orphan:
+
+   .. _testbuildconfig OK:
+
+   ``Ran 14 tests in 64.575 secs
+           * with readwrite sleep ~64.0 sec
+
+     OK
+     INFO    [runtest] time 04/02/18 00:04:22``
+
+   .. _testmakeparse OK:	 
+	 
+   `` set-up makedefault.TestCaseJson.test_case_json_m2
+
+   tear-down makedefault.TestCaseJson.test_case_json_m2
+
+   set-up makedefault.TestCaseJson.test_case_json_m3
+
+   tear-down makedefault.TestCaseJson.test_case_json_m3
+
+   Ran 37 tests 
+
+   OK``
+   
+   .. _makedefault OK:	 
+   
+   `` set-up__main__.TestCaseJson.test_case_json_m2
+
+   tear-dowm__main__.TestCaseJson.test_case_json_m2
+
+   set-up__main__.TestCaseJson.test_case_json_m3
+
+   tear-dowm__main__.TestCaseJson.test_case_json_m3
+
+   Ran 20 tests 
+
+   OK``

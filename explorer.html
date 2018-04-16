@@ -1,0 +1,369 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>explorlib methods &mdash; ipybuilder 0.0.A10 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/bldi.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="ipybuilder 0.0.A10 documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ipybuilder
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.A10
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bld.html"><strong>ipybuild</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="indxmeth.html">ipybuilder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ipypyc.html">IronPython™ compiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unit.html">unittests</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="indxexplr.html">advanced</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ipybuilder</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>explorlib methods</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/explorer.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-explorlib">
+<span id="explorlib-methods"></span><span id="explib"></span><h1>explorlib methods<a class="headerlink" href="#module-explorlib" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="explorlib.explore">
+<code class="descclassname">explorlib.</code><code class="descname">explore</code><span class="sig-paren">(</span><em>argv</em><span class="sig-paren">)</span><a class="headerlink" href="#explorlib.explore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run explore</p>
+<p><em>Use ipy.exe and this file for debugging unusual errors</em>
+<em>Need ~1500 lines to see all listed output</em>
+<strong>pipe to file</strong> <code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span> <span class="pre">output.txt</span></code> is better</p>
+<p>params:</p>
+<p>help: [-h, -?, /?, /h, help][op] :</p>
+<p>None [opt] - look at current IronPython imports status
+output: current contents of libimports manually updated:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Have Passed: Have been loaded as standalone in win8.1/win7 32/64</li>
+<li>Direect: via import &lt;libname&gt;</li>
+<li>Indirect: loaded as a results of “Direct” imports</li>
+<li>Imported: list of current import libs by running this module</li>
+<li>NotTested: Libraries and sub-Libraries not yet tested</li>
+<li>New Added: If uncommented in NotTested and recomiled, run will have output</li>
+<li>list of <strong>current</strong> index values in NotTested list to remove on success</li>
+<li>Calc’d Indirect: Passed - Direct</li>
+</ul>
+</div></blockquote>
+<p><em>current contents of libimports manually updated</em>
+-p [opt]  - Have Passed: Have been loaded as standalone in win8.1/win7 32/64
+-d [opt]  - Direect: via import &lt;libname&gt;
+-i [opt]  - Indirect: loaded as a results of “Direct” imports
+-n [opt]  - NotTested: Libraries and sub-Libraries not yet tested
+-v [opt]  - run ipyver to see where assemblies and modules are sourced.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="explorlib.getIndirect">
+<code class="descclassname">explorlib.</code><code class="descname">getIndirect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#explorlib.getIndirect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Difference between hard coded maunlly updated “Passed” list and “Direct” list
+<em>not dynamically updated</em> - that is why the output is formated.
+Send output &gt;&gt; to file.txt copy and past into libimports then re-compile
+re-run until ok.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-explorver">
+<span id="explorver-methods"></span><span id="explver"></span><h1>explorver methods<a class="headerlink" href="#module-explorver" title="Permalink to this headline">¶</a></h1>
+<p>Used by autodoc_mock_imports.</p>
+</div>
+<div class="section" id="module-libimport">
+<span id="libimport-methods"></span><span id="libimp"></span><h1>libimport methods<a class="headerlink" href="#module-libimport" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="libimport.Passed">
+<code class="descclassname">libimport.</code><code class="descname">Passed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libimport.Passed" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>ALL THAT PASSED</em></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libimport.Direct">
+<code class="descclassname">libimport.</code><code class="descname">Direct</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libimport.Direct" title="Permalink to this definition">¶</a></dt>
+<dd><p>passed direct (imported on import)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libimport.Indirect">
+<code class="descclassname">libimport.</code><code class="descname">Indirect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libimport.Indirect" title="Permalink to this definition">¶</a></dt>
+<dd><p>last manually update Indirect
+indirectly imported from a “direct” import depedancy</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libimport.NotTested">
+<code class="descclassname">libimport.</code><code class="descname">NotTested</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libimport.NotTested" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>NOT TESTED</strong>
+The following least common ancestor libs may have
+buggy behavior that will not load in an environment
+without IronPython/Python present</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-ipyver">
+<span id="ipyver-methods"></span><span id="ipver"></span><h1>ipyver methods<a class="headerlink" href="#module-ipyver" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="ipyver.ReferenceStatus">
+<em class="property">class </em><code class="descclassname">ipyver.</code><code class="descname">ReferenceStatus</code><span class="sig-paren">(</span><em>ref=None</em><span class="sig-paren">)</span><a class="headerlink" href="#ipyver.ReferenceStatus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check clr Reference Status - ipy <strong>Only</strong></p>
+<p>:use:refStat = ReferenceStatus().RefStatus()</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">reference name  [opt] [str] - check against loaded</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>class and instance method returns:</dt>
+<dd><ul class="first last simple">
+<li>cls.RefStatus() if pararm: reference name</li>
+<li>cls.RefStatusIPMS() for any instance</li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">status [dict] - None on fail/err
+keys: ‘sys’ - System and ‘ipy’ IronPython<blockquote>
+<div>or no key for reference name return:</div></blockquote>
+<dl class="docutils">
+<dt>subkeys:</dt>
+<dd>’ver’ [str]
+‘isLocal’ [bool]
+‘isloaded’ [bool]
+‘path’ [str]
+‘name’ [str]</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">inspect</span>
+<span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="n">rsp</span> <span class="o">=</span> <span class="n">ReferenceStatus</span><span class="p">(</span><span class="s1">&#39;inspect&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">RefStatus</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">rsp</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;inspect {}:{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">))</span>
+
+<span class="ow">or</span> 
+
+<span class="n">rsp</span> <span class="o">=</span> <span class="n">ReferenceStatus</span><span class="p">()</span><span class="o">.</span><span class="n">RefStatusIPMS</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">rsp</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;IPMS {}:{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Howard Dunn.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.A10',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+:orphan:
+
+:ref:`docs home`
+
+.. _to dos:
+
+**ToDo next steps**
+===================
+
+  - **ipybuilder works for the author using Win7 64 bit python 32/64 with 
+    IronPython 2.7.7.1000 - thats the only test..so far.**
+ 
+  - **This fixes several longtime running bugs in the IronPython 
+    pyc.py complier and then goes on to try and really help build a
+    project lib or exe.**
+
+  - **Please keep in mind this is alpha release for help/review**
+  
+  - **Intensional: must keep out all** *non-IronPyhton* **available imports**
+  
+  - **Intensionally kept imports to a minimum at the expense of re-writing the 
+    wheel. Wanted to be as transparent/independent as possible.**
+      
+  **development**: Developed in 32 bit python
+    - cant use set.py for IronPython code
+    - cant use pylint/enchant in 64 bit, so build with 32 bit
+    - cant sphinx in 64 bit, so built with 32 bit
+  
+  *check - should run in both ipy and python and 32/64bit*
+  
+work to continue
+----------------   
+  *on error bad arg parse may pollutes with multiple directory/file creates*
+    Add del current writes/rm dirs on exit errors.
+  
+  *add file_version info to dll files*
+    Requires sub-classing IronPython CompileModules.
+  
+  *clean out all globals except log*
+   \
+   
+  *separate unit tests from production code completely*
+   Difficult, as wanted to test real-time run with subprocess, but
+   have to run unittest from /Tests not /builder sub directory. This must 
+   require lots of set-up mocks into a /builder like subdirectory so that 
+   testing for 'Tests' in current working directory can be avoided in 
+   production code.
+  
+  *adapt argparse (on comments, help readability, and bugs found*
+    Trying out a structure free input style cost many hours and 
+    is about half the code-base. Also allowed non-'r'"text" and both unicode and 
+    str.
+    Originally planned on complete structured free input so user doesn't have
+    remember or learn an exact format.  Found limits on how far this works and
+    that eventually a main name has to be provided so no real use in accepting 
+    command args that omit a main name.
+  
+  *add a switch func to TerminalColorlog between windows and bash*
+    Right now have to manually adjust the code.
+  
+  *clean naming to match PascalCase throughout*
+    The whole point of this program is for working with python and C#.net. When 
+    sub-classing a .net class it is much clearer to mirror a .Net class with a 
+    python PascalClass name style to visually read code back and forth. 
+    I really didn't focus on naming to start as this package is only written
+    in python, but is relevant for all my other work. Sorry.
+ 
+  *write a nice tutorial/how to/steps*
+   \
+     
+really kill anti-patterns and bad practice - life long pursuit
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  *adapt where possible parsing code that already exists*
+   i.e. remove code that re-wrote the wheel.
+   
+  *refactor if else into methods*
+   Too many if else - just takes a bit of time.
+   
+  *wow these wonderful unittests - what to do?* 
+   \
+   
+:ref:`docs home`
