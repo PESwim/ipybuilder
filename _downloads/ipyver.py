@@ -27,23 +27,23 @@ class ReferenceStatus(object):
 
       :use:refStat = ReferenceStatus().RefStatus()
 
-      :param: reference name  [opt] [str] - check against loaded
+      :param: reference name [opt][str] - check against loaded
 
       class and instance method returns:
         - cls.RefStatus() if pararm: reference name
         - cls.RefStatusIPMS() for any instance
       
-      :return: status [dict] - None on fail/err
-          keys: 'sys' - System and 'ipy' IronPython
-            or no key for reference name return:
-          subkeys:
-            'ver' [str]
-            'isLocal' [bool]
-            'isloaded' [bool]
-            'path' [str]
-            'name' [str]
-
-             
+      :return:
+        - status [dict] - None on fail/err
+        - keys:
+            -'sys' - System and 'ipy' IronPython
+              or no key for reference name return:
+        - subkeys:
+            - 'ver' [str]
+            - 'isLocal' [bool]
+            - 'isloaded' [bool]
+            - 'path' [str]
+            - 'name' [str]
 
       Example:
     
@@ -58,7 +58,7 @@ class ReferenceStatus(object):
         for k, v in rsp.iteritems():
             print('inspect {}:{}'.format(k,v))
 
-        or 
+        also 
         
         rsp = ReferenceStatus().RefStatusIPMS()
         for k, v in rsp.iteritems():

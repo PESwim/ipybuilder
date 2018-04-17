@@ -10,7 +10,7 @@ import sys
 import logging
 
 class terminalC(logging.StreamHandler):
-    ''' Sheads light on a dark subject.
+    ''' Sheds light on a dark subject.
     
         Uses wincon and winbase constants and handles
         or ANSI codes for platform specific awesomeness
@@ -91,7 +91,7 @@ class terminalC(logging.StreamHandler):
         assert self.emits != self.emit
         
     def assignColor(self):
-        if 'win' in sys.platform:#if comiling in bash will set to Ansi
+        if 'win' in sys.platform:#if compiling in bash will set to Ansi
             self.setColor = self.emitWin#self.emitAnsi#
         else:
             self.setColor = self.emitWin#self.emitAnsi

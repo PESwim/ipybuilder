@@ -90,7 +90,7 @@ def GenerateExe(config):
     # 3/19/2018  # Copyright 2018 - hdunn. Apache 2.0 licensed. Modified from original.
     # --- handle dll and StdLib embed -----------
     dllNames = []
-    if config.embed and config.dlls: #not for stanalone ?
+    if config.embed and config.dlls: #not for standalone ?
         config.dlls = list(set(config.dlls))
         opath = System.IO.Path.GetDirectoryName(config.output)
         print 'opath: ' + opath
@@ -201,7 +201,7 @@ def GenerateExe(config):
                     f = System.IO.FileStream(assem.Location, System.IO.FileMode.Open, System.IO.FileAccess.Read)
                     mb.DefineManifestResource("Dll." + name.Name, f, ResourceAttributes.Public)
                 
-        # we currently do no error checking on what is passed in to the assemblyresolve event handler
+        # we currently do no error checking on what is passed in to the AssemblyResolve event handler
         assemblyResolveMethod = tb.DefineMethod("AssemblyResolve", MethodAttributes.Public | MethodAttributes.Static, clr.GetClrType(Assembly), (clr.GetClrType(System.Object), clr.GetClrType(System.ResolveEventArgs)))
         gen = assemblyResolveMethod.GetILGenerator()
         s = gen.DeclareLocal(clr.GetClrType(System.IO.Stream)) # resource stream
@@ -270,7 +270,7 @@ def GenerateExe(config):
         gen.EmitCall(OpCodes.Call, clr.GetClrType(Assembly).GetMethod("GetEntryAssembly"), ())
         gen.Emit(OpCodes.Newobj, clr.GetClrType(System.Resources.ResourceManager).GetConstructor((str, clr.GetClrType(Assembly))))
         # ---- hdunn dido --------
-        gen.Emit(OpCodes.Ldstr, "IPDll." + strPathRefIPDll)#strPathRefIPDll)#config.ouput 4/4
+        gen.Emit(OpCodes.Ldstr, "IPDll." + strPathRefIPDll)#strPathRefIPDll)#config.output 4/4
         # ------------------
         gen.EmitCall(OpCodes.Call, clr.GetClrType(System.Resources.ResourceManager).GetMethod("GetObject", (str, )), ())
         gen.EmitCall(OpCodes.Call, clr.GetClrType(System.Reflection.Assembly).GetMethod("Load", (clr.GetClrType(System.Array[System.Byte]), )), ())

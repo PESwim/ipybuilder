@@ -251,7 +251,7 @@ without IronPython/Python present</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">reference name  [opt] [str] - check against loaded</td>
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">reference name [opt][str] - check against loaded</td>
 </tr>
 </tbody>
 </table>
@@ -267,17 +267,30 @@ without IronPython/Python present</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">status [dict] - None on fail/err
-keys: ‘sys’ - System and ‘ipy’ IronPython<blockquote>
-<div>or no key for reference name return:</div></blockquote>
-<dl class="docutils">
-<dt>subkeys:</dt>
-<dd>’ver’ [str]
-‘isLocal’ [bool]
-‘isloaded’ [bool]
-‘path’ [str]
-‘name’ [str]</dd>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li>status [dict] - None on fail/err</li>
+<li><dl class="first docutils">
+<dt>keys:</dt>
+<dd><dl class="first last docutils">
+<dt>-‘sys’ - System and ‘ipy’ IronPython</dt>
+<dd>or no key for reference name return:</dd>
 </dl>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>subkeys:</dt>
+<dd><ul class="first last">
+<li>’ver’ [str]</li>
+<li>’isLocal’ [bool]</li>
+<li>’isloaded’ [bool]</li>
+<li>’path’ [str]</li>
+<li>’name’ [str]</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 </td>
 </tr>
 </tbody>
@@ -292,7 +305,7 @@ keys: ‘sys’ - System and ‘ipy’ IronPython<blockquote>
 <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">rsp</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;inspect {}:{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">))</span>
 
-<span class="ow">or</span> 
+<span class="n">also</span> 
 
 <span class="n">rsp</span> <span class="o">=</span> <span class="n">ReferenceStatus</span><span class="p">()</span><span class="o">.</span><span class="n">RefStatusIPMS</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">rsp</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>

@@ -183,174 +183,164 @@
 </tr>
 </tbody>
 </table>
-<p>Writes or reads a python compile specific config file used in buildmake.py.
-Command-line args are parsed by pseudo-ORDER.</p>
-<dl class="docutils">
-<dt><strong>cmd example</strong>:</dt>
-<dd><p class="first"><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">ipybuild.py</span> <span class="pre">''</span> <span class="pre">examples\makehello.py</span> <span class="pre">example\makehello</span>
-<span class="pre">_assembly.json</span> <span class="pre">'True'</span> <span class="pre">'listdll=examples\listdll.txt</span></code></p>
-<dl class="last docutils">
-<dt>names/outdir omitted are auto-named with the following preference;</dt>
-<dd><em>assembly.json path &gt;&gt; main name path &gt;&gt; config name path</em></dd>
-</dl>
-</dd>
-</dl>
-<p><strong>max output switch</strong>: args include -v</p>
-<p><strong>help</strong>: -h, /h, /?  +[opt] -v: verbose help</p>
-<blockquote>
-<div><p><strong>setup</strong>: [opt]: manually setup “appname”.json file: defaults to assembly.json</p>
-<dl class="docutils">
-<dt><strong>assembly json</strong></dt>
-<dd><ul class="first last simple">
-<li>User assembly info compiled into exe</li>
-<li>User assembly info (i.e. version) - Not Implemented for dll files</li>
-</ul>
-</dd>
-</dl>
-<p><strong>assembly.json file content (default):</strong>
-..code-block: json:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;company&quot;</span><span class="p">:</span> <span class="s2">&quot;Your Identifier&quot;</span>
-  <span class="s2">&quot;product_version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.0.0.1&quot;</span>
-  <span class="s2">&quot;standalone&quot;</span><span class="p">:</span> <span class="n">false</span>               <span class="o">/</span> <span class="nb">set</span> <span class="n">true</span> <span class="k">for</span> <span class="n">exe</span> <span class="n">standalone</span>
-  <span class="s2">&quot;file_version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.0.0.1&quot;</span>
-  <span class="s2">&quot;embed&quot;</span><span class="p">:</span> <span class="n">false</span>                    <span class="o">/</span> <span class="nb">set</span> <span class="n">true</span> <span class="n">to</span> <span class="n">add</span> <span class="n">dlls</span> <span class="n">to</span> <span class="n">exe</span>
-  <span class="s2">&quot;libembed&quot;</span><span class="p">:</span> <span class="n">false</span>                 <span class="o">/</span> <span class="nb">set</span> <span class="n">true</span> <span class="n">to</span> <span class="n">add</span> <span class="n">StdLib</span><span class="o">.</span><span class="n">dll</span> <span class="n">to</span> <span class="n">exe</span>
-  <span class="s2">&quot;copyright&quot;</span><span class="p">:</span> <span class="s2">&quot;Copyright Notice&quot;</span>
-  <span class="s2">&quot;product_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Application exe name&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div></blockquote>
-<dl class="docutils">
-<dt><strong>args</strong>:</dt>
-<dd><table class="first docutils field-list" frame="void" rules="none">
+<p><em>space separated - use relative or absolute paths</em>
+<em>non-quoted args</em></p>
+<p>params:</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">[opt]:</th><td class="field-body"><p class="first">‘’ or configPath - user config path</p>
+<tr class="field-odd field"><th class="field-name">configPath:</th><td class="field-body"><p class="first">[opt][str] - user .config path location or ‘’ to use default_config.config</p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">[opt]:</th><td class="field-body"><p class="first">mainName - input main entry Name or dll Name
-- can build config but can’t compile until provided</p>
+<tr class="field-even field"><th class="field-name">mainName:</th><td class="field-body"><p class="first">[str] -  Python/IronPython “.py” file to compile as library .dll or .exe</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">[opt]:</th><td class="field-body"><p class="first">bool or makeEXE= [True,False] -default False
-- Set True for executable (exe)</p>
+<tr class="field-odd field"><th class="field-name">outDir:</th><td class="field-body"><p class="first">[opt][str] - output directory path - default “release/”</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">jsonarg:</th><td class="field-body"><p class="first">[opt][str] - path to assembly and embedding flags .json file</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Bool or makeEXE=:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><p class="first">True - make exe [bool][opt] - default False to make dll file</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">args:</th><td class="field-body"><ul class="first last simple">
+<li>single file paths [str] to add in compile</li>
+<li>MUST contain key word (‘exe’, ‘dll’, or ‘zip’) don’t mix</li>
+<li>like mypydll.py or zip.txt</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>kwargs</strong> filepath - like listexe=myprojectpyfilelist.txt [opt]</p>
 <blockquote>
 <div><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">[opt]:</th><td class="field-body">jsonp - path to assembly.json file</td>
+<tr class="field-odd field"><th class="field-name">listexe or exe:</th><td class="field-body"><ul class="first simple">
+<li>all .py required to run the main.py file as an exe</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">listdll or dll:</th><td class="field-body"><ul class="first simple">
+<li>pre-compiled .dlls or .py module files to add or embed in main</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">listzip or zip:</th><td class="field-body"><ul class="first last simple">
+<li>file path structure and file archive into output directory</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">[opt]:</th><td class="field-body"><p class="first last">outDir - output dir relative or absolute path</p>
-</td>
-</tr>
-</tbody>
-</table>
-<p><strong>no comma spearation unless inside tuple or list, no space k=v</strong></p>
-<dl class="last docutils">
-<dt><strong>configPath</strong>:</dt>
-<dd><ul class="first last simple">
-<li>if args configuration path exists reads, otherwise writes then:
-creates “app_config.config used for main name “app”.py.</li>
-<li><em>use two quotes, no space ‘’ for a default config file</em></li>
+<p>options: at end of params</p>
+<ul class="simple">
+<li>-h,/? help</li>
+<li>-v verbose output</li>
+<li><em>see help (-h -v) and documentation for more</em></li>
 </ul>
-</dd>
-</dl>
-</dd>
-<dt><strong>extended args</strong>: abs/rel paths</dt>
-<dd><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">[opt]:</th><td class="field-body">listexe - path/ listexe.txt: exe inlcude module.py files</td>
-</tr>
-<tr class="field-even field"><th class="field-name">[opt]:</th><td class="field-body">listdll - path/ listdll.txt: dll inlcude files</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">[opt]:</th><td class="field-body">listzip - path/ listzip.txt: zip package files</td>
-</tr>
-</tbody>
-</table>
-</dd>
-</dl>
-<p>ipybuild maps input based on ‘dll’, ‘exe’, or ‘zip’ as part of the arg.</p>
-<p><strong>create include file lists create with an editor</strong>: (listexe, listdll, listzip):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Do</span> <span class="ow">not</span> <span class="n">mix</span><span class="p">:</span>  <span class="n">bad</span>       <span class="o">-</span> <span class="n">listdll</span><span class="o">.</span><span class="n">zip</span><span class="p">,</span> <span class="n">listdll</span><span class="o">=</span><span class="n">exedll</span><span class="o">.</span><span class="n">txt</span>
-             <span class="n">good</span> <span class="n">use</span>  <span class="o">-</span> <span class="n">listzip</span><span class="o">.</span><span class="n">txt</span>
-                       <span class="o">-</span> <span class="n">listdll</span><span class="o">=</span><span class="n">my</span><span class="o">.</span><span class="n">py</span><span class="p">,</span><span class="n">your</span><span class="o">.</span><span class="n">py</span>
-                       <span class="o">-</span> <span class="n">listdll</span><span class="o">=</span><span class="n">my</span><span class="o">.</span><span class="n">dll</span>
-</pre></div>
-</div>
-<p>Can be one file or file list, comma or newline separated.
-Generate a list by a windows <code class="docutils literal notranslate"><span class="pre">dir</span> <span class="pre">/b</span> <span class="pre">&gt;&gt;</span> <span class="pre">mylistdll.txt</span></code> or
-bash <code class="docutils literal notranslate"><span class="pre">ll</span> <span class="pre">&gt;&gt;</span> <span class="pre">mylistexe.txt</span></code> command piped to file
-then edit to build/load exactly what you want and where it is located.</p>
-<p><strong>kwargs</strong>: [opt]: any or all as key,value pair
-<strong>result</strong>: Reads/writes a user config file “mainName”_config.config</p>
-<blockquote>
-<div><p>Builds an exe or dll file based on options makeEXE</p>
 <dl class="docutils">
 <dt>Example: <a href="#id1"><span class="problematic" id="id2">``</span></a>python ipybuild.py c:/souredir/my.config appname c:/release</dt>
 <dd>listexe=c:/dev/include.txt``</dd>
 </dl>
-<p>Same as: <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">ipybuild.py</span> <span class="pre">c:/souredir/my.config</span> <span class="pre">appname</span> <span class="pre">c:/release</span> <span class="pre">c:/dev/include.txt</span></code>
-Same as: <a href="#id3"><span class="problematic" id="id4">``</span></a>python ipybuild.py {‘configPath/my.config’:’c:/souredir’</p>
-<blockquote>
-<div>‘mainName’:’appname’ ‘outDir’:’c:/source’
-‘listexe’:’c:/dev/include.txt’}``</div></blockquote>
-</div></blockquote>
 <dl class="function">
 <dt id="ipybuild.helpVerbose">
 <code class="descclassname">ipybuild.</code><code class="descname">helpVerbose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ipybuild.helpVerbose" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
-<div><p><strong>Version:</strong> 0.0.A10 - Apr 16, 2018</p>
+<div><p>Writes or reads a python compile specific config file used in buildmake.py.
+Command-line args are parsed by pseudo-ORDER.</p>
+<blockquote>
+<div>First three args any order unless none then last.</div></blockquote>
+<p>args:</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">created on:</th><td class="field-body">Wed Feb 14 19:44:03 2018</td>
+<tr class="field-odd field"><th class="field-name">configPath:</th><td class="field-body"><p class="first">[opt][str] - user .config path location or ‘’ to use default_config.config</p>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">author:</th><td class="field-body">PE LLC <a class="reference external" href="mailto:peswin&#37;&#52;&#48;mindspring&#46;com">peswin<span>&#64;</span>mindspring<span>&#46;</span>com</a></td>
+<tr class="field-even field"><th class="field-name">mainName:</th><td class="field-body"><p class="first">[str] -  python/ironpython “.py” file to compile as library .dll or .exe</p>
+<p>if you leave mainName out final compile is suspended until re-run with mainName</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">copyright:</th><td class="field-body">2018, Howard Dunn. Apache 2.0 v2 licensed.</td>
+<tr class="field-odd field"><th class="field-name">outDir:</th><td class="field-body"><p class="first">[opt][str] - output directory path - default “release/”</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">jsonarg:</th><td class="field-body"><ul class="first simple">
+<li>[opt][str] - path to assembly and embedding flags .json file</li>
+<li>defaults to “defaults/”asembly_config.json” and requires the file path subdirectory “defaults/”.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Bool or makeEXE=:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><p class="first">True - make exe [bool][opt] - default False to make dll file</p>
+<p>After first three/four args above.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">args:</th><td class="field-body"><p class="first last">single file paths [str] to add in compile - MUST contain key word (‘exe’, ‘dll’, or ‘zip’) 
+- like mypydll.py or zip.txt</p>
+</td>
 </tr>
 </tbody>
 </table>
-<p>Writes or reads a python compile specific config file used in buildmake.py.
-Command-line args are parsed by pseudo-ORDER.</p>
+<p><strong>kwargs</strong> filepath - like listexe=myprojectpyfilelist.txt [opt]</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">listexe or exe:</th><td class="field-body"><ul class="first simple">
+<li>all .py required to run the main.py file as an exe</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">listdll or dll:</th><td class="field-body"><ul class="first simple">
+<li>pre-compiled .dlls or .py module files to add or embed in main</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">listzip or zip:</th><td class="field-body"><ul class="first last simple">
+<li>file path structure and file archive into output directory</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>options</p>
+<p>-h,/? help</p>
+<p><strong>max output switch</strong>: args include -v ex. -h -v</p>
+<p>-v verbose output</p>
 <dl class="docutils">
-<dt><strong>cmd example</strong>:</dt>
-<dd><p class="first"><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">ipybuild.py</span> <span class="pre">''</span> <span class="pre">examples\makehello.py</span> <span class="pre">example\makehello</span>
-<span class="pre">_assembly.json</span> <span class="pre">'True'</span> <span class="pre">'listdll=examples\listdll.txt</span></code></p>
+<dt>Example: <a href="#id3"><span class="problematic" id="id4">``</span></a>python ipybuild.py c:/souredir/my.config appname c:/release</dt>
+<dd><blockquote class="first">
+<div>listexe=c:/dev/include.txt``</div></blockquote>
 <dl class="last docutils">
-<dt>names/outdir omitted are auto-named with the following preference;</dt>
-<dd><em>assembly.json path &gt;&gt; main name path &gt;&gt; config name path</em></dd>
+<dt><strong>cmd example</strong>:</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">ipybuild.py</span> <span class="pre">''</span> <span class="pre">examples\makehello.py</span> <span class="pre">example\makehello</span>
+<span class="pre">_assembly.json</span> <span class="pre">'True'</span> <span class="pre">'listdll=examples\listdll.txt</span></code></dd>
 </dl>
 </dd>
 </dl>
-<p><strong>max output switch</strong>: args include -v</p>
-<p><strong>help</strong>: -h, /h, /?</p>
+<p>names/outdir omitted are auto-named with the following preference;
+<em>assembly.json path &gt;&gt; main name path &gt;&gt; config name path</em></p>
 <p><em>help - extra</em>: -h, /h, /? plus -v</p>
-<blockquote>
-<div><p><strong>setup</strong>: [opt]: manually setup “appname”.json file: defaults to assembly.json</p>
+<p><strong>setup</strong>: [opt]: manually setup “appname”.json file: defaults to assembly.json</p>
 <dl class="docutils">
 <dt><strong>assembly json</strong></dt>
-<dd><ul class="first last simple">
+<dd><ul class="first simple">
 <li>User assembly info compiled into exe</li>
 <li>User assembly info (i.e. version) - Not Implemented for dll files</li>
 </ul>
-</dd>
-</dl>
 <p><strong>assembly.json file content (default):</strong>
 ..code-block: json:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
  <span class="s2">&quot;company&quot;</span><span class="p">:</span> <span class="s2">&quot;Your Identifier&quot;</span>
  <span class="s2">&quot;product_version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.0.0.1&quot;</span>
  <span class="s2">&quot;standalone&quot;</span><span class="p">:</span> <span class="n">false</span>               <span class="o">/</span> <span class="nb">set</span> <span class="n">true</span> <span class="k">for</span> <span class="n">exe</span> <span class="n">standalone</span>
@@ -362,29 +352,26 @@ Command-line args are parsed by pseudo-ORDER.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div></blockquote>
-<dl class="docutils">
-<dt><strong>args</strong>:</dt>
-<dd><table class="first last docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">[opt]:</th><td class="field-body">‘’ or configPath - user config path</td>
-</tr>
-<tr class="field-even field"><th class="field-name">[opt]:</th><td class="field-body">mainName - input main entry Name or dll Name
-- can build config but can’t compile until provided</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">[opt]:</th><td class="field-body">bool or makeEXE= [True,False] -default False
-- Set True for executable (exe)
-:[opt]: jsonp - path to assembly.json file</td>
-</tr>
-<tr class="field-even field"><th class="field-name">[opt]:</th><td class="field-body">outDir - output dir relative or absolute path</td>
-</tr>
-</tbody>
-</table>
 </dd>
 </dl>
-<p><strong>no comma spearation unless inside tuple or list, no space k=v</strong></p>
+<p><strong>args</strong>:</p>
+<blockquote>
+<div><blockquote>
+<div><dl class="docutils">
+<dt>configPath [opt] - “” or  user config path ex. myapp.config</dt>
+<dd><a href="#id5"><span class="problematic" id="id6">|</span></a>[default] - UserDefaulted/default_config.config</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
+<dt>mainName - input main entry Name or dll Name ex. hello.py</dt>
+<dd><a href="#id7"><span class="problematic" id="id8">|</span></a>can build config but can’t compile until provided</dd>
+<dt>bool or makeEXE [opt] = [True,False] - [default] False ex. True or makeExe=True</dt>
+<dd><a href="#id9"><span class="problematic" id="id10">|</span></a>Set/provide True arg for executable (exe)</dd>
+</dl>
+<p>jsonp [opt] - path to assembly.json file</p>
+<p>outDir [opt]- output dir relative or absolute path</p>
+</div></blockquote>
+<p><strong>no comma separation unless inside tuple or list, no spaces k=v</strong></p>
 <dl class="docutils">
 <dt><strong>configPath</strong>:</dt>
 <dd><ul class="first last simple">
@@ -425,11 +412,11 @@ then edit to build/load exactly what you want and where it is located.</p>
 <blockquote>
 <div><p>Builds an exe or dll file based on options makeEXE</p>
 <dl class="docutils">
-<dt>Example: <a href="#id5"><span class="problematic" id="id6">``</span></a>python ipybuild.py c:/souredir/my.config appname c:/release</dt>
+<dt>Example: <a href="#id11"><span class="problematic" id="id12">``</span></a>python ipybuild.py c:/souredir/my.config appname c:/release</dt>
 <dd>listexe=c:/dev/include.txt``</dd>
 </dl>
 <p>Same as: <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">ipybuild.py</span> <span class="pre">c:/souredir/my.config</span> <span class="pre">appname</span> <span class="pre">c:/release</span> <span class="pre">c:/dev/include.txt</span></code>
-Same as: <a href="#id7"><span class="problematic" id="id8">``</span></a>python ipybuild.py {‘configPath/my.config’:’c:/souredir’</p>
+Same as: <a href="#id13"><span class="problematic" id="id14">``</span></a>python ipybuild.py {‘configPath/my.config’:’c:/souredir’</p>
 <blockquote>
 <div>‘mainName’:’appname’ ‘outDir’:’c:/source’
 ‘listexe’:’c:/dev/include.txt’}``</div></blockquote>
@@ -445,7 +432,6 @@ keep the .py files in release, just use them to check.</p>
 the python interpreter to get logging in ipybuild runs.*</p>
 <p><em>file write logs</em> can only be manually deleted after python interpreter is closed</p>
 <p><strong>Carefully read the output and File log to see find what is executing</strong></p>
-<p>#TODO Add auto-resource list creation as sideby method to run first</p>
 </div></blockquote>
 </dd></dl>
 
@@ -482,7 +468,7 @@ libraries in listdll.txt files files to zip in</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Params:</th><td class="field-body">configPath, mainName, outDir,
-jsonp, makeEXE, <a href="#id9"><span class="problematic" id="id10">*</span></a>args, <a href="#id11"><span class="problematic" id="id12">**</span></a>kwargs</td>
+jsonp, makeEXE, <a href="#id15"><span class="problematic" id="id16">*</span></a>args, <a href="#id17"><span class="problematic" id="id18">**</span></a>kwargs</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
 </tr>
@@ -501,7 +487,7 @@ jsonp, makeEXE, <a href="#id9"><span class="problematic" id="id10">*</span></a>a
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Params:</th><td class="field-body">configPath=None, mainName=None, outDir=None,
-jsonp=None, makeEXE=False, <a href="#id13"><span class="problematic" id="id14">*</span></a>args, <a href="#id15"><span class="problematic" id="id16">**</span></a>kwargs</td>
+jsonp=None, makeEXE=False, <a href="#id19"><span class="problematic" id="id20">*</span></a>args, <a href="#id21"><span class="problematic" id="id22">**</span></a>kwargs</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
 </tr>

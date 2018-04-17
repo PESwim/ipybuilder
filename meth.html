@@ -182,6 +182,9 @@
 </div>
 <div class="section" id="module-buildlogs">
 <span id="buildlogs-methods"></span><span id="bldlgs"></span><h1>buildlogs methods<a class="headerlink" href="#module-buildlogs" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span><span class="n">logging</span> <span class="k">with</span> <span class="n">termialC</span> <span class="n">stream</span> <span class="n">subclass</span><span class="o">*</span>
+</pre></div>
+</div>
 <dl class="class">
 <dt id="buildlogs.func">
 <em class="property">class </em><code class="descclassname">buildlogs.</code><code class="descname">func</code><span class="sig-paren">(</span><em>hi</em>, <em>lo</em><span class="sig-paren">)</span><a class="headerlink" href="#buildlogs.func" title="Permalink to this definition">¶</a></dt>
@@ -227,11 +230,11 @@ if log.critical = 50 then log console goes to File.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">method:</th><td class="field-body">makebuild() internal call</td>
+<tr class="field-odd field"><th class="field-name">method:</th><td class="field-body">makeBuild() internal call</td>
 </tr>
 </tbody>
 </table>
-<p>Compile the exe or dll files given the user infomation</p>
+<p>Compile the exe or dll files given the user information</p>
 <p>Use modified pyc.py to compile with subprocess call to
 IronPython ipy.exe.</p>
 <p>Stop build on partialError that is Fatal to Compile
@@ -606,13 +609,70 @@ information when the install IronPython path is/is not found.</p>
 <dt id="makedefault.validatePath">
 <code class="descclassname">makedefault.</code><code class="descname">validatePath</code><span class="sig-paren">(</span><em>txt</em><span class="sig-paren">)</span><a class="headerlink" href="#makedefault.validatePath" title="Permalink to this definition">¶</a></dt>
 <dd><p>Regex parse a valid filepath into path:name:ext group</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param:</th><td class="field-body">txt [str] - valid file path</td>
+</tr>
+<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">path:name:ext [list] or []</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="makedefault.BasePathDir">
+<code class="descclassname">makedefault.</code><code class="descname">BasePathDir</code><span class="sig-paren">(</span><em>dp</em><span class="sig-paren">)</span><a class="headerlink" href="#makedefault.BasePathDir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a file path and return dict of info about path</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">dp [str] - user arg path</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><blockquote>
+<div><ul class="simple">
+<li>(main, base, basetype, isFile, isdefault) [tuple]</li>
+<li>main [str] - fullpath parent</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>base [str] - base of path dir or file path</li>
+<li><dl class="first docutils">
+<dt>basetype [basetype [python, json, config, None]]</dt>
+<dd><ul class="first last">
+<li>isFile [bool]</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>isdefault [ bool] - True if output is going to UserDefaulted/</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="makedefault.SlashArgs">
 <code class="descclassname">makedefault.</code><code class="descname">SlashArgs</code><span class="sig-paren">(</span><em>config</em>, <em>name</em>, <em>jsn</em>, <em>out</em><span class="sig-paren">)</span><a class="headerlink" href="#makedefault.SlashArgs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Runs SlashControl and BasePath for each user path arg:
-<em>(configPath, mainName, jsonp, outDir)</em></p>
+<dd><p>Runs SlashControl and BasePath for each user path arg:</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">params:</th><td class="field-body">(configPath, mainName, jsonp, outDir)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">(argc, argm, argj, argo) [tuple]</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
 </dd></dl>
 
 <dl class="function">
@@ -668,11 +728,9 @@ reset mainName path to outDir if no arg “outDir”</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Params:</th><td class="field-body">path[s] [str][list] - path[s] to check.</td>
+<tr class="field-odd field"><th class="field-name">Params:</th><td class="field-body">fpath[s] [str][list] - path[s] to check</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">[str] or [list] of path[s] read.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raise:</th><td class="field-body">IOError - in getTrueFilePath if fail.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">path[s] read [str] or [list]</td>
 </tr>
 </tbody>
 </table>
@@ -688,8 +746,7 @@ reset mainName path to outDir if no arg “outDir”</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">config Dict from LoadConfig [OrderedDict]</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">userconfig [config Dict]
-- as written to filepath shown in writefiles.log</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">userconfig [config Dict] - as written to file path shown in writefiles.log</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Raise:</th><td class="field-body">FatalError or partialError [Exception] or [error sink list]</td>
 </tr>
@@ -707,7 +764,7 @@ reset mainName path to outDir if no arg “outDir”</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">file path [str] - file path to check.</td>
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">fnpath [str] - file path to check.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">absolute path to existing file [str].</td>
 </tr>
@@ -721,16 +778,19 @@ reset mainName path to outDir if no arg “outDir”</p>
 <dt id="makeload.LoadConfig">
 <code class="descclassname">makeload.</code><code class="descname">LoadConfig</code><span class="sig-paren">(</span><em>parsedArgs</em><span class="sig-paren">)</span><a class="headerlink" href="#makeload.LoadConfig" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load user defined “configPath” or start with auto-renamed 
-default configuration as helper,if started with “two quotes 
-no space (“”) as configPath parameter. After user adjustments 
-to default_config.config content or name or path, user will need to 
-re-run using “auto-renamed” config path. 
-The auto-renamed file is <em>shown as output</em> in the output log. 
-This will finish a build.</p>
+default configuration as helper, if started with “two quotes” 
+no space (“”) as configPath parameter.</p>
+<blockquote>
+<div>After user adjustments to default_config.config content or</div></blockquote>
+<p>name, or path, user will need to re-run using “auto-renamed” 
+config path.</p>
+<blockquote>
+<div>The auto-renamed file is <em>shown as output</em> in the output log.</div></blockquote>
+<p>This will finish a build.</p>
 <p>Provides user opportunity to change defaults in an editor 
 before building on default settings and assembly information.</p>
 <p>If you use “two quotes no space (“”) as the first arg then the 
-default config path is used and buld proceeds with an 
+default config path is used and build proceeds with an 
 auto re-named appname:_config.config file or if no main name was 
 provided the default_config.config file which user can modify.</p>
 <p>If the output path (“ourDir” arg) is not resolved generated files
@@ -741,8 +801,7 @@ go to the “/UserDefaulted” directory.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">parsredArgs from ParseArg [OrderedDict]</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">[config Dict] userconfig 
-- written to filepath shown in writefiles.log</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">userconfig  [config Dict] - written to file path shown in writefiles.log</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">FatalError or partialError [Exception] or [error sink list]</td>
 </tr>
@@ -759,7 +818,7 @@ go to the “/UserDefaulted” directory.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">strPath to listfile of filepaths [str] or [list]</td>
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">arg [str] or [list] - path to listfile of filepaths</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">filepaths(s) [str] or [list]</td>
 </tr>
@@ -783,7 +842,7 @@ go to the “/UserDefaulted” directory.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Filters:</th><td class="field-body">.dll and .exe files to not read</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Param:</th><td class="field-body">[str] a file path</td>
+<tr class="field-even field"><th class="field-name">Param:</th><td class="field-body">rpath [str] - a file path</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">[str] - path if isfile</td>
 </tr>
@@ -813,8 +872,8 @@ go to the “/UserDefaulted” directory.</p>
 <tr class="field-odd field"><th class="field-name">OutDir:</th><td class="field-body">path output directory [str] [opt] = default “release/”</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Jsonarg:</th><td class="field-body">path to assembly and embedding flags .json file [str] [opt]
-- defaults to “defautls/”asembly_config.json” and requires the filepath 
-subdirectory “defautls/”.</td>
+- defaults to “defaults/”asembly_config.json” and requires the file path 
+subdirectory “defaults/”.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">MakeEXE:</th><td class="field-body">True - make exe [bool] [opt] - default False to make dll file</td>
 </tr>
@@ -835,12 +894,12 @@ subdirectory “defautls/”.</td>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">listdll:</th><td class="field-body"><ul class="first simple">
-<li>pre-comiled .dlls or .py module file to add or embed in main</li>
+<li>pre-compiled .dlls or .py module file to add or embed in main</li>
 </ul>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">listzip:</th><td class="field-body"><ul class="first last simple">
-<li>filepath structure and file archive into output directory</li>
+<li>file path structure and file archive into output directory</li>
 </ul>
 </td>
 </tr>
@@ -895,7 +954,7 @@ for i.e. teststests, considers   an escape sequence.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">true path.</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">true path [str]</td>
 </tr>
 </tbody>
 </table>
@@ -913,7 +972,7 @@ for i.e. teststests, considers   an escape sequence.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">[str] IronPython install path and if not main sets gsBuild.IPATH</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">IronPython install path [str] - or - if not main sets gsBuild.IPATH</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raise:</th><td class="field-body">NotImplementedError</td>
 </tr>
@@ -927,7 +986,7 @@ for i.e. teststests, considers   an escape sequence.</p>
 <dl class="class">
 <dt id="terminalcolorlog.terminalC">
 <em class="property">class </em><code class="descclassname">terminalcolorlog.</code><code class="descname">terminalC</code><span class="sig-paren">(</span><em>stream=&lt;colorama.ansitowin32.StreamWrapper object&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#terminalcolorlog.terminalC" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sheads light on a dark subject.</p>
+<dd><p>Sheds light on a dark subject.</p>
 <p>Uses wincon and winbase constants and handles
 or ANSI codes for platform specific awesomeness
 in concert with with logging.</p>
