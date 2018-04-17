@@ -1,0 +1,66 @@
+# git ls-files --others --exclude-from=.git/info/exclude
+# Lines that start with '#' are comments.
+# builder
+*.log.*
+*.exe
+*.pdf
+*.dll
+!StdLib.dll
+lic*.html
+lic*.rtf
+lic*.s*.*
+*.odt
+*/UserDefaulted
+UserDefaulted/*.*
+UserDefaulted
+*.log
+*.pyc
+*/*.pyc
+*/.coverage
+*.coverage
+!*/buildSpellIgnore.txt
+!requirements.txt
+!*/requirements.txt
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+# network
+"e\357\200\272"
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
