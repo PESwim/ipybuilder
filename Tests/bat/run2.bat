@@ -1,0 +1,1 @@
+cmd /C python ..\ipybuild.py  maketest_config.config make.py ('listdll.txt', 'listzip=zip_list.txt') ('{listexe:clexe.txt}')

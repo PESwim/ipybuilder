@@ -1,0 +1,3 @@
+mock\inst\zip\afile.txt
+mock\inst\zip\bfile.txt
+mock\inst\zip\cfile.txt

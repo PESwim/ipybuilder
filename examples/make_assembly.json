@@ -1,0 +1,10 @@
+{
+    "product_version": "0.0.1.1 alpha", 
+    "copyright": "Copyright 2018 - Howard Dunn. Apache 2.0 v2 Licensed.", 
+    "company": "Process Engineering LLC (PE LLC)", 
+    "file_version": "0.0.1.1", 
+    "standalone": false, 
+    "product_name": "PESwim installer", 
+    "embed": false,
+    "libembed": false
+}

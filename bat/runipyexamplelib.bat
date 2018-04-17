@@ -1,0 +1,1 @@
+cmd /c python ipybuild.py "" ..\examplepy\ipyexamplelib.py ..\examplepy\ipyex_assembly_lib_true.json True ..\examplepy\testlib listexe=[..\examplepy\ipyexampleimport.py, ..\examplepy\ipyeximp.py]
