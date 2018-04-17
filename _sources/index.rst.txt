@@ -2,7 +2,9 @@
    sphinx-quickstart on Sat Mar 03 23:03:55 2018.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
-   
+
+.. _ipybuilder source download: https://github.com/HBDunn/readme.git
+
 .. |trade| unicode:: U+02122
 
 .. _docs home:
@@ -10,6 +12,8 @@
 ipybuilder's documentation
 ==========================
    **Version:** |version| - |today|
+
+   `ipybuilder source download`_
 
 Highlights   
 **********
