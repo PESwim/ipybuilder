@@ -109,7 +109,7 @@ class ReferenceStatus(object):
         return(self._ipms)
 
     def _getModules(self):
-#        print 'RUNNING GETMODS'
+
         if self.ref and any(self.ref in sm for sm in sys.modules):
             fnp = None
 
@@ -119,7 +119,7 @@ class ReferenceStatus(object):
                 fnp = 'Internal'
                 if any(self.ref in bltn for bltn in sys.builtin_module_names):
                     fnp = 'Built-In-Module'
-#            print 'FNP ' + str(fnp) 
+
             if fnp:
                 self._aref['isloaded'] = True
 
@@ -163,7 +163,7 @@ class ReferenceStatus(object):
             realassLoc = None
             realassVer = None
             realassName = None
-            #print realass.GetName().ToString()
+
             try:
                 realassVer = realass.GetName().Version.ToString()
             except (System.NotSupportedException, System.MissingMemberException):

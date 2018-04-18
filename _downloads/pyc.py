@@ -174,7 +174,7 @@ def GenerateExe(config):
         
         config.embed = True
         
-        #3/19/2018,4/3/2018  # Copyright 2018 - hdunn. Apache 2.0 licensed. Modified from original.
+        # 3/19/2018,4/3/2018  # Copyright 2018 - hdunn. Apache 2.0 licensed. Modified from original.
         # ----- handle dll and StdLib embed -----------
         embedDict = {}
         for a in System.AppDomain.CurrentDomain.GetAssemblies():
@@ -186,7 +186,7 @@ def GenerateExe(config):
                         n.Name in ['Microsoft.Dynamic', 'Microsoft.Scripting']:
                         embedDict[n] = a
                 
-                #hdunn 3/15/2018 any(n.Name in dlln for dlln in dllNames) or \ above
+                # hdunn 3/15/2018 any(n.Name in dlln for dlln in dllNames) or \ above
                 if any(n.Name in dlln for dlln in dllNames):
                     embedDict[n] = a
                 if config.libembed and 'StdLib' in n.Name:
@@ -257,12 +257,12 @@ def GenerateExe(config):
 
         # put the generated DLL into the resources for the stub exe
         w = mb.DefineResource("IPDll.resources", "Embedded IronPython Generated DLL")
-        #print 'IPDLL NAME: ' + 'IPDLL.' + config.output
+        # print 'IPDLL NAME: ' + 'IPDLL.' + config.output
         # 4/4/2018 Copyright 2018 - hdunn. Apache 2.0 licensed. Modified from original.----- IPDLL NAME
         strPathRefIPDll = System.IO.DirectoryInfo(config.output).Name
         #---  'Changed to: ' + "IPDll." + strPathRefIPDll
         # comment out System.IO.File.Exists(config.output + ".dll"))
-        #w.AddResource("IPDll." + config.output, System.IO.File.ReadAllBytes(config.output + ".IPDLL"))
+        # w.AddResource("IPDll." + config.output, System.IO.File.ReadAllBytes(config.output + ".IPDLL"))
         w.AddResource("IPDll." + strPathRefIPDll, System.IO.File.ReadAllBytes(config.output + ".IPDLL"))
         #--------------------
         # generate code to load the resource
@@ -555,7 +555,7 @@ def Main(args):
         print(str(ex)[:255] + ' ...' + '\n' + msg)
     
     if config.target != System.Reflection.Emit.PEFileKinds.Dll:
-        #read bytes while using dll in compile
+        # read bytes while using dll in compile
         # 4.11.2018 Copyright 2018 - hdunn. Apache 2.0 licensed. Modified from original.
         System.IO.File.Copy(config.output + ".dll", 
                             config.output + ".IPDLL",
