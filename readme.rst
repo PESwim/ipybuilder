@@ -1,25 +1,31 @@
 ..  created on Fri Mar 24 17:26:26 2018
 ..  author: PE LLC peswin@mindspring.com
 ..  copyright: 2018, Howard Dunn. Apache 2.0 v2 licensed.
-
+.. _Full Documentation: https://hbdunn.github.io/readme/
 .. |trade| unicode:: U+02122
 
-**Mar 25, 2018 21:11 MST**
+
+**Apr 18, 2018 00:16 MST**
+
+`Full Documentation`_
 
 ipybuilder
 ==========
-Command-line standalone IronPython™ 2.7.7 dll and exe file compiler. Uses user
-defined assembly information, input command args parsed by pseudo-ORDER. 
+
+Command-line standalone IronPython™ 2.7.7 dll and exe file compiler. Uses, user
+defined, assembly information, and input command args parsed by pseudo-ORDER. 
 
 **Not Endorsed by C#.Net, IronPython, or Python**
 
 Motivation and Development
 --------------------------
+
 Develop without Visual Studio\ |trade| - In an IronPython\ |trade| project I
 ran into trouble distributing my project as the compiler code in "pyc.py" was
-buggy, so I set out to fix it.
+buggy, so I set out to fix it. 90% of the code is for the loose parameter input
+format, error, and info output - that hopefully helps you complete a compile.
 
-Use a command-line compile - importable, shell .bat/.sh easily setup.
+Use a command-line compile - shell .bat/.sh easily setup.
 
 Intensionally verbose output - wanted users (me) to have extra-ordinary
 feedback output and transparent coding, so that "hidden" 3rd party apps were
@@ -28,8 +34,8 @@ minimized. This is my first time public release.
 Use project as a general working reference for me/users/coders to see full
 working complex code such as logging and unit testing.
 
-While I'm not completely satisfied with all of the unit testing code, a lot of
-other unit testing falls very short of completely test a code base.
+While I'm not completely satisfied with the unit testing code, a lot of
+other unit testing falls very short of completely testing a code base.
  
 - **ipybuilder fixes several longtime running bugs in the IronPython**
   **pyc.py complier and then goes on to try and really help users build a**
@@ -44,24 +50,22 @@ other unit testing falls very short of completely test a code base.
 
 Development System 
 ------------------
-**ipybuild works for the author using**: 
-  - Win7 64 bit python 32/64 
-  - IronPython 2.7.7.1000**
-    
-  thats the only test so far....
+**ipybuild works for the author using Win7 64 bit python 32/64 with 
+IronPython 2.7.7.1000** - thats the only test..so far.
 
 Built Using
 -----------
-- Developed in 32 bit Python 2.7.14
-  - can't use set.py for IronPython code
+  - Developed in 32 bit Python 2.7.14
+  - can't (do'nt know how) to use set.py for IronPython code
   - can't use pylint/enchant in 64 bit, so build with 32 bit
   - can't sphinx in 64 bit, so built with 32 bit
   
-  *check - should run in both ipy and python and 32/64bit*
+  check - should run in both ipy and python and 32/64bit 
+  thats the only test so far....
 
 Getting Started
 ===============
-get copy of  project  running on your local machine 
+get a copy of project running on your local machine 
  
 Prerequisites Required
 ======================
@@ -99,7 +103,7 @@ Please work through what you can before asking for help - It is hard to get
 relative paths and dependencies resolved when compiling an exe. Start small, 
 work up to big.
 
-If you are a first time Github contributor or beginner than I really encourage
+If you are a first time GitHub contributor or beginner than I really encourage
 you to submit a fix or comment, we both will learn. Of course Advanced help 
 appreciated.
 
@@ -109,7 +113,7 @@ more code work is required by developers. It really slows production down when y
 Ultimately, hope ipybuilder can be a friendly bug-free command-line Compiler.
 
 This is a free-time project so if my free-time goes away so does me ability to 
-respond. Please be responsible with your comments and requests. I hope you find
+respond. Please be responsible with your comments and requests (see *Code of Conduct*). I hope you find
 the answer/solution/explanation in the full-documentation.
 
 ****
@@ -162,8 +166,30 @@ pseudo constants: uppercase
     The whole point of this program is for working with python and C#.Net\ |trade|.
     When sub-classing a .net class it is much clearer to mirror a .Net class with a 
     python PascalClass name style to visually read code back and forth. 
-    I really didn't focus on naming to start as this package is only written
-    in python, but is relevant for all(my) .net work.
+    I really didn't focus on a consistent and standardized python-.Net naming style at the
+    to start, as this package is only written in python. Now that I have worked out, what 
+    seems to be a reasonable style, there are naming fixes that still need to be made this
+    code. The naming style is relevant for all(my) other python-.net work. 
+    
+    Consider working in .net from the IronPython side and sub-classing (just an example)
+    .net class System.IO.Directory. It is obvious what to expect(.net methods etc) with
+    the PESwim style when reviewing, testing, and developing - not so much when you see 
+    the snake_case form.
+    
+      Style type in IronPython (pseudo-code):
+        - PESwim Style:
+        .. code:: python
+        
+           class SystemIO(System.IO):
+               pass  
+           dirName = SystemIO.Directory.GetCurrentDirectory()  
+             
+        - snake_case Style:
+        .. code:: python
+        
+           class system_io(System.IO):
+               pass
+           dirName = system_io.Directory.GetCurrentDirectory()   
 
 work todo continues 
 -------------------
@@ -219,27 +245,26 @@ really kill anti-patterns and bad practice - life long pursuit - just started
 
 known issues 
 ------------
-- well none ducmented so far: Mar 25, 2018 21:11 MST
+- well none documented so far: Apr 15, 2018 11:51 MST
 
-version issues v0.0.A8
-^^^^^^^^^^^^^^^^^^^^^^
-
+version issues v0.0.A10
+-----------------------
 see section: work todo continues
   \
 
 ****
 
-Versioning
-==========
-**v0.0.A8** - current
-  - well, none so far: Mar 25, 2018 21:11 MST
+Versions
+========
+**v0.0.A10** - current
+  - well, none so far: Apr 15, 2018 11:51 MST
 
-  **Version v0.0.A8**
+  **Version v0.0.A10**
     - Alpha release to start
     - Tested:
       - Window 7 64 platform - 32 bit python
     - issues:
-      see: issues v0.0.A8
+      see: issues v0.0.A10
       \  
       
 Authors
