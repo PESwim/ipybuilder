@@ -1,7 +1,7 @@
 ..  created on Fri Mar 24 17:26:26 2018
 ..  author: PE LLC peswin@mindspring.com
 ..  copyright: 2018, Howard Dunn. Apache 2.0 v2 licensed.
-.. _Full Documentation: https://hbdunn.github.io/readme/
+.. _Full Documentation:  https://hbdunn.github.io/ipybuilder/
 .. |trade| unicode:: U+02122
 
 
