@@ -180,7 +180,7 @@ def delBuildFileWrites(dellst):
         if os.path.isfile(f):
             sys.path.remove(f)
     return True
-def setLogLookBackTimeSec(lookback=120):
+def setLogLookBackTimeSec(lookback=30):
     '''
        Set log output look-back time (sec)
 
@@ -225,7 +225,7 @@ def checkLogTimeSec(strline, lookBackSec, tag):
 def getWriteLog(tag=''):
     '''
        Find writelog lines matching timestamps between
-       lookbacktime (default 120 sec back) and current local time
+       lookbacktime (default 30 sec back) and current local time
 
        logpath: cwd\\UserDefaulted\\filewrite.log - no limit storage
 

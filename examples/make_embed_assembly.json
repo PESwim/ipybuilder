@@ -1,0 +1,10 @@
+{
+    "product_version": "0.0.0.1", 
+    "copyright": "Copyright Notice", 
+    "standalone": false, 
+    "company": "Your Identifier", 
+    "file_version": "0.0.0.1", 
+    "libembed": false, 
+    "embed": true, 
+    "product_name": "Application exe name"
+}

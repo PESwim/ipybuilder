@@ -6,7 +6,6 @@
 ..\..\ironpython\ipy64.exe.config
 ..\..\ironpython\ipyc.exe
 ..\..\ironpython\ipyc.exe.config
-..\..\ironpython\ironpython-wpf.pdf
 ..\..\ironpython\IronPython.dll
 ..\..\ironpython\IronPython.Modules.dll
 ..\..\ironpython\License.html
@@ -18,4 +17,3 @@
 ..\..\ironpython\Microsoft.Scripting.dll
 ..\..\ironpython\Microsoft.Scripting.Metadata.dll
 ..\..\ironpython\StdLib.dll
-..\..\ironpython\StdLib.txt

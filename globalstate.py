@@ -50,6 +50,8 @@ class GlobalState(object):
 gsBuild = GlobalState()
 gsBuild.Verbose = False
 gsBuild.INFO = True
+gsBuild.IPATH = None
+gsBuild.IPYBLDPATH = sys.argv[0]
 
 if any('-v' in arg for arg in sys.argv):
     sys.argv.remove('-v')

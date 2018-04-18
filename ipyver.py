@@ -5,10 +5,10 @@
 .. copyright: 2018, Howard Dunn. Apache 2.0 v2 licensed.
 
 """
-import os
-import sys
+__version__ = "0.0.0.11"
+
 clr = None
-from version import __version__
+
 try:
     import clr
     clr.AddReference("System")
@@ -17,6 +17,15 @@ try:
     from System.Reflection import Assembly
 except Exception as exi:
     pass
+
+try:
+    import os
+    import sys
+except Exception as exo:
+    print('No module os or No module sys')
+    print(exo)    
+
+
 
 if not clr:
     print 'Must run under ipy/clr'    

@@ -123,7 +123,6 @@ def _parseOrder(argtyps):
                     not '.' in ar) or (ar.endswith('/') or ar.endswith('\\')):
                     argtmp[2] = ar
                 elif '.json' in ar:
-#                    log.error('\n ar with .json {}'.format(ar))
                     argtmp[3] = ar
                 
         if not argtmp[0]:

@@ -224,7 +224,7 @@ log = dynfile(__name__)
 log.debug('\n---------------- ' + str(__name__) + \
               ' loaded -----------------')
 #---------------------------- code width --------------------------------------
-log.info('Checking paths, zip(if any), IronPython: ~30 sec to Compile start .....')
+log.info('Checking paths, zip(if any), IronPython: ~30 sec (first run find IPY) to Compile start .....')
 import makeload
 from buildcheck import checkBuildConfig
 from makeparse import MainParse, CommandLineParse
@@ -253,7 +253,6 @@ def Build(args):
     '''
     checkhelp(args)
     checkRequiredIP()
-    print('gsbuild ' + str(gsBuild.Verbose))
     if gsBuild.Verbose or not gsBuild.INFO:
         log.info('\nInput args:\n {}'.format(json.dumps(args),indent=4))
     CmdConfig(args)

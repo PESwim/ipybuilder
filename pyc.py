@@ -10,9 +10,10 @@
 # by the terms of the Apache License, Version 2.0.
 #
 # Copyright 2018 - Howard Dunn - PE LLC. Apache 2.0 v.2 licensed. Modified/derivative work from original.
-# 
+#
+#
 # Modification not endorsed by Microsoft Corp. or Secret Labs AB
-# 
+#
 # You must not remove this notice, or any other, from this software.
 #
 #####################################################################################
@@ -31,7 +32,7 @@
         /file_version:<version>  NOT IMPLEMENTED  Set the file/assembly version
         /? /h                                     This message
         -v - in ipybuild args                     Verbose output
-        
+
     ::EXE/WinEXE specific options:
         /main:main_file.py                        Main file of the project (module to be executed first)
         /platform:x86                             Compile for x86 only
@@ -46,11 +47,11 @@
         /file_info_trademark:<info>               Set trademark information in executable meta information
     ::
     ::Example:
-        ipy.exe pyc.py /main:Program.py Form.py /target:exe
+        ipy.exe pyc.py /main:Program.py mian.py /target:exe
 
 """
 from version import __version__
-
+clr = None
 import sys
 
 try:
@@ -68,7 +69,7 @@ try:
     from System.Reflection import AssemblyName, TypeAttributes, MethodAttributes, ResourceAttributes, CallingConventions
 
 except Exception as exi:
-    print(exi)     
+    print('pyc: ' + str(exi))
 
 def GenerateExe(config):
     """generates the stub .EXE file for starting the app"""
@@ -93,7 +94,6 @@ def GenerateExe(config):
     if config.embed and config.dlls: #not for standalone ?
         config.dlls = list(set(config.dlls))
         opath = System.IO.Path.GetDirectoryName(config.output)
-        print 'opath: ' + opath
         for dll in config.dlls:
             dpath = System.IO.Path.GetFileName(dll)
             dllNames.append(dpath)
@@ -103,23 +103,22 @@ def GenerateExe(config):
                     print 'Adding to Ref: ' + lpath
                     clr.AddReferenceToFileAndPath(lpath)
                 except Exception as exa:
-                    msg = ('File | Filepath: \n {}: ' + 
+                    msg = ('File | Filepath: \n {}: ' +
                            'not a DLL file or does not exist.').format(dll)
                     raise IOError(str(exa) + '\n' + msg)
-                        
+
             elif '.dll' in dll:
                 try:
                     print 'Adding .dll to Ref: ' + dll
                     clr.AddReferenceToFileAndPath(dll)
                 except Exception as exb:
-                    msg = ('File | Filepath: \n {}: ' + 
+                    msg = ('File | Filepath: \n {}: ' +
                            'not a DLL file or does not exist.').format(dll)
                     raise IOError(str(exb) + '\n' + msg)
-            
+    
+    outdir = System.IO.Path.GetDirectoryName(config.output)
     if config.standalone or config.libembed or config.embed:
-        outdir = System.IO.Path.GetDirectoryName(config.output)
         StdLibOutPath = System.IO.Path.Combine(outdir,'StdLib.dll')
-        print 'exists ' + str(System.IO.File.Exists(StdLibOutPath))
         clrHasStdLib = False
         for clrRef in clr.References:
             if 'StdLib' in str(clrRef):
@@ -130,77 +129,65 @@ def GenerateExe(config):
              clr.AddReferenceToFileAndPath(StdLibOutPath)
              clrHasStdLib = True
             except(System.IO.IOException, System.IO.FileLoadException) as exd:
-                try:
-                    print str(exd.GetType().FullName) + '\n' + str(exd.Message)
-                    print
-                except Exception as exu:
-                        raise exu
-            
-                if exd.GetType()==System.IO.IOException:    
-                    msg = ('File | Filepath:\nStdLib.dll or {}:\n ' + 
+                if exd.GetType()==System.IO.IOException:
+                    msg = ('File | Filepath:\nStdLib.dll or {}:\n ' +
                            'Not a DLL file or does not exist.') \
                            .format(config.output + '.dll')
                     print msg
                 elif exd.GetType()==System.IO.FileLoadException:
-                    msg = ('File | Filepath: {}\n' + 
+                    msg = ('File | Filepath: {}\n' +
                           'Not a clr Loadable file.') \
                           .format(config.output + '.dll')
                     print msg
-        
+
         if not clrHasStdLib:
-        
+
             try:
                 clr.AddReference("StdLib.dll")
             except (System.IO.IOException, System.IO.FileLoadException) as ex:
-                try:
-                    print str(ex.GetType().FullName) + '\n' + str(ex.Message)
-                    print
-                except Exception as exu:
-                        raise exu
-            
-                if ex.GetType()==System.IO.IOException:    
-                    msg = ('File | Filepath:\nStdLib.dll or {}:\n ' + 
+                if ex.GetType()==System.IO.IOException:
+                    msg = ('File | Filepath:\nStdLib.dll or {}:\n ' +
                            'Not a DLL file or does not exist.') \
                            .format(config.output + '.dll')
                     print msg
                 elif ex.GetType()==System.IO.FileLoadException:
-                    msg = ('File | Filepath: {}\n' + 
+                    msg = ('File | Filepath: {}\n' +
                           'Not a clr Loadable file.') \
                           .format(config.output + '.dll')
                     print msg
-            print    
-            print 'Trying to finish .... - check compiled function, paths and access'        
             print
-        
+            print 'Trying to finish .... - check compiled function, paths and access'
+            print
+
         config.embed = True
-        
+
         # 3/19/2018,4/3/2018  # Copyright 2018 - hdunn. Apache 2.0 licensed. Modified from original.
         # ----- handle dll and StdLib embed -----------
         embedDict = {}
         for a in System.AppDomain.CurrentDomain.GetAssemblies():
             n = AssemblyName(a.FullName)
-            
+
             if not a.IsDynamic and not a.EntryPoint:
                 if config.standalone:
                     if n.Name.StartsWith("IronPython") or \
                         n.Name in ['Microsoft.Dynamic', 'Microsoft.Scripting']:
                         embedDict[n] = a
-                
+
                 # hdunn 3/15/2018 any(n.Name in dlln for dlln in dllNames) or \ above
                 if any(n.Name in dlln for dlln in dllNames):
                     embedDict[n] = a
                 if config.libembed and 'StdLib' in n.Name:
                     embedDict[n] = a
-                    
+
         for name, assem in embedDict.iteritems():
             print "\tEmbedding %s %s" % (name.Name, str(name.Version))
-            print '\t path ' + str(assem.Location) 
+            print '  path:\n  ' + str(assem.Location)
             if assem.Location:
-                print 'exist' + str(System.IO.File.Exists(assem.Location))
+                print 'exists' + str(System.IO.File.Exists(assem.Location))
                 if System.IO.File.Exists(assem.Location):
-                    f = System.IO.FileStream(assem.Location, System.IO.FileMode.Open, System.IO.FileAccess.Read)
+                    f = System.IO.FileStream(assem.Location, System.IO.FileMode.Open, System.IO.FileAccess.Read)    
                     mb.DefineManifestResource("Dll." + name.Name, f, ResourceAttributes.Public)
-                
+
         # we currently do no error checking on what is passed in to the AssemblyResolve event handler
         assemblyResolveMethod = tb.DefineMethod("AssemblyResolve", MethodAttributes.Public | MethodAttributes.Static, clr.GetClrType(Assembly), (clr.GetClrType(System.Object), clr.GetClrType(System.ResolveEventArgs)))
         gen = assemblyResolveMethod.GetILGenerator()
@@ -275,9 +262,9 @@ def GenerateExe(config):
         gen.EmitCall(OpCodes.Call, clr.GetClrType(System.Resources.ResourceManager).GetMethod("GetObject", (str, )), ())
         gen.EmitCall(OpCodes.Call, clr.GetClrType(System.Reflection.Assembly).GetMethod("Load", (clr.GetClrType(System.Array[System.Byte]), )), ())
         if config.verbose: print 'Base embed... completed {}'.format(config.output + ".dll")
-        
+
     else:
-        
+
         if config.verbose: print 'No embed'
         # variables for saving original working directory und return code of script
         wdSave = gen.DeclareLocal(str)
@@ -328,7 +315,7 @@ def GenerateExe(config):
     if config.verbose: print 'Gen emit ... done'
     if config.verbose: print "Save as " +  aName.Name + ".exe"
     System.IO.File.Delete(config.output + ".IPDLL")
-        
+
 class Config(object):
     def __init__(self):
         self.output = None
@@ -350,7 +337,7 @@ class Config(object):
         self.file_version = None
         self.dlls = []
         self.verbose = False
-        
+
     def ParseArgs(self, args, respFiles=[]):
         for arg in args:
             arg = arg.strip()
@@ -414,7 +401,7 @@ class Config(object):
              #hdunn 3/19/2018 ------------
             elif arg.endswith(".dll"):
                 self.dlls.append(arg)
-            #hdunn 4/8/2018 ------------ 
+            #hdunn 4/8/2018 ------------
             elif arg in ["-v"]:
                 self.verbose = True
             elif arg in ["/?", "-?", "/h", "-h"]:
@@ -433,9 +420,11 @@ class Config(object):
                 else:
                     #adding py files here
                     self.files.append(arg)
-                    
+
     #hdunn 4/2/2018 ----------
     def Validate(self, config):
+        if self.main_name:
+            print 'main name' + str(self.main_name)
         #  self.main_name or tobe or not tobe
         if self.main and '.py' in self.main and self.main not in self.files:
             self.files.append(self.main)
@@ -448,7 +437,7 @@ class Config(object):
             for fl in cpyfiles:
                 if '.py' not in fl:
                     self.files.remove(fl)
-        #-------------------------------        
+        #-------------------------------
         if self.target != System.Reflection.Emit.PEFileKinds.Dll and self.main_name == None:
             print "EXEs require /main:<filename> to be specified"
             return False
@@ -457,7 +446,7 @@ class Config(object):
             self.output = System.IO.Path.GetFileNameWithoutExtension(self.main_name)
         elif not self.output and self.files:
             self.output = System.IO.Path.GetFileNameWithoutExtension(self.files[0])
-        if config.verbose: print 'First: output path... done' 
+        if config.verbose: print 'First: output path... done'
         return True
 
     def __repr__(self):
@@ -487,17 +476,21 @@ def Main(args):
     if not config.Validate(config):
         print __doc__
         sys.exit(0)
-    
-    if config.verbose: 
-        if 'StdLib' not in config.output:
+
+    if config.verbose:
+            res = ''
             print 'Compiling with config:\n'
-            res = "Input Files - see:{}\n".format(config.output + '.txt')
-            
+            if 'StdLib' in config.output:
+                res = "Input Files - see:{}\n" \
+                .format(config.output + '.txt')
+            else:
+                res += "Input Files - see below 'Setting up compile' output\n"
+
             res += "Output:\n\t%s\n" % config.output
             res += "Target:\n\t%s\n" % config.target
             res += "Platform:\n\t%s\n" % config.platform
             res += "Machine:\n\t%s\n" % config.machine
-    
+
             if config.target == System.Reflection.Emit.PEFileKinds.WindowApplication:
                 res += "Threading:\n"
                 if config.mta:
@@ -505,66 +498,65 @@ def Main(args):
                 else:
                     res += "\tSTA\n"
             print res
-        
-    if config.verbose: print "Setting up full compile: "
-    
+
     #hdunn 4/3/2018 -try clr.CompileMods
     msg = ''
-    if config.verbose: 
-        msg = '\nSending internal to clr.ComplierModules:\n'
+    pre = ''
+    if config.verbose:
+        print "Setting up full compile: "
+        pre = '\nSending internal to clr.ComplierModules:\n'
         msg = msg + '\tconifg.ouput is: {}\n'.format(config.output)
         msg = msg + '\tconfig.main_name is: {}\n'.format(config.main_name)
-    
-    if config.files and config.verbose: 
+
+    if config.files and config.verbose:
         #hdunn 4/6/2018 output ----------
         if 'StdLib' in config.output:
             cfiles = list(config.files)
             cfiles.sort()
             with open( config.output + '.txt', 'w') as tw:
                 tw.writelines(('\n').join(cfiles))
-        else:            
+        else:
             msg = msg + ('\tconfig.files:\n\t' + '{} \n\t'*len(config.files)) \
-                            .format(*config.files)      
-        
+                            .format(*config.files)
             print 'config.files len: ' + str(len(config.files))
-            print 'config.files type: ' + str(type(config.files))
-                            
-    elif config.verbose:
-        msg = msg + '\nconfig.files is empty:'    
-        
-    print str(msg)
+
+    if config.dlls and config.verbose and not 'StdLib' in config.output:
+        msg = msg + ('\n\n\tproject config.dlls (no re-compile):\n\t' + \
+                     '{} \n\t'*len(config.dlls)).format(*config.dlls)
+        print 'config.dlls len: ' + str(len(config.dlls))
+
+    elif config.verbose and not config.files and not config.dlls:
+        msg = msg + '\nconfig.files and config.dlls are empty:'
+
+    print str(pre + msg)
     #hdunn 4/6/2018 Try ----------
     try:
         print 'Compiling dlls ...'
-       
-        clr.CompileModules(config.output + ".dll", 
+        print ' main name - ' + str(config.main_name)
+        clr.CompileModules(config.output + ".dll",
                            mainModule = config.main_name,
                            *config.files)
         
     except Exception as ex:
-        msg = 'FATAL ERROR - Internal clr.ComplierModules:\n'
-        msg = msg + '\tconifg.ouput is {}\n'.format(config.output)
-        msg = msg + '\tconfig.main_name is {}\n'.format(config.main_name)
-        print 'msg create'
-        if config.files:
-            msg = msg + ('\tconfig.files:\n\t' + '{} \n\t'*len(config.files)) \
-                        .format(*config.files)
-        else:
-            msg = msg + '\tconfig.files is empty'
-        
-        print(str(ex)[:255] + ' ...' + '\n' + msg)
-    
+        pre = ('FATAL ERROR - Internal clr.ComplierModules:' + \
+              '\n    - possible bad file in config.files:' + \
+              '\n    - This Error will cause additional Errors:' + \
+              '\n    - Err like:\n {} - acces denied or does not exist.') \
+                  .format(config.output + '.exe')
+
+        print(str(ex)[:255] + ' ...' + '\n' + pre + msg)
+
     if config.target != System.Reflection.Emit.PEFileKinds.Dll:
         # read bytes while using dll in compile
         # 4.11.2018 Copyright 2018 - hdunn. Apache 2.0 licensed. Modified from original.
-        System.IO.File.Copy(config.output + ".dll", 
+        System.IO.File.Copy(config.output + ".dll",
                             config.output + ".IPDLL",
                             True)
         # ------------------------------------------
         #config.dlls.append(config.output + '.dll')
         if config.verbose: print 'Gen Start'
         GenerateExe(config)
-        
+
      #hdunn 3/19/2018 commented out ------------
     #    ext = Ext(config.target)
     #    print "Saved to %s" % (config.output + ext, )

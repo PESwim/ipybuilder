@@ -22,6 +22,7 @@ import json
 import unittest
 from regt import SlashContrl
 from buildlogs import dynfile
+from globalstate import gsBuild
 
 log = dynfile(__name__)
 log.debug('\n---------------- ' + str(__name__) + \
@@ -90,7 +91,16 @@ with open(DefaultReqPath, 'r') as tr:
 log.FILE('Exists {}'.format(DefaultReqPath))
 for txtPath in DefaultReq:
     DefaultReqList.append(os.path.normpath(txtPath.strip()))
-                        
+
+if opex(opn(opab(opj(os.getcwd(),'defaults\\ipath.txt')))):
+   with open(opn(opab(opj(os.getcwd(),'defaults\\ipath.txt'))), 'r') as tr:
+       gsipath = tr.readline().strip()
+       
+   if opex(gsipath):
+      gsBuild.IPATH = gsipath
+   else:
+      os.remove(opn(opab(opj(os.getcwd(),'defaults\\ipath.txt'))))
+                    
 #---------------------------- code width --------------------------------------
 
 def ndcDict(rdic):

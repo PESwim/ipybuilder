@@ -77,6 +77,7 @@ from os.path import join as opj
 from os.path import normpath as opn
 from os.path import dirname as opd
 from os.path import basename as opb
+from os.path import relpath as oprel
 import json
 import glob
 import subprocess
@@ -121,20 +122,24 @@ def makeBuild(config):
         return False
 
     gbm = []
-    dllNames = createUserLibs(config)
+    dllNames = list(createUserLibs(config))
     exedllName = opn(opj(compiler.mainoutdir,
                          compiler.mainout).replace('.exe','.dll'))
-
+    
+#    if dllNames:
+#        log.error(('\n dllNames:\n ' + '{}\n'*len(dllNames)).format(*dllNames))
+#        log.error('\n exedllName:{}'.format(exedllName))
+        
     # std stub useless unless just an exe way to run a few single python modules
     if  compiler.ext.replace('.', '') == 'exe':
         gbm = gbm + _setupBaseExe(config, dllNames)
-        if gsBuild.Verbose: gbm = gbm + ['-v']
-        ipystr = [compiler.ipath + '/ipy '] + ['pyc.py '] + gbm
+        if gsBuild.Verbose: gbm = gbm + ['-v'] # pass verbose to pyc
+        
+        ipystr = [compiler.ipath + '/ipy '] + [compiler.pycpath] + gbm
         _subprocPYC(ipystr, compiler.mainfile, dotExt='.exe')
 
-        # ADD SO DELETED
+        # ADD, SO DELETED
         if compiler.f_embed or compiler.f_standalone:
-            print 'try append ' + compiler.mainoutdir + '.dll'
             dllNames.append(compiler.mainoutdir + '.dll')
 
         if os.path.isfile(compiler.mainoutdir + '.IPDLL'):
@@ -147,22 +152,8 @@ def makeBuild(config):
                     pass
                 else:
                     raise ex
-
-        for dll in dllNames:
-            if os.path.isfile(dll) and '.dll' in dll and\
-                'IronPython' not in dll: #some ver deleted probably not needed
-                try:
-                    os.remove(dll)
-                except (IOError, Exception) as ex:
-                    if ex == IOError:
-                        pass
-                    elif ex == System.IO.IOException:
-                        pass
-                    else:
-                        raise ex
-
+                    
         if (compiler.f_embed or compiler.f_standalone) and compiler.f_libembed:
-
             if os.path.isfile(opd(compiler.mainoutdir) + 'StdLib.dll'):
                 try:
                     os.remove(opd(compiler.mainoutdir) + 'StdLib.dll')
@@ -173,16 +164,28 @@ def makeBuild(config):
 
         #pyc does not send .exe to mainoutdir
         if 'dll' not in compiler.ext:
-
             movestr = ['cmd', '/C', 'move', compiler.pycdir,
                opn(opd(compiler.mainoutdir) + '\\')]
 
             _subprocMove(movestr, compiler.pycdir,
                          compiler.mainoutdir, compiler.ext)
-
+            
+            if compiler.f_embed or compiler.f_standalone:
+                for dll in dllNames:
+                    if os.path.isfile(dll) and '.dll' in dll and\
+                        'IronPython' not in dll: #some ver deleted probably not needed
+                        try:
+                            os.remove(dll)
+                        except (IOError, Exception) as ex:
+                            if ex == IOError:
+                                pass
+                            elif ex == System.IO.IOException:
+                                pass
+                            else:
+                                raise ex
+                                
     #TODO debug simple dll compile
     elif compiler.ext.replace('.', '') == 'dll':
-
         _setupBaseDll(config, dllNames, exedllName)
 
 def pycInfo():
@@ -267,7 +270,6 @@ def pycInfo():
               '\n and dll must accompany any distribution.\n')
 
 
-
 def createUserLibs(config):
     '''
        Loads files from user arg "listdll".
@@ -313,30 +315,40 @@ def createUserLibs(config):
                 gb.append("/out:" + dllName)
                 gb.append("/target:dll")
                 gb = nullList(gb)
-
-                ipystr = [compiler.ipath + '/ipy'] + ['-X:FullFrames'] + ['pyc.py '] + gb
+                
+                ipystr = [compiler.ipath + '/ipy'] + [compiler.pycpath] + gb
+#                for gbs in gb:
+#                    log.warn('\ndll gbs {}'.format(gbs))
+                    
                 _subprocPYC(ipystr, dllName, '.dll')
                 gb = []
                 continue
-
+        
+#        log.error('\n conpiled dllNames:\n {}'.format(dllNames))
+        
         # make one lib dll to embed
         if compiler.f_embed or compiler.f_standalone:
+            
+            dllNames = []
             gb.extend(_getAssembly(config))
+            
             dllName = opj(opd(compiler.mainoutdir),
-                          ('.').join(compiler.mainout.split('.')[:-1]) +'UserLibs')
-
+                          ('.').join(compiler.mainout.split('.')[:-1]) +'DLL')
+            
+            dllNames.append(dllName + '.dll')
+            
             gb.append("/out:" + dllName)
             gb.append("/target:dll")
             gb = nullList(gb)
 
-            ipystr = [compiler.ipath + '/ipy'] + ['-X:FullFrames'] + ['pyc.py '] + gb
+            ipystr = [compiler.ipath + '/ipy'] + [compiler.pycpath] + gb
             _subprocPYC(ipystr, dllName, '.dll')
          
-        if not dllName:
-            dllName = opj(opd(compiler.mainoutdir),
-                      ('.').join(compiler.mainout.split('.')[:-1])) + 'DLL.dll'
-                          
-        return [dllName + '.dll']
+#        if not dllName:
+#            dllName = opj(opd(compiler.mainoutdir),
+#                      ('.').join(compiler.mainout.split('.')[:-1])) + 'DLL.dll'
+#        log.error('\n returing dllnames {}'.format(dllNames))                  
+        return dllNames
     return None
 
 def nullList(gbm):
@@ -369,7 +381,7 @@ def _createStdLib():
     gb.append("/out:" + compiler.stdlibsource.replace('.dll', ''))
     gb.append("/target:dll")
 
-    ipystr = [compiler.ipath + '/ipy'] + ['pyc.py '] + gb
+    ipystr = [compiler.ipath + '/ipy'] + [compiler.pycpath] + gb
     if _subprocPYC(ipystr, opabs(compiler.stdlibsource), dotExt=None):
         if op.isfile(opabs(compiler.stdlibsource)):
             log.FILE('Build Created: {}' \
@@ -486,7 +498,7 @@ def _setCompilerClass(rconfig):
     IPATH = gsBuild.IPATH
     STDLIBSOURCE = opabs(opj(IPATH, 'StdLib.dll'))
     LIBPATH = opabs(opj(IPATH, 'Lib'))
-
+    compiler.pycpath = (opn(opd(opabs(gsBuild.IPYBLDPATH)))) + '\pyc.py'
     compiler.stdlibsource = STDLIBSOURCE
     compiler.ipath = IPATH
     compiler.libpath = LIBPATH
@@ -508,7 +520,6 @@ def _setCompilerClass(rconfig):
         if isinstance(config['LISTFILES']['dll'], list):
             for lfile in config['LISTFILES']['dll']:
                 if lfile and '__init__' not in lfile:
-                    log.error('\n lfile {}'.format(lfile.strip()))
                     lstdll.append(lfile)
         else:
             lstdll.append(config['LISTFILES']['dll'])
@@ -517,7 +528,7 @@ def _setCompilerClass(rconfig):
     if config['LISTFILES']['exe']:
         if isinstance(config['LISTFILES']['exe'], list):
             for xfile in config['LISTFILES']['exe']:
-                if xfile:# and '__init__' not in xfile:
+                if xfile and '__init__' not in xfile:
                     lstexe.append(xfile)
         else:
             lstexe.append(config['LISTFILES']['exe'])
@@ -544,7 +555,8 @@ def _setCompilerClass(rconfig):
     compiler.lstexe = lstexe
     compiler.ext = ext
     compiler.lstexedlls = None
-
+    
+    
     if not opex(opd(compiler.pycdir)):
         raise IOError('FilePath {}:\t Use absolute or relative to:\n\t {}' \
                       .format(opd(compiler.pycdir), os.getcwd()))
@@ -567,7 +579,8 @@ def _setCompilerClass(rconfig):
 
     if gsBuild.Verbose or not gsBuild.INFO:
         log.info('\n Lib source path {}'.format(LIBPATH))
-        log.info('\n "IF" flagged "True", f_libembed adds ~23mb to file: {}'.format(compiler.f_libembed))
+        log.info('\n "IF" set "True", f_libembed adds ~23mb to file:' + \
+                 'now set as {}'.format(compiler.f_libembed))
 
     if compiler.f_libembed and compiler.isStdLib:
         if gsBuild.Verbose or not gsBuild.INFO:
@@ -588,7 +601,6 @@ def _setCompilerClass(rconfig):
                                   ' in something like ../ironpython path')
 
 def _setupBaseExe(config, dllNames):
-
     gbm = []
     gbm.append("/main:" + compiler.mainfile)
 
@@ -613,7 +625,7 @@ def _setupBaseExe(config, dllNames):
     gbm.extend(_getAssembly(config))
     gbm.append("/out:" + compiler.mainoutdir)
     gbm.append("/target:exe")
-
+    
     return list(gbm)
 
 def _setupBaseDll(config, dllNames, exedllName):
@@ -678,12 +690,12 @@ def _subprocMove(moveCmd, source, dest, dotExt):
 
 def _subprocPYC(strCmd, cmpfile, dotExt='.dll'):
 
-    clr = None
+    clr = None # keep out global clr
     try:
         import clr
-        import pyc
-
-    except ImportError:
+        sys.path.append(oprel(compiler.pycpath))
+        import pyc       
+    except Exception as exi:
         pass
 
     args = None
@@ -704,8 +716,11 @@ def _subprocPYC(strCmd, cmpfile, dotExt='.dll'):
 
             else:
                 log.warn('pyc.Main err:\n')
+            
+            return False
 
     else:
+        
         po = subprocess.Popen(strCmd, stdout=PIPE, stderr=PIPE)
         stdout, stderr = po.communicate()
         po.wait()
@@ -714,16 +729,21 @@ def _subprocPYC(strCmd, cmpfile, dotExt='.dll'):
             log.warn('ERR\n {}:\n\t compiling with {}'.format(stderr, cmpfile))
             po.kill()
             return False
+     
         else:
             if gsBuild.Verbose or not gsBuild.INFO:
                 log.info('\n - STDOUT - \n{}'.format(stdout))
 
-        if dotExt:
-            log.FILE('Build Created: {}' \
-                     .format(cmpfile.replace('.py', dotExt)))
-        else:
-            log.FILE('Build Created: {}'.format(cmpfile))
-
         po.kill()
-
+    
+    if dotExt and opex(opj(opd(compiler.mainoutdir), 
+                           opb(cmpfile).replace('.py', dotExt))):   
+        log.FILE('Build Created: {}'.format(cmpfile.replace('.py', dotExt)))
+  
+    elif opex(cmpfile):
+        log.FILE('Build Created: {}'.format(cmpfile))   
+    
+    else:
+        return False
+     
     return True

@@ -1,2 +1,3 @@
-C:\Users\PEllc\ipython\builder\examples\make.py,
-C:\Users\PEllc\ipython\builder\ipyver.py
+make.py,
+../ipyver.py
+
