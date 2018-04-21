@@ -7,7 +7,7 @@
   :copyright: 2018, Howard Dunn. Apache 2.0 v2 licensed.
 
   *space separated - use relative or absolute paths*
-  *non-quoted args*
+  *non-quoted args* - *no space in comma separated lists* 
      
   params:
   
@@ -44,21 +44,20 @@
             listexe=c:/dev/include.txt``
 
 '''
+
 def helpVerbose():
     '''
 
        Writes or reads a python compile specific config file used in buildmake.py.
        Command-line args are parsed by pseudo-ORDER.
 
-           First three args any order unless none then last.
+           First three args any order.
  
        args:
   
        :configPath: [opt][str] - user .config path location or '' to use default_config.config 
 
        :mainName: [str] -  python/ironpython ".py" file to compile as library .dll or .exe 
-        
-           if you leave mainName out final compile is suspended until re-run with mainName
 
        :outDir: [opt][str] - output directory path - default "release/"
 
@@ -74,6 +73,7 @@ def helpVerbose():
             - like mypydll.py or zip.txt       
       
        **kwargs** filepath - like listexe=myprojectpyfilelist.txt [opt]
+                           - or "{'listexe':'myprojectpyfilelist.txt'}"
         
          :listexe or exe: - all .py required to run the main.py file as an exe 
          :listdll or dll: - pre-compiled .dlls or .py module files to add or embed in main
@@ -87,7 +87,7 @@ def helpVerbose():
 
        -v verbose output 
 
-       Example: ``python ipybuild.py c:/souredir/my.config appname c:/release
+       Example: ``python ipybuild.py c:/souredir/my.config appname.py c:/release
                 listexe=c:/dev/include.txt``   
 
            **cmd example**:
@@ -100,7 +100,7 @@ def helpVerbose():
 
        *help - extra*: -h, /h, /? plus -v
 
-       **setup**: [opt]: manually setup "appname".json file: defaults to assembly.json
+       **setup**: [opt]: manually setup "appname".json file: defaults to appname_assembly.json
 
        **assembly json**
          - User assembly info compiled into exe
@@ -118,7 +118,8 @@ def helpVerbose():
             "copyright": "Copyright Notice"
             "product_name": "Application exe name"
            }
-       **args**:
+       
+        **args**:
 
    	     configPath [opt] - "" or  user config path ex. myapp.config
                    |[default] - UserDefaulted/default_config.config		 
@@ -159,19 +160,19 @@ def helpVerbose():
        bash ``ll >> mylistexe.txt`` command piped to file
        then edit to build/load exactly what you want and where it is located.
 
-       **kwargs**: [opt]: any or all as key,value pair
+       **kwargs**: [opt]: any or all list file as key,value pair
        **result**: Reads/writes a user config file "mainName"_config.config
          Builds an exe or dll file based on options makeEXE
 
-         Example: ``python ipybuild.py c:/souredir/my.config appname c:/release
+         Example: ``python ipybuild.py souredir/my.config sorcedir/appname.py c:/release
                     listexe=c:/dev/include.txt``
-         Same as: ``python ipybuild.py c:/souredir/my.config appname c:/release c:/dev/include.txt``
-         Same as: ``python ipybuild.py {'configPath/my.config':'c:/souredir'
-                                        'mainName':'appname' 'outDir':'c:/source'
-                                        'listexe':'c:/dev/include.txt'}``
+         Same as: ``python ipybuild.py souredir/my.config sorcedir/appname.py c:/release
+                    c:/dev/include_exe.txt``
+         Same as: ``python ipybuild.py 'sourcedir/my.config' 'source/appname.py'
+                    c:/release' "{'listexe':'c:/dev/include.txt'}"``
   
       **update previous run with new param**: python ipybuild.py c:/souredir/my.config, '', c:/debug
-      **see**: examples/ and examples/release - user must manually set the IronPython path
+      **see**: examples/ and examples/release
       **note**: Make sure your .py runs (ipy.exe) from release directory then all
         references should match the compiled ver. You don't have to
         keep the .py files in release, just use them to check.
