@@ -1,11 +1,17 @@
-
 :ref:`docs home`
+
+example walk through
+--------------------
+
+See the subdirectory builder/examples:
+
+.. include::  steps/Examples.rst 
 
 advanced
 --------
 
 devop & debug: explore 
-++++++++++++++++++++++
+^^^^^^^^^^^^^^^^^^^^^^
 Uses :ref:`ipyver` to track the loaded Assembly and module sources.
 This was useful to see how compiled versions were loaded/imported and
 show how to use these methods. This code all came from a one-line bug 
@@ -15,7 +21,9 @@ debug trace each line had to be checked manually in the entire Lib/ code.
  
 .. toctree::
    :maxdepth: 2
-
+   
+   steps/Examples.rst 
+   
    exploremod.rst
        
 :ref:`modindex`

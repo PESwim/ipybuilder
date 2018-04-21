@@ -100,7 +100,8 @@
 <li class="toctree-l1"><a class="reference internal" href="unit.html">unittests</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="indxexplr.html">advanced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="indxexplr.html">example walk through</a></li>
+<li class="toctree-l1"><a class="reference internal" href="indxexplr.html#advanced">advanced</a></li>
 </ul>
 
             
@@ -170,7 +171,7 @@
 <div><p><a class="reference internal" href="License.html#apache-license"><span class="std std-ref">License-Apache v2.0</span></a></p>
 <p><a class="reference internal" href="cmd.html#cmd-ex"><span class="std std-ref">cmd shell help</span></a></p>
 </div></blockquote>
-<span class="target" id="module-ipybuild"></span><p><strong>Version:</strong> 0.0.A10 - Apr 18, 2018</p>
+<span class="target" id="module-ipybuild"></span><p><strong>Version:</strong> 0.0.A10 - Apr 21, 2018</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -184,7 +185,7 @@
 </tbody>
 </table>
 <p><em>space separated - use relative or absolute paths</em>
-<em>non-quoted args</em></p>
+<em>non-quoted args</em> - <em>no space in comma separated lists</em></p>
 <p>params:</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -256,7 +257,7 @@
 <div><p>Writes or reads a python compile specific config file used in buildmake.py.
 Command-line args are parsed by pseudo-ORDER.</p>
 <blockquote>
-<div>First three args any order unless none then last.</div></blockquote>
+<div>First three args any order.</div></blockquote>
 <p>args:</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -266,7 +267,6 @@ Command-line args are parsed by pseudo-ORDER.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">mainName:</th><td class="field-body"><p class="first">[str] -  python/ironpython “.py” file to compile as library .dll or .exe</p>
-<p>if you leave mainName out final compile is suspended until re-run with mainName</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">outDir:</th><td class="field-body"><p class="first">[opt][str] - output directory path - default “release/”</p>
@@ -289,9 +289,14 @@ Command-line args are parsed by pseudo-ORDER.</p>
 </tr>
 </tbody>
 </table>
-<p><strong>kwargs</strong> filepath - like listexe=myprojectpyfilelist.txt [opt]</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<dl class="docutils">
+<dt><strong>kwargs</strong> filepath - like listexe=myprojectpyfilelist.txt [opt]</dt>
+<dd><blockquote class="first">
+<div><ul class="simple">
+<li>or “{‘listexe’:’myprojectpyfilelist.txt’}”</li>
+</ul>
+</div></blockquote>
+<table class="last docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -312,13 +317,14 @@ Command-line args are parsed by pseudo-ORDER.</p>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
+</dd>
+</dl>
 <p>options</p>
 <p>-h,/? help</p>
 <p><strong>max output switch</strong>: args include -v ex. -h -v</p>
 <p>-v verbose output</p>
 <dl class="docutils">
-<dt>Example: <a href="#id3"><span class="problematic" id="id4">``</span></a>python ipybuild.py c:/souredir/my.config appname c:/release</dt>
+<dt>Example: <a href="#id3"><span class="problematic" id="id4">``</span></a>python ipybuild.py c:/souredir/my.config appname.py c:/release</dt>
 <dd><blockquote class="first">
 <div>listexe=c:/dev/include.txt``</div></blockquote>
 <dl class="last docutils">
@@ -331,16 +337,17 @@ Command-line args are parsed by pseudo-ORDER.</p>
 <p>names/outdir omitted are auto-named with the following preference;
 <em>assembly.json path &gt;&gt; main name path &gt;&gt; config name path</em></p>
 <p><em>help - extra</em>: -h, /h, /? plus -v</p>
-<p><strong>setup</strong>: [opt]: manually setup “appname”.json file: defaults to assembly.json</p>
+<p><strong>setup</strong>: [opt]: manually setup “appname”.json file: defaults to appname_assembly.json</p>
 <dl class="docutils">
 <dt><strong>assembly json</strong></dt>
-<dd><ul class="first simple">
+<dd><blockquote class="first">
+<div><ul class="simple">
 <li>User assembly info compiled into exe</li>
 <li>User assembly info (i.e. version) - Not Implemented for dll files</li>
 </ul>
 <p><strong>assembly.json file content (default):</strong>
 ..code-block: json:</p>
-<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
  <span class="s2">&quot;company&quot;</span><span class="p">:</span> <span class="s2">&quot;Your Identifier&quot;</span>
  <span class="s2">&quot;product_version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.0.0.1&quot;</span>
  <span class="s2">&quot;standalone&quot;</span><span class="p">:</span> <span class="n">false</span>               <span class="o">/</span> <span class="nb">set</span> <span class="n">true</span> <span class="k">for</span> <span class="n">exe</span> <span class="n">standalone</span>
@@ -352,10 +359,9 @@ Command-line args are parsed by pseudo-ORDER.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-</dd>
-</dl>
+</div></blockquote>
 <p><strong>args</strong>:</p>
-<blockquote>
+<blockquote class="last">
 <div><blockquote>
 <div><dl class="docutils">
 <dt>configPath [opt] - “” or  user config path ex. myapp.config</dt>
@@ -371,6 +377,8 @@ Command-line args are parsed by pseudo-ORDER.</p>
 <p>jsonp [opt] - path to assembly.json file</p>
 <p>outDir [opt]- output dir relative or absolute path</p>
 </div></blockquote>
+</dd>
+</dl>
 <p><strong>no comma separation unless inside tuple or list, no spaces k=v</strong></p>
 <dl class="docutils">
 <dt><strong>configPath</strong>:</dt>
@@ -407,23 +415,22 @@ creates “app_config.config used for main name “app”.py.</li>
 Generate a list by a windows <code class="docutils literal notranslate"><span class="pre">dir</span> <span class="pre">/b</span> <span class="pre">&gt;&gt;</span> <span class="pre">mylistdll.txt</span></code> or
 bash <code class="docutils literal notranslate"><span class="pre">ll</span> <span class="pre">&gt;&gt;</span> <span class="pre">mylistexe.txt</span></code> command piped to file
 then edit to build/load exactly what you want and where it is located.</p>
-<p><strong>kwargs</strong>: [opt]: any or all as key,value pair
+<p><strong>kwargs</strong>: [opt]: any or all list file as key,value pair
 <strong>result</strong>: Reads/writes a user config file “mainName”_config.config</p>
 <blockquote>
 <div><p>Builds an exe or dll file based on options makeEXE</p>
 <dl class="docutils">
-<dt>Example: <a href="#id11"><span class="problematic" id="id12">``</span></a>python ipybuild.py c:/souredir/my.config appname c:/release</dt>
+<dt>Example: <a href="#id11"><span class="problematic" id="id12">``</span></a>python ipybuild.py souredir/my.config sorcedir/appname.py c:/release</dt>
 <dd>listexe=c:/dev/include.txt``</dd>
+<dt>Same as: <a href="#id13"><span class="problematic" id="id14">``</span></a>python ipybuild.py souredir/my.config sorcedir/appname.py c:/release</dt>
+<dd>c:/dev/include_exe.txt``</dd>
+<dt>Same as: <a href="#id15"><span class="problematic" id="id16">``</span></a>python ipybuild.py ‘sourcedir/my.config’ ‘source/appname.py’</dt>
+<dd>c:/release’ “{‘listexe’:’c:/dev/include.txt’}”``</dd>
 </dl>
-<p>Same as: <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">ipybuild.py</span> <span class="pre">c:/souredir/my.config</span> <span class="pre">appname</span> <span class="pre">c:/release</span> <span class="pre">c:/dev/include.txt</span></code>
-Same as: <a href="#id13"><span class="problematic" id="id14">``</span></a>python ipybuild.py {‘configPath/my.config’:’c:/souredir’</p>
-<blockquote>
-<div>‘mainName’:’appname’ ‘outDir’:’c:/source’
-‘listexe’:’c:/dev/include.txt’}``</div></blockquote>
 </div></blockquote>
 </div></blockquote>
 <p><strong>update previous run with new param</strong>: python ipybuild.py c:/souredir/my.config, ‘’, c:/debug
-<strong>see</strong>: examples/ and examples/release - user must manually set the IronPython path
+<strong>see</strong>: examples/ and examples/release
 <strong>note</strong>: Make sure your .py runs (ipy.exe) from release directory then all</p>
 <blockquote>
 <div><p>references should match the compiled ver. You don’t have to
@@ -468,7 +475,7 @@ libraries in listdll.txt files files to zip in</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Params:</th><td class="field-body">configPath, mainName, outDir,
-jsonp, makeEXE, <a href="#id15"><span class="problematic" id="id16">*</span></a>args, <a href="#id17"><span class="problematic" id="id18">**</span></a>kwargs</td>
+jsonp, makeEXE, <a href="#id17"><span class="problematic" id="id18">*</span></a>args, <a href="#id19"><span class="problematic" id="id20">**</span></a>kwargs</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
 </tr>
@@ -487,7 +494,7 @@ jsonp, makeEXE, <a href="#id15"><span class="problematic" id="id16">*</span></a>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Params:</th><td class="field-body">configPath=None, mainName=None, outDir=None,
-jsonp=None, makeEXE=False, <a href="#id19"><span class="problematic" id="id20">*</span></a>args, <a href="#id21"><span class="problematic" id="id22">**</span></a>kwargs</td>
+jsonp=None, makeEXE=False, <a href="#id21"><span class="problematic" id="id22">*</span></a>args, <a href="#id23"><span class="problematic" id="id24">**</span></a>kwargs</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
 </tr>
