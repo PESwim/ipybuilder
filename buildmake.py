@@ -16,33 +16,44 @@ Let makeBuild finish so that user can fix partialErrs
 
 Assembly setup:
 
+Embedding or standalone changes the path to imports:
+  Use AddRef in the .py compiled module to access embedded
+  libs used. AddRef IronPython is not required. After AddRef
+  you need to import.
+
+  Lists of dlls are compiled into one <App>DLL file. <App> is the
+  name of the main .py file.  See Examples.
+
 +-----------+-------+-----------------+-------------------------------+
 | flag (exe)| state | parameter(s)    | ipy run result                |
 +===========+=======+=================+===============================+
-|standalone |       | listexe         | App self embedded: no AddRef  |
+|standalone |       | listexe         | Self embedded: AddRef <App>DLL|
+|           |       |                 | Distribute & AddRef Stdlib    |
+|           |       |                 | if Lib imports (i.e. zip, etc)|
 |           |       |                 | Can run without Ironpython.   |
 |plus embed | true  +-----------------+-------------------------------+
-|           |       | listdll         | User libs embedded: no AddRef |
+|           |       | listdll         | User libs embedded: AddRef    |
+|           |       |                 | <App>DLL.dll, imports in .py  |
 |           |       |                 | Can run without Ironpython.   |
 +-----------+-------+-----------------+-------------------------------+
 |standalone |       | any or None     |                               |
 |           |       |                 |                               |
-|plus embed | true  |                 | No AddRef - any               |
+|plus embed | true  |                 | AddRef - <App>DLL if lists    |
 |           |       |                 |                               |
-|plus       |       |                 |                               |
-|libembed   |       | listexe/listdll | can run without Ironpython.   |
+|plus       |       |                 | AddRef - StdLib as requir'd   |
+|libembed   |       | listexe/listdll | Can run without Ironpython.   |
 +-----------+-------+-----------------+-------------------------------+
 |           |       |                 | Distribute and AddRef Stdlib  |
 |standalone | true  | all any or Non  | if Lib imports (i.e. zip, etc)|
 |           |       |                 | Can run without Ironpython.   |
 +-----------+-------+-----------------+-------------------------------+
 |           |       | listexe and/or  | modules.py (listexe) and .dlls|
-|   embed   | true  | listdll         | (listdll) embedded.           |
-|           |       |                 | No AddRef                     |
-|           |       |                 | imports within app.exe        |
+|   embed   | true  | listdll         | (listdll) embedded. AddRef -  |
+|           |       |                 | <App>DLL and StdLib if reqr'd |
+|           |       |                 | Imports within app.exe        |
 +-----------+-------+-----------------+-------------------------------+
 |           |       |                 | Import modules.py and .dlls   |
-|   all     | false | listexe and     | (listdll) copyied to outdir.  |
+|   all     | false | listexe and     | (listdll) copied to outdir.   |
 |           |       | listdll         | Distribute with app.exe.      |
 +-----------+-------+                 +-------------------------------+
 | libembed  | true  |                 | Distribute and AddRef Stdlib  |
@@ -51,8 +62,8 @@ Assembly setup:
 +-----------+-------+-----------------+-------------------------------+
 | flag (dll)| state | parameter(s)    | ipy run result                |
 +===========+=======+=================+===============================+
-|           |       | listexe         | App dll .py modules needed in |
-| no effect |       |                 | path.                         |
+|           |       | listexe         | <App>DLL, .py modules needed  |
+| no effect |       |                 | in path. AddRef <App>DLL      |
 |           |  NA   +-----------------+-------------------------------+
 |           |       | listdll         | User libs need to AddRef      |
 |           |       |                 |                               |
@@ -123,12 +134,6 @@ def makeBuild(config):
 
     gbm = []
     dllNames = list(createUserLibs(config))
-    exedllName = opn(opj(compiler.mainoutdir,
-                         compiler.mainout).replace('.exe','.dll'))
-    
-#    if dllNames:
-#        log.error(('\n dllNames:\n ' + '{}\n'*len(dllNames)).format(*dllNames))
-#        log.error('\n exedllName:{}'.format(exedllName))
         
     # std stub useless unless just an exe way to run a few single python modules
     if  compiler.ext.replace('.', '') == 'exe':
@@ -184,9 +189,12 @@ def makeBuild(config):
                             else:
                                 raise ex
                                 
-    #TODO debug simple dll compile
-    elif compiler.ext.replace('.', '') == 'dll':
-        _setupBaseDll(config, dllNames, exedllName)
+    elif compiler.ext.replace('.', '') == 'dll':     
+        gbm = gbm + _setupBaseDll(config, dllNames)
+        if gsBuild.Verbose: gbm = gbm + ['-v'] # pass verbose to pyc
+        
+        ipystr = [compiler.ipath + '/ipy '] + [compiler.pycpath] + gbm
+        _subprocPYC(ipystr, compiler.mainfile)
 
 def pycInfo():
     log.info('\n standalone: {}\n embed: {}\n libembed: {}'\
@@ -317,14 +325,9 @@ def createUserLibs(config):
                 gb = nullList(gb)
                 
                 ipystr = [compiler.ipath + '/ipy'] + [compiler.pycpath] + gb
-#                for gbs in gb:
-#                    log.warn('\ndll gbs {}'.format(gbs))
-                    
                 _subprocPYC(ipystr, dllName, '.dll')
                 gb = []
                 continue
-        
-#        log.error('\n conpiled dllNames:\n {}'.format(dllNames))
         
         # make one lib dll to embed
         if compiler.f_embed or compiler.f_standalone:
@@ -343,11 +346,7 @@ def createUserLibs(config):
 
             ipystr = [compiler.ipath + '/ipy'] + [compiler.pycpath] + gb
             _subprocPYC(ipystr, dllName, '.dll')
-         
-#        if not dllName:
-#            dllName = opj(opd(compiler.mainoutdir),
-#                      ('.').join(compiler.mainout.split('.')[:-1])) + 'DLL.dll'
-#        log.error('\n returing dllnames {}'.format(dllNames))                  
+                   
         return dllNames
     return None
 
@@ -440,6 +439,314 @@ def _getAssembly(config):
     gbm = nullList(gbm)
 
     return gbm
+
+def _setCompilerClass(rconfig):
+
+    config = ndcDict(rconfig)
+    f_standalone = None
+    f_embed = None
+    f_libembed = None
+    f_parerr = None
+    # f_parerr - Stop build on partialError that is Fatal to Compile
+    # Let makeBuild finish so that user can fix partialErrs
+
+    with open(config['CONFIGPATH'], 'r') as jbcr:
+        config = ndcDict(json.load(jbcr))
+
+    if gsBuild.Verbose or not gsBuild.INFO:
+        log.info('\n Building from CONFIG:\n {}\n'.format(json.dumps(config,indent=4)))
+
+    if not opex(config['MAINFILE']):
+        try:
+            raise IOError
+        except IOError as ex:
+            msg = 'File Filepath does Not exist:\n "{}"' \
+                    .format(config['MAINFILE'])
+            partialError(ex, msg)
+            f_parerr = True
+
+    if not f_parerr:
+        log.FILE('Build Loaded: {}'.format(config['MAINFILE']))
+
+    assemInfo = config['ASSEMBLY']
+    if isinstance(assemInfo['standalone'], bool) or \
+        str(assemInfo['standalone']).upper() in ['TRUE', 'FALSE']:
+        f_standalone = True if str(assemInfo['standalone']).upper() == \
+                                                            'TRUE' else False
+    if isinstance(assemInfo['embed'], bool) or \
+        str(assemInfo['embed']).upper() in ['TRUE', 'FALSE']:
+        f_embed = True if str(assemInfo['embed']).upper() == 'TRUE' else False
+
+    if isinstance(assemInfo['libembed'], bool) or \
+        str(assemInfo['libembed']).upper() in ['TRUE', 'FALSE']:
+        f_libembed = True if str(assemInfo['libembed']).upper() \
+                        == 'TRUE' else False
+
+    ext = '.dll'
+    if config['MAKEEXE'] == True or \
+        str(config['MAKEEXE']).upper() == 'TRUE':
+        ext = '.exe'
+
+    if f_standalone and not config['MAKEEXE']:
+        log.warn('\n** Switching to exe /stanalone == true in Assembly:' + \
+                 '\n {}\n   Overrides default or makeEXE input arg == False' \
+                 .format(config['JSONPATH']))
+
+    MAINOUT = opn(opj(config['OUTDIR'], ('.').join(opb(config['MAINFILE']) \
+                      .split('.')[:-1])) + ext)
+    IPATH = gsBuild.IPATH
+    STDLIBSOURCE = opabs(opj(IPATH, 'StdLib.dll'))
+    LIBPATH = opabs(opj(IPATH, 'Lib'))
+    compiler.pycpath = (opn(opd(opabs(gsBuild.IPYBLDPATH)))) + '\pyc.py'
+    compiler.stdlibsource = STDLIBSOURCE
+    compiler.ipath = IPATH
+    compiler.libpath = LIBPATH
+
+    if not op.isfile(STDLIBSOURCE):
+        _createStdLib()
+
+    MAINOUTDIR = ('.').join(MAINOUT.split('.')[:-1])
+    PYCDIR = opn(opj(os.getcwd(), opb(MAINOUTDIR)) + ext)
+    STDLIBRELEASE = opj(opd(MAINOUTDIR), 'StdLib.dll')
+    MAINFILE = config['MAINFILE']
+    isLib = opex(LIBPATH)
+    isStdLib = op.isfile(STDLIBSOURCE)
+    haveStdLib = op.isfile(opj(os.getcwd(), 'StdLib.dll'))
+    isReleasedStdLib = op.isfile(STDLIBRELEASE)
+
+    lstdll = []
+    if config['LISTFILES']['dll']:
+        if isinstance(config['LISTFILES']['dll'], list):
+            for lfile in config['LISTFILES']['dll']:
+                if lfile and '__init__' not in lfile:
+                    lstdll.append(lfile)
+        else:
+            lstdll.append(config['LISTFILES']['dll'])
+
+    lstexe = []
+    if config['LISTFILES']['exe']:
+        if isinstance(config['LISTFILES']['exe'], list):
+            for xfile in config['LISTFILES']['exe']:
+                if xfile and '__init__' not in xfile:
+                    lstexe.append(xfile)
+        else:
+            lstexe.append(config['LISTFILES']['exe'])
+
+        lstexe = nullList(lstexe)
+
+    compiler.f_standalone = f_standalone
+    compiler.f_embed = f_embed
+    compiler.f_libembed = f_libembed
+    compiler.f_parerr = f_parerr
+    compiler.mainout = MAINOUT
+    compiler.ipath = IPATH
+    compiler.mainoutdir = MAINOUTDIR
+    compiler.pycdir = PYCDIR
+    compiler.stdlibrelease = STDLIBRELEASE
+    compiler.stdlibsource = STDLIBSOURCE
+    compiler.libpath = LIBPATH
+    compiler.mainfile = MAINFILE
+    compiler.isLib= isLib
+    compiler.isStdLib = isStdLib
+    compiler.haveStdLib = haveStdLib
+    compiler.isReleasedStdLib = isReleasedStdLib
+    compiler.lstdll = lstdll
+    compiler.lstexe = lstexe
+    compiler.ext = ext
+    compiler.lstexedlls = None
+    
+    
+    if not opex(opd(compiler.pycdir)):
+        raise IOError('FilePath {}:\t Use absolute or relative to:\n\t {}' \
+                      .format(opd(compiler.pycdir), os.getcwd()))
+    if compiler.f_standalone:
+        if gsBuild.Verbose or not gsBuild.INFO:
+            log.info('\nNew {} compile standalone from:\n {}' \
+                            .format(ext.upper().replace('.', ''),
+                                    config['MAINFILE']))
+    else:
+        mfn = 'application/lib'
+        if config['MAINFILE']:
+            mfn = opb(config['MAINFILE'])
+        if gsBuild.Verbose or not gsBuild.INFO:
+            log.info(("\nNew {} compile from: \n {}" + \
+                      "\n\tAs Required: add your {}, project, and ironpython"+ \
+                      "\n\tdll(s) to path:\n\t{}\n\n")
+                     .format(ext.upper().replace('.', ''),
+                             config['MAINFILE'], mfn,
+                             config['OUTDIR']))
+
+    if gsBuild.Verbose or not gsBuild.INFO:
+        log.info('\n Lib source path {}'.format(LIBPATH))
+        log.info('\n "IF" set "True", f_libembed adds ~23mb to file:' + \
+                 'now set as {}'.format(compiler.f_libembed))
+
+    if compiler.f_libembed and compiler.isStdLib:
+        if gsBuild.Verbose or not gsBuild.INFO:
+            if compiler.isReleasedStdLib:
+                log.info('\nOK - "StdLib.dll" exists delete'+ \
+                         ' or move to update:\n{}'.format(STDLIBRELEASE))
+            else:
+                log.info('\nOK - "StdLib.dll" exists delete'+ \
+                         ' or move to update:\n{}'.format(STDLIBSOURCE))
+
+    elif not compiler.isStdLib and compiler.f_libembed and \
+        not compiler.isReleasedStdLib and compiler.isLib:
+
+        _createStdLib()
+
+    if not compiler.isStdLib:
+        raise NotImplementedError('StdLib: Need ironpython2.7 distribution' + \
+                                  ' in something like ../ironpython path')
+
+def _setupBaseExe(config, dllNames):
+    gbm = []
+    gbm.append("/main:" + compiler.mainfile)
+
+    if isinstance(compiler.lstexe, list):
+        for resfile in compiler.lstexe:
+            if '.py' in resfile:
+                gbm.append(resfile)
+
+    if dllNames:
+        for dll in dllNames:
+            gbm.append(dll)
+
+    if compiler.f_embed:
+        gbm.append("/embed")
+
+    if compiler.f_standalone:
+        gbm.append("/standalone")
+
+    if compiler.f_libembed:
+        gbm.append("/libembed")
+
+    gbm.extend(_getAssembly(config))
+    gbm.append("/out:" + compiler.mainoutdir)
+    gbm.append("/target:exe")
+    
+    return list(gbm)
+
+def _setupBaseDll(config, dllNames):
+
+    gbm = []
+    gbm.append("/main:" + compiler.mainfile)
+
+    if isinstance(compiler.lstexe, list):
+        for resfile in compiler.lstexe:
+            if '.py' in resfile:
+                gbm.append(resfile)
+
+    if dllNames:
+        for dll in dllNames:
+            gbm.append(dll)
+
+    gbm.append("/out:" + compiler.mainoutdir)
+    gbm.append("/target:dll")
+
+    return list(gbm)
+
+def _subprocCopy(copyCmd, source):
+
+    try:
+        subprocess.check_output(copyCmd)
+    except subprocess.CalledProcessError:
+        msg = 'StdLib  File | Filepath:\n{} ' \
+              '\n\t- access denied or does not exist'.format(source)
+        raise IOError(msg)
+    return True
+
+def _subprocMove(moveCmd, source, dest, dotExt):
+    rpath = dest
+    if dotExt:
+        rpath = rpath + dotExt
+    if os.path.isfile(rpath):
+        try:
+            os.remove(rpath)
+        except IOError as ex:
+            pass
+    po = None
+
+    try:
+        po = subprocess.check_output(moveCmd)
+
+    except subprocess.CalledProcessError as ex:
+        try:
+            msg = str(ex)
+            raise IOError(msg)
+        except IOError as exc:
+            msg = 'Move failed File | Filepath \n{} ' \
+                          '- access denied or does not exist:\n\t{}' \
+                          .format(source, ex.message)
+            partialError(exc, msg)
+
+    if 'moved' not in str(po):
+        log.info('\nRelative path resolution Error:\n {} \nmoving to {}' \
+                 .format(source,
+                         rpath))
+    else:
+        if op.isfile(rpath):
+            log.FILE('Build Moved: {}'.format(rpath))
+
+def _subprocPYC(strCmd, cmpfile, dotExt='.dll'):
+
+    clr = None # keep out global clr
+    try:
+        import clr
+        sys.path.append(oprel(compiler.pycpath))
+        import pyc       
+    except Exception as exi:
+        pass
+
+    args = None
+    if clr:
+        args = strCmd[2:]
+        try:
+            pyc.Main(args)
+        except Exception as ex:
+            if ex:
+                print('type',type(ex))
+                try:
+                    print(ex)
+                    print(ex.message)
+                except Exception:
+                    pass
+
+                log.warn('pyc.Main err:\n' + ex.ToString())
+
+            else:
+                log.warn('pyc.Main err:\n')
+            
+            return False
+
+    else:
+        
+        po = subprocess.Popen(strCmd, stdout=PIPE, stderr=PIPE)
+        stdout, stderr = po.communicate()
+        po.wait()
+
+        if stderr:
+            log.warn('ERR\n {}:\n\t compiling with {}'.format(stderr, cmpfile))
+            po.kill()
+            return False
+     
+        else:
+            if gsBuild.Verbose or not gsBuild.INFO:
+                log.info('\n - STDOUT - \n{}'.format(stdout))
+
+        po.kill()
+    
+    if dotExt and opex(opj(opd(compiler.mainoutdir), 
+                           opb(cmpfile).replace('.py', dotExt))):   
+        log.FILE('Build Created: {}'.format(cmpfile.replace('.py', dotExt)))
+  
+    elif opex(cmpfile):
+        log.FILE('Build Created: {}'.format(cmpfile))   
+    
+    else:
+        return False
+     
+    return True
 
 def _setCompilerClass(rconfig):
 

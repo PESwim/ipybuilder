@@ -29,8 +29,8 @@ if clr:
     except System.IO.IOException as ex:
         if clr:
             print('ipybuild reference error:\n\t' + \
-                  'check file | filepath')    
-import version   
+                  'check file | filepath')
+
 from version import __version__
 import os
 
@@ -38,28 +38,32 @@ class GlobalState(object):
     '''
       #TODO trying to clean up globals
       currently only used for the *required* module
-      
+
       **gsBuild**: Global class holding required paths and existence
       information when the install IronPython path is/is not found.
-    
+
     '''
-    
+
     def __init__(self):
-        pass
+        
+        self.Verbose = False
+        self.INFO = True #set false for debug
+        self.IPATH = None
+        self.IPYBLDPATH = None
 
 gsBuild = GlobalState()
 gsBuild.Verbose = False
-gsBuild.INFO = True
+gsBuild.INFO = True #set false for debug
 gsBuild.IPATH = None
 gsBuild.IPYBLDPATH = sys.argv[0]
 
 if any('-v' in arg for arg in sys.argv):
     sys.argv.remove('-v')
     gsBuild.Verbose = True
-    gsBuild.INFO = True
+    gsBuild.INFO = True #set False for debug
     print('\ncur wrk dir - {}'.format(os.getcwd()))
     print('\n"IF" error: check "all" paths absolute or relative' + \
           ' to "ipybuild" run directory.\n')
 
-if __name__ == '__main__':    
+if __name__ == '__main__':
     pass

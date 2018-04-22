@@ -170,8 +170,8 @@ def helpVerbose():
                     c:/dev/include_exe.txt``
          Same as: ``python ipybuild.py 'sourcedir/my.config' 'source/appname.py'
                     c:/release' "{'listexe':'c:/dev/include.txt'}"``
-  
-      **update previous run with new param**: python ipybuild.py c:/souredir/my.config, '', c:/debug
+					
+      **update previous run with new param**: python ipybuild.py c:/souredir/my.config, "" c:/debug
       **see**: examples/ and examples/release
       **note**: Make sure your .py runs (ipy.exe) from release directory then all
         references should match the compiled ver. You don't have to
