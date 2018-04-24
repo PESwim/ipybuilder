@@ -10,14 +10,15 @@ import version
 from version import __version__
 import sys
 import os
-op = os.path
-opex = os.path.exists
-opab = op.abspath
-opj = op.join 
-opn = op.normpath
-opd = op.dirname
-opb = op.basename
-oprel = op.relpath
+from os import path as op
+from os.path import exists as opex
+from os.path import join as opj
+from os.path import normpath as opn
+from os.path import dirname as opd
+from os.path import abspath as opab
+from os.path import basename as opb
+from os.path import relpath as oprel
+
 import json
 import time
 import zipfile
@@ -139,11 +140,60 @@ def uniqueZips(zips, zipsExisting):
                         continue
             continue
         
-    if addZips and gsBuild.Verbose or not gsBuild.INFO:    
-        log.info(('\n addZips:\n' + '{}\n'*len(addZips)).format(*addZips))    
+#    if addZips and gsBuild.Verbose or not gsBuild.INFO:    
+#        log.info(('\n addZips:\n' + '{}\n'*len(addZips)).format(*addZips))    
     
     return addZips
-            
+
+def zipDrives(zips):
+    ops = os.path.splitdrive
+    drives = {}
+    for zfl in zips:
+        zdrive = ops(zfl)[0]
+        if zdrive in drives.keys():
+            drives[zdrive]['num'] = drives[zdrive]['num'] + 1
+        else:    
+            drives.update({ops(zfl)[0]:{'num':1}})
+    
+    baseroot = ''
+    num = -1
+    key = ''
+    for k in drives.keys():
+        if  num < drives[k]['num']:
+            num = drives[k]['num']
+            baseroot = k
+            key = k
+    for k in drives.keys():
+        if k == key:            
+            drives[k].update({'baseroot':baseroot})
+        else:
+            drives[k].update({'baseroot':None})
+               
+    return drives
+
+def zipDirGCA(zips):
+    
+    ops = os.path.splitdrive
+    zdirs = dict(zipDrives(zips))
+    drives = zdirs.keys()
+    
+    for drv in drives:
+        drvzips = []
+        
+        for zfl in zips:
+            curFileDrive = ops(zfl)[0]
+            if curFileDrive == drv:
+                drvzips.append(zfl)
+                
+        root = opd(op.commonprefix(drvzips))
+        if zdirs[drv]['baseroot']:
+            zdirs[drv]['GCA'] = root
+        else:
+#            log.error('\n wrote GCA {}'.format('from_' + drv.replace(':','') + ops(root)[1]))
+            zdirs[drv]['GCA'] = 'from_' + drv.replace(':','') + ops(root)[1]
+                
+    return zdirs
+
 def AssignMakeZip(uconfig, args):
 
     config = ndcDict(uconfig)
@@ -153,9 +203,10 @@ def AssignMakeZip(uconfig, args):
     if args['listzip']:
         zfiles = [] # missing zipfiles in listzip.txt or input
         zips = loadRes(getTrueFilePath(args['listzip']))
-        
+
         zpl = None
         uzips = None  # unique zips
+        nuzips = [] #full path uniques
         if zips:
             zpl = len(zips)
         
@@ -212,7 +263,7 @@ def AssignMakeZip(uconfig, args):
             
             for zipname in zips:
                 relname = None
-                relname = _getRelativeZipName(zipname)
+                relname = _getRelativeZipName(zips, zipname)
                 if relname:
                     zipsRelative.append(relname)
                 else:
@@ -220,25 +271,46 @@ def AssignMakeZip(uconfig, args):
                     
             with zipfile.ZipFile(cfzp, 'a', mode) as ziprd:
                 uzips = list(uniqueZips(zipsRelative, list(ziprd.namelist())))
+                
+                #getting back full path from relative
                 for zfile in uzips:
+                    if 'from' in zfile:
+                        drv = zfile[5]
+                        zfile = opn(zfile.replace('from_'+ drv, drv + ':'))
+                    else:
+                        cwdlst = os.getcwd().split(os.sep)
+
+                        cnt = 0
+                        while cwdlst[-1] and not opex(opab(opj((os.sep).join(cwdlst), zfile))):
+                            cnt += 1
+                            if cnt > 25: break
+                            cwdlst.pop()
+        
+                        zfile = opab(opj((os.sep).join(cwdlst), zfile))
+                    
+                    nuzips.append(zfile)        
+                    
                     if not os.path.isfile(zfile):
+                        log.error("can't find {}".format(zfile))
                         zfiles.append(zfile)
                         continue
-                    arcname = _getRelativeZipName(zfile)
-                    if not arcname:
-                        arcname = oprel(zfile)
-                    ziprd.write(zfile, arcname)
                     
+                    arcname = _getRelativeZipName(nuzips, zfile)
+                    if not arcname:
+                        log.error("can't find arcname using {}".format(oprel(zfile)))
+                        zfiles.append(zfile)
+                        continue
+                    ziprd.write(zfile, arcname)      
             ziprd.close()
 
             # changed if uzips
-            if uzips:
+            if nuzips:
                 if gsBuild.Verbose or not gsBuild.INFO:
                     log.info(('\nSome Files already zipped in:\n{}\n\t' + \
                               '- delete to replace existing' + \
                               '\nadding zip files to existing archive:\n' + \
-                              '{}\n'*len(uzips)) \
-                            .format(cfz, *uzips))
+                              '{}\n'*len(nuzips)) \
+                            .format(cfz, *nuzips))
         
         # Need new zip with ZIPPATH/outzipPath as name
         elif not isautozip:   
@@ -251,8 +323,7 @@ def AssignMakeZip(uconfig, args):
                         if not os.path.isfile(zfile):
                             zfiles.append(zfile)
                             continue
-                        
-                        arcname = _getRelativeZipName(zfile)
+                        arcname = _getRelativeZipName(zips, zfile)
                         if not arcname:
                             arcname = oprel(zfile)
                         zipr.write(zfile, arcname)
@@ -269,9 +340,10 @@ def AssignMakeZip(uconfig, args):
                 log.FILE('{}'.format(cfz))
 
         if zfiles:
-            log.warn(('\nFile | path does not exist - ' +\
-                      'skipped adding zip files:\n\t' + \
-                       '{} \n\t'*len(zfiles)).format(*zfiles))
+            if gsBuild.Verbose or not gsBuild.INFO:
+                log.warn(('\nFile | path does not exist - ' +\
+                          'skipped adding zip files:\n\t' + \
+                          '{} \n\t'*len(zfiles)).format(*zfiles))
     
             log.FILE(('*Missing zip: {}\n'*len(zfiles)).format(*zfiles))
     
@@ -280,24 +352,23 @@ def AssignMakeZip(uconfig, args):
 
     return ndcDict(config)
 
-def _getRelativeZipName(zfile):
-    parupCount = 0
+def _getRelativeZipName(zips, zfile):
+    roots = dict(zipDirGCA(zips))
+
+    zfiledrv = os.path.splitdrive(zfile)[0]
     RelDirsFilePath = None
-
-    if '..' in oprel(zfile): 
-        parupCount = oprel(zfile).count('..')
+    reldir = roots[zfiledrv]['GCA']
+    reldir = roots[zfiledrv]['GCA']
     
-    if parupCount == 0:
-       return 
-
-    zfileDirs = os.path.normpath(zfile).split(os.path.sep)
-    useDirs = zfileDirs[-(parupCount+1):]
-    RelDirsFilePath = opn(opj((op.sep).join(useDirs)))
-    
+    if roots[zfiledrv]['baseroot']:
+        RelDirsFilePath = oprel(zfile, reldir)
+    else:
+        RelDirsFilePath = opn(opj(reldir,opb(zfile)))
+        
     if RelDirsFilePath:
         return RelDirsFilePath
     
-    return
+    return 
 
 def AssignArgsConfig(args, uconfig):
 
@@ -317,28 +388,6 @@ def AssignArgsConfig(args, uconfig):
     config = AssignMakeZip(config, args)
 
     return ndcDict(config)
-
-def pathRead(fpaths):
-    '''
-       Try to read a file path or or lst of file paths.
-
-       :params: fpath[s] [str][list] - path[s] to check
-
-       :return: path[s] read [str] or [list]
-
-    '''
-    fig = None
-    fpaths = _fmtResFiles(fpaths)
-    if fpaths and isinstance(fpaths, list):
-        fig = []
-        for resfile in fpaths:
-            filepath = getTrueFilePath(resfile)
-            fig.append(filepath)
-
-    elif fpaths and isinstance(fpaths, (str, unicode)):
-        fig = getTrueFilePath(fpaths)
-
-    return fig
 
 def warnZip(outzpath):
 
@@ -465,11 +514,11 @@ def LoadConfig(parsedArgs):
       default configuration as helper, if started with "two quotes" 
       no space ("") as configPath parameter.
       
-	  After user adjustments to default_config.config content or
+      After user adjustments to default_config.config content or
       name, or path, user will need to re-run using "auto-renamed" 
       config path. 
       
-	  The auto-renamed file is *shown as output* in the output log. 
+      The auto-renamed file is *shown as output* in the output log. 
       This will finish a build.
 
       Provides user opportunity to change defaults in an editor 
@@ -544,7 +593,7 @@ def loadRes(arg):
             lfiles = (openResListFiles(filelst))
             listOfFiles.append(lfiles)
         return listOfFiles
-		
+
     flst = openResListFiles(arg)
     return flst
 
@@ -570,22 +619,18 @@ def openResListFiles(rpath):
     rpath = pathRead(rpath)    
     resfiles = None
     resFiles = None
-    
+    ignoreExt = ['.dll', '.py', '.sh', '.exe', '.bat', '.config']
     # arg exists as file
-    if '.dll' not in rpath.lower() and '.exe' not in rpath.lower() and \
-        '.py' not in rpath.lower():
-
+    if all(ext not in rpath.lower() for ext in ignoreExt):
         with open(rpath, 'r') as txtr:# errors on bad file | path
             resFiles = txtr.readlines()
-
+        
     # chk list or str
     try:
         # None if not path
         if resFiles:
             resfiles = pathRead(resFiles)
-
     except IOError as ex:
-
         rname = os.path.basename(rpath)
         msg = ('\n Possible err(s) in:\n "{}": ' + \
                '\n - retrieved:\n' + '"\n\t{}"'*len(resFiles[:4]) + \
@@ -602,9 +647,36 @@ def openResListFiles(rpath):
         return resfiles
     return pathRead(rpath)
 
+def pathRead(fpaths):
+    '''
+       Try to read a file path or or lst of file paths.
+
+       :params: fpath[s] [str][list] - path[s] to check
+
+       :return: path[s] read [str] or [list]
+
+    '''
+    fig = None
+    _fpaths = _fmtResFiles(fpaths)
+    if _fpaths and isinstance(_fpaths, list):
+        fig = []
+        for resfile in _fpaths:
+            try:
+                filepath = getTrueFilePath(resfile)
+                fig.append(filepath)
+            except IOError as exi:
+                msg = "\n add file to archive manually:\n" + \
+                      "bad file | path or can't parse {}".format(resfile)
+                partialError(exi, msg)
+            
+    elif _fpaths and isinstance(_fpaths, (str, unicode)):
+        fig = None
+        fig = getTrueFilePath(_fpaths)
+    return fig
+
 def _fmtResFiles(rfile):
     '''
-       :param: rfile [str] - File like path
+       :param: rfile [str][list] - File like path(s)
        
        :return: 
 	       - valid path(s) [str] or [list]
@@ -616,23 +688,27 @@ def _fmtResFiles(rfile):
     assert len(sepc) == 1, 'bad spec format'
     if '[' in rfile and sepc in rfile:
         rfile  = rfile.replace('[', '').replace(']', '').split(sepc)
-    fmt = None
+    
     seps = [',', ';', '\n', '\r']
     assert len(seps[0]) == 1, 'bad format in seps'
     sep = []
-
+    
+    
     #strip leading whitespace
     if isinstance(rfile, (str, unicode)):
+        fmt = None
         sep = [sp for sp in seps if sp in rfile]
         if sep and rfile.count(sep[0]) > 0:
-            fmt = _fmt_list(rfile.split(sep[0]))
+            fmt = _fmt_list(list(rfile.split(sep[0])))
         else:
             fmt = _fmt_str(rfile)
         return fmt
 
     #normal list in listfile
     if isinstance(rfile, list):
-        fmt = _fmt_list(rfile)
+        fmt = None
+        fmt = _fmt_list(list(rfile))
+        return fmt
     return fmt
 
 def _fmt_list(lstfiles):
@@ -653,11 +729,18 @@ def _fmt_list(lstfiles):
         if sep and sfile.count(sep[0]) > 0:
             for rf in sfile.split(sep[0]):
                 if rf.strip():
-                    rfiles.append(_fmt_str(rf.strip()))
+                    rfstr = None
+                    try:
+                        rfstr = _fmt_str(rf.strip())
+                    except Exception as ex:
+                        print(ex)
+                    if rfstr:    
+                        rfiles.append(rfstr)
         else:
             if sfile.strip():
                 rfiles.append(_fmt_str(sfile.strip()))
-    return rfiles
+    
+    return list(rfiles)
 
 def _fmt_str(strfile):
     '''
@@ -696,8 +779,13 @@ def _validateFileIsPath(txt):
     '''
     regfilepathSplit = "^(.*/|.*\\\\)?(?:$|(.+?)(?:(\.[^.]*$)|$))" #ver2
     re_txt = re.compile(regfilepathSplit)
-
-    if '.' in re_txt.findall(txt)[0][-1]:
+    rslt = re_txt.findall(txt)
+    if '.' in rslt[0][-1]:
         return True
-
+    elif '.' in rslt[0][-2]:
+        if gsBuild.Verbose or not gsBuild.INFO:
+            log.warn(('\n OK - just warning no-name "." file "{}"' + \
+                     ' in zip archive').format(rslt[0][-2]))
+        return True
+    
     return None

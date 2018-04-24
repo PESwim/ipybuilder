@@ -3,9 +3,8 @@
 .. created: on Sat Feb 17 19:43:20 2018
 .. author: PE LLC peswin@mindspring.com
 .. copyright: 2018, Howard Dunn. Apache 2.0 v2 licensed.
-::
 
- *logging with termialC stream subclass*
+  *logging with termialC stream subclass*
 
 """
 from version import __version__

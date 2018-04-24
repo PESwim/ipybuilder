@@ -5,6 +5,7 @@
 .. copyright: 2018, Howard Dunn. Apache 2.0 v2 licensed.
 
 """
+
 from version import __version__
 import os
 from os import path as op
@@ -76,47 +77,67 @@ def FindIronPython():
                      ' loadable IronPython Distribution')
 
 def checkRequiredIP():
+    clr = None
     if gsBuild.IPATH:
         return
+    try: 
+        import clr
+    except Exception as ex:
+        pass
+    ironPythonPath = None
+    userReqBaseLst = None
+    userReqLst = None
     
     gsBuild.HAVELIB
     gsBuild.HAVELIBDLL
-    ironPythonPath = FindIronPython()
 
-    if opex(ironPythonPath):
-        gsBuild.IPATH = ironPythonPath
-
-    userReqBaseLst = os.listdir(ironPythonPath)
-    userReqLst = [opn(opj(ironPythonPath, urf)) for urf in  os.listdir(ironPythonPath)]
-
-    if opex(opj(ironPythonPath, 'Lib')):
-        log.FILE('Exists: {}'.format(opj(ironPythonPath, 'Lib')))
-        gsBuild.HAVELIB = True
-
-    # TODO check for downloaded StdLib
-    if op.isfile(opn(opj(ironPythonPath, 'StdLib.dll'))):
-        gsBuild.HAVELIBDLL = True
-
-    if not all(rf in userReqBaseLst for rf in DefaultReqList):
-        try:
-            raise NotImplementedError
-        except NotImplementedError as ex:
-            msg = 'Failed to find all required IronPython Distribution files'
-            partialError(ex, msg)
-
-    log.FILE('\n Exists required path {}'.format(opj(os.getcwd(), gsBuild.requiredPath)))
-    WD = os.getcwd()
-    if 'Tests' in WD:
-        WD = opd(WD)
-    with open(opj(os.getcwd(), gsBuild.requiredPath), 'w') as tw:
-         for f in userReqLst:
-             relp = opn(op.relpath(f))
-             # skip dirs
-
-             if op.isfile(relp):
-                 tw.write(opn(os.path.relpath(f)) + '\n')
-    log.FILE('Exists {}'.format(gsBuild.requiredPath))
-
+    if not clr:
+        ironPythonPath = FindIronPython()
+        if opex(ironPythonPath):
+            gsBuild.IPATH = ironPythonPath
+    
+        userReqBaseLst = os.listdir(ironPythonPath)
+        userReqLst = [opn(opj(ironPythonPath, urf)) 
+                      for urf in  os.listdir(ironPythonPath)]
+        
+        if opex(opj(ironPythonPath, 'Lib')):
+            log.FILE('Exists: {}'.format(opj(ironPythonPath, 'Lib')))
+            gsBuild.HAVELIB = True
+    
+        # TODO check for downloaded StdLib
+        if op.isfile(opn(opj(ironPythonPath, 'StdLib.dll'))):
+            gsBuild.HAVELIBDLL = True
+    
+        if not all(rf in userReqBaseLst for rf in DefaultReqList):
+            try:
+                raise NotImplementedError
+            except NotImplementedError as ex:
+                msg = 'Failed to find all required IronPython Distribution files'
+                partialError(ex, msg)
+    
+        log.FILE('\n Exists required path {}' \
+                 .format(opj(os.getcwd(), gsBuild.requiredPath)))
+        
+        WD = os.getcwd()
+        if 'Tests' in WD:
+            WD = opd(WD)
+        with open(opj(os.getcwd(), gsBuild.requiredPath), 'w') as tw:
+             for f in userReqLst:
+                 relp = opn(op.relpath(f))
+                 # skip dirs
+    
+                 if op.isfile(relp):
+                     tw.write(opn(os.path.relpath(f)) + '\n')
+        log.FILE('Exists {}'.format(gsBuild.requiredPath))
+        
+    elif clr:
+        gsBuild.HAVELIB = False
+        if opex(opj(os.getcwd,'StdLib.dll')):
+            gsBuild.HAVELIBDLL = True
+        else:
+            gsBuild.HAVELIBDLL = False    
+            gsBuild.IPATH = 'clr'
+        
     return
 
 if __name__ == '__main__':

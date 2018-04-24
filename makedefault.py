@@ -15,6 +15,7 @@ from os.path import dirname as opd
 from os.path import basename as opb
 from os.path import exists as opex
 from os.path import isdir as opisd
+from ipyrequirements import REQUIREMENTS as ipyreq
 import re
 from copy import deepcopy
 from collections import OrderedDict
@@ -27,9 +28,13 @@ from globalstate import gsBuild
 log = dynfile(__name__)
 log.debug('\n---------------- ' + str(__name__) + \
               ' loaded --------------')
-if not opex(opn(opab(opj(os.getcwd(),'defaults\\')))):
+if not opex(opn(opab(opj(os.getcwd(),'defaults')))):
     print('no exist {}'.format(opn(opab(opj(os.getcwd(),'defaults\\')))))
-    
+    try:
+        os.mkdir(opn(opab(opj(os.getcwd(),'defaults'))))
+    except Exception as ex:
+        print(ex)
+        
 #opn is key to run in clr?    
 defaultcfg = opn(opj(os.getcwd(), 'defaults\\default_config.config'))
 defaultjson = opn(opj(os.getcwd(), 'defaults\\default_assembly.json'))
@@ -60,7 +65,7 @@ defaultconfig = {'MAKEEXE'    : False,
 
 if not os.path.exists(defaultcfg):
     with open(defaultcfg, 'w') as jcw:
-        json.dump(defaultcfg, jcw, indent=4)
+        json.dump(defaultconfig, jcw, indent=4)
     log.FILE('{}'.format(defaultcfg))
     log.info('\nExisting resource not found wrote default config:\n {}'\
             .format(defaultcfg))
@@ -82,25 +87,45 @@ if not os.path.exists(defaultjson):
     log.info('\nExisting resource not found wrote default assembly:\n {}' \
              .format(defaultjson))
 
-DefaultReqPath = opn(opj(os.getcwd(),'defaults\\','requirements.txt'))
+DefaultReq = ipyreq
 DefaultReqList = []
-DefaultReq = None
-with open(DefaultReqPath, 'r') as tr:
-    DefaultReq = tr.readlines()
-
-log.FILE('Exists {}'.format(DefaultReqPath))
 for txtPath in DefaultReq:
-    DefaultReqList.append(os.path.normpath(txtPath.strip()))
+    if gsBuild.IPATH and gsBuild.IPATH != 'clr':
+        DefaultReqList.append(opn(opj(gsBuild.IPATH,
+                                      opb(opn(txtPath.strip())))))
+    elif gsBuild.IPATH == 'clr':
+        DefaultReqList = []
+        
+    else:
+        DefaultReqList.append(os.path.normpath(txtPath.strip()))
+        
+DefaultReqPath = opn(opj(os.getcwd(),'requirements.txt'))
 
+with open(DefaultReqPath, 'w') as tw:
+          tw.writelines(('\n').join(DefaultReqList))
+
+if opex(DefaultReqPath):
+    log.FILE('Exists {}'.format(DefaultReqPath))
+
+#else:
+#    with open(DefaultReqPath, 'w') as tw:
+#        tw.writelines(('\n').join(DefaultReqList))
+#    if opex(DefaultReqPath):
+#        log.FILE('{}'.format(DefaultReqPath)) 
+        
 if opex(opn(opab(opj(os.getcwd(),'defaults\\ipath.txt')))):
    with open(opn(opab(opj(os.getcwd(),'defaults\\ipath.txt'))), 'r') as tr:
        gsipath = tr.readline().strip()
        
-   if opex(gsipath):
+   if opex(gsipath) or gsipath == 'clr':
       gsBuild.IPATH = gsipath
+
    else:
-      os.remove(opn(opab(opj(os.getcwd(),'defaults\\ipath.txt'))))
-                    
+
+      try: 
+          os.remove(opn(opab(opj(os.getcwd(),'defaults\\ipath.txt'))))
+      except Exception as ex:
+        pass              
 #---------------------------- code width --------------------------------------
 
 def ndcDict(rdic):
@@ -133,14 +158,14 @@ def BasePathDir(dp):
 
        :param: dp [str] - user arg path
 	
-       :return: 
-	     - (main, base, basetype, isFile, isdefault) [tuple] 
-	     - main [str] - fullpath parent
-         - base [str] - base of path dir or file path
-         - basetype [basetype [python, json, config, None]]
-		 - isFile [bool]
-         - isdefault [ bool] - True if output is going to UserDefaulted/
-		 
+       :return:
+           - (main, base, basetype, isFile, isdefault) [tuple] 
+           - main [str] - fullpath parent
+           - base [str] - base of path dir or file path
+           - basetype [basetype [python, json, config, None]]
+           - isFile [bool]
+           - isdefault [ bool] - True if output is going to UserDefaulted/
+
 	'''
 	
     dp = dp.strip()

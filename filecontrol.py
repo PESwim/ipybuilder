@@ -10,12 +10,16 @@
 from version import __version__
 import sys
 import os
+from os import path as op
+from os.path import join as opj
+from os.path import normpath as opn
+from os.path import basename as opb
 import re
 import time
 
 from partialerror import partialError
 from makeload import getTrueFilePath
-
+from globalstate import gsBuild
 from buildlogs import dynfile
 log = dynfile(__name__)
 log.debug('\n---------------- ' + str(__name__) + \
@@ -45,18 +49,22 @@ def checkRequired(path):
     with open(reqpath, 'r') as txtr:
         reqfiles = txtr.readlines()
         log.FILE('{} {}'.format(tag, path))
-
+        
     reqfs = list(reqfiles)
-    for f in reqfiles:
-
-        try:
-            fp = getTrueFilePath(f.strip())
-            log.FILE('{} {}'.format(tag, fp))
-            reqfs.remove(f)
-        except IOError as ex:
-            log.debug('raise partial')
-            partialError(ex, ex.message)
-            continue
+    if gsBuild.IPATH != 'clr': 
+        for f in reqfiles:
+            if gsBuild.IPATH and gsBuild.IPATH not in f:
+                fr = opn(opj(gsBuild.IPATH, opb(f)))
+            else:
+                fr = f
+            try:
+                fp = getTrueFilePath(fr.strip())
+                log.FILE('{} {}'.format(tag, fp))
+                reqfs.remove(f)
+            except IOError as ex:
+                log.debug('raise partial')
+                partialError(ex, ex.message)
+                continue
 
     return reqfs
 
