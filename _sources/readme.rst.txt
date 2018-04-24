@@ -99,6 +99,9 @@ Contributing
 ============
 Thanks for even considering a contribution or comment.
 
+IMPORTANT: By submitting a patch, you agree to license your work under the
+same license as that used by the project.
+
 Keep it friendly and open to dialog critiques and fixes and to help beginners
 and advanced users, while encouraging all levels of input.
 
