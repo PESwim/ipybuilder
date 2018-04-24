@@ -3,7 +3,7 @@
 example walk through
 --------------------
 
-See the subdirectory builder/examples:
+**See the subdirectory builder/examples**:
 
 .. include::  steps/Examples.rst 
 
@@ -18,11 +18,10 @@ show how to use these methods. This code all came from a one-line bug
 fix in the original IronPython Lib/ code, which kept the compiled standalones
 from running in an independent system. As I could not get IronPython to 
 debug trace each line had to be checked manually in the entire Lib/ code.
+
  
 .. toctree::
    :maxdepth: 2
-   
-   steps/Examples.rst 
    
    exploremod.rst
        

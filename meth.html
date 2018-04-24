@@ -98,7 +98,8 @@
 <li class="toctree-l1"><a class="reference internal" href="unit.html">unittests</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="indxexplr.html">advanced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="indxexplr.html">example walk through</a></li>
+<li class="toctree-l1"><a class="reference internal" href="indxexplr.html#advanced">advanced</a></li>
 </ul>
 
             
@@ -240,6 +241,15 @@ IronPython ipy.exe.</p>
 <p>Stop build on partialError that is Fatal to Compile
 Let makeBuild finish so that user can fix partialErrs</p>
 <p>Assembly setup:</p>
+<dl class="docutils">
+<dt>Embedding or standalone changes the path to imports:</dt>
+<dd><p class="first">Use AddRef in the .py compiled module to access embedded
+libs used. AddRef IronPython is not required. After AddRef
+you need to import.</p>
+<p class="last">Lists of dlls are compiled into one &lt;App&gt;DLL file. &lt;App&gt; is the
+name of the main .py file.  See Examples.</p>
+</dd>
+</dl>
 <table border="1" class="docutils">
 <colgroup>
 <col width="17%" />
@@ -260,11 +270,14 @@ Let makeBuild finish so that user can fix partialErrs</p>
 </td>
 <td rowspan="2">true</td>
 <td>listexe</td>
-<td>App self embedded: no AddRef
+<td>Self embedded: AddRef &lt;App&gt;DLL
+Distribute &amp; AddRef Stdlib
+if Lib imports (i.e. zip, etc)
 Can run without Ironpython.</td>
 </tr>
 <tr class="row-odd"><td>listdll</td>
-<td>User libs embedded: no AddRef
+<td>User libs embedded: AddRef
+&lt;App&gt;DLL.dll, imports in .py
 Can run without Ironpython.</td>
 </tr>
 <tr class="row-even"><td><p class="first">standalone</p>
@@ -276,8 +289,9 @@ libembed</p>
 <td><p class="first">any or None</p>
 <p class="last">listexe/listdll</p>
 </td>
-<td><p class="first">No AddRef - any</p>
-<p class="last">can run without Ironpython.</p>
+<td><p class="first">AddRef - &lt;App&gt;DLL if lists</p>
+<p class="last">AddRef - StdLib as requir’d
+Can run without Ironpython.</p>
 </td>
 </tr>
 <tr class="row-odd"><td>standalone</td>
@@ -292,16 +306,16 @@ Can run without Ironpython.</td>
 <td>listexe and/or
 listdll</td>
 <td>modules.py (listexe) and .dlls
-(listdll) embedded.
-No AddRef
-imports within app.exe</td>
+(listdll) embedded. AddRef -
+&lt;App&gt;DLL and StdLib if reqr’d
+Imports within app.exe</td>
 </tr>
 <tr class="row-odd"><td>all</td>
 <td>false</td>
 <td rowspan="2">listexe and
 listdll</td>
 <td>Import modules.py and .dlls
-(listdll) copyied to outdir.
+(listdll) copied to outdir.
 Distribute with app.exe.</td>
 </tr>
 <tr class="row-even"><td>libembed</td>
@@ -328,8 +342,8 @@ Distribute with app.exe.</td>
 <tr class="row-even"><td rowspan="2">no effect</td>
 <td rowspan="2">NA</td>
 <td>listexe</td>
-<td>App dll .py modules needed in
-path.</td>
+<td>&lt;App&gt;DLL, .py modules needed
+in path. AddRef &lt;App&gt;DLL</td>
 </tr>
 <tr class="row-odd"><td>listdll</td>
 <td>User libs need to AddRef</td>

@@ -5,6 +5,8 @@
 
 .. _ipybuilder source download: https://github.com/HBDunn/readme.git
 
+.. _readme: readme.html
+
 .. |trade| unicode:: U+02122
 
 .. _docs home:
@@ -14,6 +16,8 @@ ipybuilder's documentation
    **Version:** |version| - |today|
 
    `ipybuilder source download`_
+
+   `readme`_
 
 Highlights   
 **********

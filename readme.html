@@ -1,0 +1,537 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ipybuilder &mdash; ipybuilder 0.0.A10 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/bldi.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="ipybuilder 0.0.A10 documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ipybuilder
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.A10
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bld.html"><strong>ipybuild</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="indxmeth.html">ipybuilder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ipypyc.html">IronPython™ compiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unit.html">unittests</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="indxexplr.html">example walk through</a></li>
+<li class="toctree-l1"><a class="reference internal" href="indxexplr.html#advanced">advanced</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ipybuilder</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>ipybuilder</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/readme.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p><strong>Apr 23, 2018 16:16 MST</strong></p>
+<p><a class="reference external" href="https://peswim.github.io/ipybuilder/">Full Documentation</a></p>
+<div class="section" id="ipybuilder">
+<h1>ipybuilder<a class="headerlink" href="#ipybuilder" title="Permalink to this headline">¶</a></h1>
+<p>Command-line standalone IronPython™ 2.7.7 dll and exe file compiler. Uses, user
+defined, assembly information, and input command args parsed by pseudo-ORDER.</p>
+<p><strong>Not Endorsed by C#.Net, IronPython, or Python</strong></p>
+<div class="section" id="motivation-and-development">
+<h2>Motivation and Development<a class="headerlink" href="#motivation-and-development" title="Permalink to this headline">¶</a></h2>
+<p>Develop without Visual Studio™ - In an IronPython™ project I
+ran into trouble distributing my project as the compiler code in “pyc.py” was
+buggy, so I set out to fix it. 90% of the code is for the loose parameter input
+format, error, and info output - that hopefully helps you complete a compile.</p>
+<p>Use a command-line compile - shell .bat/.sh easily setup.</p>
+<p>Intensionally verbose output - wanted users (me) to have extra-ordinary
+feedback output and transparent coding, so that “hidden” 3rd party apps were
+minimized. This is my first time public release.</p>
+<p>Use project as a general working reference for me/users/coders to see full
+working complex code such as logging and unit testing.</p>
+<p>While I’m not completely satisfied with the unit testing code, a lot of
+other unit testing falls very short of completely testing a code base.</p>
+<ul class="simple">
+<li><strong>ipybuilder fixes several longtime running bugs in the IronPython</strong>
+<strong>pyc.py complier and then goes on to try and really help users build a</strong>
+<strong>project lib or exe.</strong></li>
+<li><strong>Please keep in mind this is alpha release for help/review</strong></li>
+<li><strong>Intensional: must keep out all</strong> <em>non-IronPython</em> <strong>available imports</strong></li>
+<li><strong>Intensionally kept imports to a minimum at the expense of re-writing the wheel.</strong>
+<strong>Wanted to be as transparent/independent as possible.</strong></li>
+</ul>
+</div>
+<div class="section" id="development-system">
+<h2>Development System<a class="headerlink" href="#development-system" title="Permalink to this headline">¶</a></h2>
+<p><strong>ipybuild works for the author using Win7 64 bit python 32/64 with
+IronPython 2.7.7.1000</strong> - thats the only test..so far.</p>
+</div>
+<div class="section" id="built-using">
+<h2>Built Using<a class="headerlink" href="#built-using" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Developed in 32 bit Python 2.7.14</li>
+<li>can’t (do’nt know how) to use set.py for IronPython code</li>
+<li>can’t use pylint/enchant in 64 bit, so build with 32 bit</li>
+<li>can’t sphinx in 64 bit, so built with 32 bit</li>
+</ul>
+<p>check - should run in both ipy and python and 32/64bit
+thats the only test so far….</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="prerequisites-required">
+<h1>Prerequisites Required<a class="headerlink" href="#prerequisites-required" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Microsoft™ .Net 4.0 - 4.6 framework</li>
+<li>IronPython™ 2.7.7.100</li>
+<li>Python™ 2.7.14 32 bit for documentation using pylint/enchant/sphinx</li>
+</ul>
+</div>
+<div class="section" id="installing">
+<h1>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><ul class="simple">
+<li>git clone - :download: &lt;<a class="reference external" href="https://github.com/PESwim/ipybuilder.git">https://github.com/PESwim/ipybuilder.git</a>&gt;</li>
+<li>git zip install to “builder” directory:  <a class="reference external" href="https://github.com/PESwim/ipybuilder">gitzip</a></li>
+<li>download .zip - <cite>ipybuilder.zip &lt;underconstruciton&gt;</cite></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><ul class="simple">
+<li>Project running on your local machine
+clone or unzip into <code class="docutils literal notranslate"><span class="pre">builder</span></code> directory</li>
+</ul>
+</div></blockquote>
+<div class="section" id="example-runs">
+<h2>example runs<a class="headerlink" href="#example-runs" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://peswim.github.io/ipybuilder/indxexplr.html">Examples</a></p>
+</div>
+</div>
+<div class="section" id="documentation">
+<h1>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://peswim.github.io/ipybuilder/">Full Documentation</a></p>
+</div>
+<div class="section" id="running-unit-tests">
+<h1>Running unit tests<a class="headerlink" href="#running-unit-tests" title="Permalink to this headline">¶</a></h1>
+<p><em>todo tests run-through</em></p>
+</div>
+<div class="section" id="contributing">
+<h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
+<p>Thanks for even considering a contribution or comment.</p>
+<p>Keep it friendly and open to dialog critiques and fixes and to help beginners
+and advanced users, while encouraging all levels of input.</p>
+<p>Please work through what you can before asking for help - It is hard to get
+relative paths and dependencies resolved when compiling an exe. Start small,
+work up to big.</p>
+<p>If you are a first time GitHub contributor or beginner than I really encourage
+you to submit a fix or comment, we both will learn. Of course Advanced help
+appreciated.</p>
+<p>Want a solid easy way to Compile. The easier it is to use a program, the
+more code work is required by developers. It really slows production down when you have to
+‘on-line’ search how to use a program module/library and/or fix bugs./patches.
+Ultimately, hope ipybuilder can be a friendly bug-free command-line Compiler.</p>
+<p>This is a free-time project so if my free-time goes away so does me ability to
+respond. Please be responsible with your comments and requests (see <em>Code of Conduct</em>). I hope you find
+the answer/solution/explanation in the full-documentation.</p>
+<hr class="docutils" />
+<div class="section" id="coding-style">
+<h2>coding style<a class="headerlink" href="#coding-style" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><em>moderately verbose naming - no snake_case</em></li>
+<li><em>attempted goals</em>:
+- Maximize readability and code comprehension
+- Minimize typing</li>
+</ul>
+<p><em>Some genius at Microsoft determined that PascalCase is the best.</em></p>
+<p><em>Some genius at Python determined that snake_case is the best.</em></p>
+<p>Trying to meet the following formats and let’s try and avoid
+any discussion on appropriate style:</p>
+<dl class="docutils">
+<dt>modules: lowercase</dt>
+<dd></dd>
+<dt>classes: PascalCase</dt>
+<dd><ul class="first last simple">
+<li>attributes:<ul>
+<li>internal: _camelCase</li>
+<li>external: camelCase</li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt>methods:</dt>
+<dd><ul class="first last simple">
+<li>checks, get, set, is etc.: camelCase</li>
+<li>internal: camelCase</li>
+<li>external module to module imports or user available: PascalCase</li>
+</ul>
+</dd>
+<dt>variables:</dt>
+<dd><ul class="first last">
+<li><p class="first">local scope simple: short looping, internal, easily understood (“i”,”k”, “dfpath”, “dir”)</p>
+</li>
+<li><p class="first">intermodule or external inputs: camelCase verbose (long name)</p>
+</li>
+<li><p class="first">local scope complex:
+- under ~ five-seven chars: lowercase
+- over ~ five-seven chars: camelCase</p>
+<blockquote>
+<div><p></p>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+<dt>constants/globals: uppercase</dt>
+<dd></dd>
+<dt>pseudo constants: uppercase</dt>
+<dd><ul class="first last simple">
+<li>logging setup, constant dict keys, and directories that are setup at runtime and derivatives.
+</li>
+<li>exception user config arg input variables**: <a href="#id1"><span class="problematic" id="id2">**</span></a>dict uses camelCase keys.
+</li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">note:</th><td class="field-body"><p class="first">The whole point of this program is for working with python and C#.Net™.
+When sub-classing a .net class it is much clearer to mirror a .Net class with a
+python PascalClass name style to visually read code back and forth.
+I really didn’t focus on a consistent and standardized python-.Net naming style at the
+to start, as this package is only written in python. Now that I have worked out, what
+seems to be a reasonable style, there are naming fixes that still need to be made this
+code. The naming style is relevant for all(my) other python-.net work.</p>
+<p>Consider working in .net from the IronPython side and sub-classing (just an example)
+.net class System.IO.Directory. It is obvious what to expect(.net methods etc) with
+the PESwim style when reviewing, testing, and developing - not so much when you see
+the snake_case form.</p>
+<blockquote class="last">
+<div><dl class="docutils">
+<dt>Style type in IronPython (pseudo-code):</dt>
+<dd><ul class="first simple">
+<li>PESwim Style:</li>
+</ul>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SystemIO</span><span class="p">(</span><span class="n">System</span><span class="o">.</span><span class="n">IO</span><span class="p">):</span>
+    <span class="k">pass</span>
+<span class="n">dirName</span> <span class="o">=</span> <span class="n">SystemIO</span><span class="o">.</span><span class="n">Directory</span><span class="o">.</span><span class="n">GetCurrentDirectory</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>snake_case Style:</li>
+</ul>
+<div class="code python last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">system_io</span><span class="p">(</span><span class="n">System</span><span class="o">.</span><span class="n">IO</span><span class="p">):</span>
+    <span class="k">pass</span>
+<span class="n">dirName</span> <span class="o">=</span> <span class="n">system_io</span><span class="o">.</span><span class="n">Directory</span><span class="o">.</span><span class="n">GetCurrentDirectory</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="work-todo-continues">
+<h2>work todo continues<a class="headerlink" href="#work-todo-continues" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><em>improve documentation - help - code comments - doc strings</em></dt>
+<dd></dd>
+<dt><em>FAQ</em></dt>
+<dd></dd>
+<dt><em>on error bad arg parse may pollutes with multiple directory/file creates</em></dt>
+<dd>Add del current writes/rmdirs on exit errors.</dd>
+<dt><em>add file_version info to dll files</em></dt>
+<dd>Requires sub-classing IronPython CompileModules.</dd>
+<dt><em>clean out all globals except log</em></dt>
+<dd></dd>
+<dt><em>separate unit tests from production code completely</em></dt>
+<dd>Difficult, as wanted to test real-time run with subprocess, but
+have to run unit test from /Tests not /builder sub directory. This must
+require lots of set-up mocks into a /builder like subdirectory so that
+testing for ‘Tests’ in current working directory can be avoided in
+production code.</dd>
+<dt><em>adapt/try argparse</em></dt>
+<dd>Trying out a structure free input style cost many hours and is about half
+the code-base. Also allowed non r”text” and both Unicode and str.
+Originally planned on complete structured free input so user doesn’t have
+remember or learn an exact format. Found limits on how far this works and
+that eventually a main name has to be provided so no real use in accepting
+command args that omit a main name.</dd>
+<dt><em>add a switch func to TerminalColorlog between windows and bash</em></dt>
+<dd>Right now have to manually adjust the code.</dd>
+<dt><em>clean naming to match PascalCase throughout</em></dt>
+<dd>The whole point of this program is for working with python and C#.net. When
+sub-classing a .net class it is much clearer to mirror a .Net class with a
+python PascalClase name style to visually read code back and forth.
+I really didn’t focus on naming to start as this package is only written
+in python, but is relevant for all my other work. Sorry.</dd>
+<dt><em>write a nice tutorial/how-to/steps</em></dt>
+<dd></dd>
+</dl>
+</div>
+<div class="section" id="really-kill-anti-patterns-and-bad-practice-life-long-pursuit-just-started">
+<h2>really kill anti-patterns and bad practice - life long pursuit - just started<a class="headerlink" href="#really-kill-anti-patterns-and-bad-practice-life-long-pursuit-just-started" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><em>adapt where possible parsing code that already exists</em></dt>
+<dd>i.e. remove code that re-wrote the wheel.</dd>
+<dt><em>refactor if else into methods</em></dt>
+<dd>Too many if else and multiple task methods - just takes a bit of time.</dd>
+<dt><em>wow these wonderful unit tests - what to do?</em></dt>
+<dd></dd>
+</dl>
+</div>
+<div class="section" id="known-issues">
+<h2>known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>well none documented so far: Apr 23, 2018 16:51 MST</li>
+</ul>
+</div>
+<div class="section" id="version-issues-v0-0-a10">
+<h2>version issues v0.0.A10<a class="headerlink" href="#version-issues-v0-0-a10" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>see section: work todo continues</dt>
+<dd></dd>
+</dl>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="versions">
+<h1>Versions<a class="headerlink" href="#versions" title="Permalink to this headline">¶</a></h1>
+<dl class="docutils">
+<dt><strong>v0.0.A10</strong> - current</dt>
+<dd><ul class="first simple">
+<li>well, none so far: Apr 23, 2018 16:51 MST</li>
+</ul>
+<dl class="last docutils">
+<dt><strong>Version v0.0.A10</strong></dt>
+<dd><ul class="first last simple">
+<li>Alpha release to start</li>
+<li>Tested:
+- Window 7 64 platform - 32 bit python</li>
+<li>issues:
+see: issues v0.0.A10
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="authors">
+<h1>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h1>
+<p>Owner: Howard Dunn &lt;<a class="reference external" href="mailto:peswin&#37;&#52;&#48;mindspring&#46;com">peswin<span>&#64;</span>mindspring<span>&#46;</span>com</a>&gt;</p>
+<div class="section" id="contributors">
+<h2>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Please help by contributing</li>
+</ul>
+</div>
+</div>
+<div class="section" id="license">
+<h1>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h1>
+<p>ipybuilder is licensed under the Apache v2.0 License - see LICENSE file</p>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Howard Dunn.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.A10',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

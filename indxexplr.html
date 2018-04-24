@@ -107,6 +107,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#embed-user-libs-example">EMBED USER LIBS example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#libembed-user-libs-example">LIBEMBED USER LIBS example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#standalone-user-libs-example">STANDALONE USER LIBS example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#simple-dll-example">SIMPLE DLL example</a></li>
 </ul>
 </li>
 </ul>
@@ -187,7 +188,7 @@
   <p><a class="reference internal" href="index.html#docs-home"><span class="std std-ref">ipybuilder’s documentation</span></a></p>
 <div class="section" id="example-walk-through">
 <h1>example walk through<a class="headerlink" href="#example-walk-through" title="Permalink to this headline">¶</a></h1>
-<p>See the subdirectory builder/examples:</p>
+<p><strong>See the subdirectory builder/examples</strong>:</p>
 <div class="section" id="examples-run-throughs">
 <span id="examples-run-through"></span><h2>Examples run throughs<a class="headerlink" href="#examples-run-throughs" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="simple-example">
@@ -271,15 +272,10 @@
 <p>command-line: <em>(from ../builder/examples)</em></p>
 <p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">../builder/ipybuild.py</span> <span class="pre">&quot;&quot;</span> <span class="pre">makehello.py</span> <span class="pre">make_assembly.json</span> <span class="pre">True</span> <span class="pre">cmds</span> <span class="pre">listdll=listdll.txt</span></code></p>
 <blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">NOTE:</th><td class="field-body">“cmds” in the above is the directory (next example will use default release by omitting.
-If instead of “cmds” we use “/cmds” the output directory will now be at root c:/cmds.</td>
-</tr>
-</tbody>
-</table>
+<div><dl class="docutils">
+<dt>Note: “cmds” in the above is the directory (next example will use default release by omitting.</dt>
+<dd>If instead of “cmds” we use “/cmds” the output directory will now be at root c:/cmds.</dd>
+</dl>
 </div></blockquote>
 </div>
 <hr class="docutils" />
@@ -308,14 +304,7 @@ If instead of “cmds” we use “/cmds” the output directory will now be at 
 <p>command-line: <em>(from ../builder/examples)</em> no arg for outdir so defaults to run /release</p>
 <p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">../ipybuild.py</span> <span class="pre">&quot;&quot;</span> <span class="pre">makehello_embed.py</span> <span class="pre">make_embed_assembly.json</span> <span class="pre">True</span> <span class="pre">listdll=listdll.txt</span></code></p>
 <blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">NOTE:</th><td class="field-body">“changed make_assembly to make_embed_assembly and omitted “cmd” in the above from previous.</td>
-</tr>
-</tbody>
-</table>
+<div><p>Note: changed make_assembly to make_embed_assembly and omitted “cmd” in the above from previous.</p>
 <p>THIS IS THE EMBEDED EXAMPLE- The .exe file has two embedded resources:</p>
 <ul class="simple">
 <li>a blob IPDLL file which handles the ipy and sys overhead to start</li>
@@ -334,7 +323,7 @@ i.e.  <code class="docutils literal notranslate"><span class="pre">clr.AddRefere
 </dl>
 </div></blockquote>
 <dl class="docutils">
-<dt>NOTE: MUST change <code class="docutils literal notranslate"><span class="pre">listdll.txt</span></code> to <code class="docutils literal notranslate"><span class="pre">listexe.txt</span></code> - cant mixe the tags ‘exe’, ‘dll’, ‘zip’</dt>
+<dt>Note: MUST change <code class="docutils literal notranslate"><span class="pre">listdll.txt</span></code> to <code class="docutils literal notranslate"><span class="pre">listexe.txt</span></code> - cant mixe the tags ‘exe’, ‘dll’, ‘zip’</dt>
 <dd>Could also use <code class="docutils literal notranslate"><span class="pre">exe=[ipyver.py,make.py]</span></code> OR  <code class="docutils literal notranslate"><span class="pre">listexe=[ipyver.py,make.py]</span></code> OR <code class="docutils literal notranslate"><span class="pre">exe=listexe.txt</span></code></dd>
 </dl>
 </div></blockquote>
@@ -387,14 +376,7 @@ i.e.  <code class="docutils literal notranslate"><span class="pre">clr.AddRefere
 <p>command-line: <em>(from ../builder/examples)</em> no arg for outdir so defaults to run /release</p>
 <p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">../ipybuild.py</span> <span class="pre">&quot;&quot;</span> <span class="pre">makehello_alone.py</span> <span class="pre">makehello_alone_assembly.json</span> <span class="pre">True</span> <span class="pre">exe=listexe.txt</span></code></p>
 <blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">NOTE:</th><td class="field-body">“changed make_assembly to make_alone_assembly and listdll – &gt; listexe [exe].</td>
-</tr>
-</tbody>
-</table>
+<div><p>Note: “changed make_assembly to make_alone_assembly and listdll – &gt; listexe [exe].</p>
 <p>THIS IS THE STANALONE EXAMPLE- The .exe file has multiple embedded resources:</p>
 <ul class="simple">
 <li>a blob IPDLL file which handles the ipy and sys overhead to start</li>
@@ -402,6 +384,45 @@ i.e.  <code class="docutils literal notranslate"><span class="pre">clr.AddRefere
 </ul>
 <p><em>requires the main.py –&gt; main.exe file to add the &lt;dependency&gt;DLL to the clr</em>
 i.e.  <code class="docutils literal notranslate"><span class="pre">clr.AddReference(&quot;makehello_embedDLL&quot;)</span></code></p>
+<p>Now we can refer directly to the methods in our Libs</p>
+<p>ALTERNATIVELY -  also embed the StdLib</p>
+</div></blockquote>
+</div>
+<div class="section" id="simple-dll-example">
+<h3>SIMPLE DLL example<a class="headerlink" href="#simple-dll-example" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>make.py –&gt; ../ipytest:</dt>
+<dd><ul class="first last simple">
+<li>…/make.dll</li>
+<li>…/StdLib.dll</li>
+</ul>
+</dd>
+<dt>Uses:</dt>
+<dd><ul class="first simple">
+<li>make.py</li>
+<li>listexe: <em>(relative references)</em>:<ul>
+<li>make.py</li>
+<li>..ipyver.py</li>
+</ul>
+</li>
+</ul>
+<p class="last">Default Assembly file: -  standalone = false, embed= false, libembed = false</p>
+</dd>
+</dl>
+<p>command-line: <em>(from ../builder/examples)</em> no arg for outdir so defaults to run ../ipytest</p>
+<p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">../ipybuild.py</span> <span class="pre">&quot;&quot;</span> <span class="pre">make.py</span> <span class="pre">../ipytest</span> <span class="pre">exe=listexe.txt</span></code></p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">NOTE:</th><td class="field-body">uses default_assembly.json.</td>
+</tr>
+</tbody>
+</table>
+<p>THIS IS THE DLL EXAMPLE- A make.dll file which can be tested with usemakedll.py:</p>
+<p><em>requires the main.py –&gt; main.exe file to add the &lt;dependency&gt; to the clr</em>
+i.e.  <code class="docutils literal notranslate"><span class="pre">clr.AddReference(&quot;make&quot;)</span></code> or <code class="docutils literal notranslate"><span class="pre">clr.AddReferenceToFileAndPath(&quot;../ipytest/make&quot;)</span></code></p>
 <p>Now we can refer directly to the methods in our Libs</p>
 <p>ALTERNATIVELY -  also embed the StdLib</p>
 </div></blockquote>
