@@ -1,11 +1,13 @@
 ..  created on Fri Mar 24 17:26:26 2018
 ..  author: PE LLC peswin@mindspring.com
 ..  copyright: 2018, Howard Dunn. Apache 2.0 v2 licensed.
-.. _Full Documentation:  https://hbdunn.github.io/ipybuilder/
+.. _Full Documentation:   https://peswim.github.io/ipybuilder/
+.. _Examples:  https://peswim.github.io/ipybuilder/indxexplr.html
+.. _gitzip:  https://github.com/PESwim/ipybuilder
+
 .. |trade| unicode:: U+02122
 
-
-**Apr 18, 2018 00:16 MST**
+**Apr 23, 2018 16:16 MST**
 
 `Full Documentation`_
 
@@ -62,10 +64,6 @@ Built Using
   
   check - should run in both ipy and python and 32/64bit 
   thats the only test so far....
-
-Getting Started
-===============
-get a copy of project running on your local machine 
  
 Prerequisites Required
 ======================
@@ -75,26 +73,34 @@ Prerequisites Required
 
 Installing
 ==========
-step by step 
+  - git clone - :download: <https://github.com/PESwim/ipybuilder.git>
+  - git zip install to "builder" directory:  `gitzip`_ 
+  - download .zip - `ipybuilder.zip <underconstruciton>` 
 
-example
--------
+Getting Started
+===============
+  - Project running on your local machine
+    clone or unzip into ``builder`` directory
+    
+example runs
+------------
+`Examples`_
 
 Documentation
 =============
+`Full Documentation`_
 
 Running unit tests
 ==================
 
-automated tests run-through
-what and why
-
-example
--------
+*todo tests run-through*
 
 Contributing
 ============
 Thanks for even considering a contribution or comment.
+
+IMPORTANT: By submitting a patch, you agree to license your work under the
+same license as that used by the project.
 
 Keep it friendly and open to dialog critiques and fixes and to help beginners
 and advanced users, while encouraging all levels of input.
@@ -245,7 +251,7 @@ really kill anti-patterns and bad practice - life long pursuit - just started
 
 known issues 
 ------------
-- well none documented so far: Apr 15, 2018 11:51 MST
+- well none documented so far: Apr 23, 2018 16:51 MST
 
 version issues v0.0.A10
 -----------------------
@@ -257,7 +263,7 @@ see section: work todo continues
 Versions
 ========
 **v0.0.A10** - current
-  - well, none so far: Apr 15, 2018 11:51 MST
+  - well, none so far: Apr 23, 2018 16:51 MST
 
   **Version v0.0.A10**
     - Alpha release to start
