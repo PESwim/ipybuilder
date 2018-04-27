@@ -192,14 +192,11 @@ def _parseTup(tup, argtyps, lists, f_list=False):
                 argtyps['d']['makeEXE'] = arg
                 lists.remove('makeEXE')
                 continue
-
-            if len([k for k in lists if k in arg]) > 1 or \
-               len([m for m in tags if m in arg]) > 1:
+            keys = [k for k in lists if k in arg]
+            ms = [m for m in tags if m in arg]
+            if keys and len(keys) > 1 or (ms and len(ms) > 1):
                 ambigWarn(arg)
 
-            keys = [k for k in lists if k in arg]
-#            if not keys:
-#                keys = [k for k in tags if k in arg]
             if keys:
                 key = keys[0]
 

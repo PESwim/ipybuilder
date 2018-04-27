@@ -204,12 +204,9 @@ def AssignMakeZip(uconfig, args):
         zfiles = [] # missing zipfiles in listzip.txt or input
         zips = loadRes(getTrueFilePath(args['listzip']))
 
-        zpl = None
         uzips = None  # unique zips
         nuzips = [] #full path uniques
-        if zips:
-            zpl = len(zips)
-        
+
         # zip exists with cur name if have zipped before
         isautozip = False
         
@@ -632,14 +629,20 @@ def openResListFiles(rpath):
             resfiles = pathRead(resFiles)
     except IOError as ex:
         rname = os.path.basename(rpath)
-        msg = ('\n Possible err(s) in:\n "{}": ' + \
-               '\n - retrieved:\n' + '"\n\t{}"'*len(resFiles[:4]) + \
-               '\n\tCheck if Bad File | Path *or* - \n' + \
-               '\n\t"OK" if err shows "{rn:}"'+ \
-               ' content text and not file path.' \
-               '\n\t - Tried to read recursively into '+ \
-               ' "{rn:}"\n\t - searching' + \
-               ' for files.').format(rpath, *resFiles[:4], rn=rname)
+        msg = '\nPossible err(s)' + \
+              '\n\tCheck if Bad File | Path *or* - \n' + \
+              '\n\t"OK" if err shows content text and not file path.' + \
+              '\n\t - Tried to read recursively into file.'
+              
+        if resFiles:
+            msg = ('\n Possible err(s) in:\n "{}": ' + \
+                   '\n - retrieved:\n' + '"\n\t{}"'*len(resFiles[:4]) + \
+                   '\n\tCheck if Bad File | Path *or* - \n' + \
+                   '\n\t"OK" if err shows "{rn:}"'+ \
+                   ' content text and not file path.' \
+                   '\n\t - Tried to read recursively into '+ \
+                   ' "{rn:}"\n\t - searching' + \
+                   ' for files.').format(rpath, *resFiles[:4], rn=rname)
 
         partialError(ex, msg)
 

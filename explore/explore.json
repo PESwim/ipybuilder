@@ -1,8 +1,8 @@
 {
     "company": "Process Engineering LLC (PE LLC)", 
-    "product_version": "0.0.11.10", 
+    "product_version": "0.0.A.20", 
     "standalone": true, 
-    "file_version": "0.0.11.10", 
+    "file_version": "0.0.11.20", 
     "embed": false,
     "libembed": false, 
     "copyright": "Copyright 2018 - Howard Dunn. Apache 2.0 v2 Licensed.", 

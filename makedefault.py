@@ -90,12 +90,12 @@ if not os.path.exists(defaultjson):
 DefaultReq = ipyreq
 DefaultReqList = []
 for txtPath in DefaultReq:
-    if gsBuild.IPATH and gsBuild.IPATH != 'clr':
+    if gsBuild.IPATH:
         DefaultReqList.append(opn(opj(gsBuild.IPATH,
                                       opb(opn(txtPath.strip())))))
-    elif gsBuild.IPATH == 'clr':
-        DefaultReqList = []
-        
+#    elif gsBuild.IPATH == 'clr':
+#        DefaultReqList = []
+#        DefaultReq = []
     else:
         DefaultReqList.append(os.path.normpath(txtPath.strip()))
         

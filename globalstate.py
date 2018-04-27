@@ -16,20 +16,32 @@ try:
 except Exception as exs:
     pass
 
-try:# if you are not standalone catch (do not need if you know)
-    clr.AddReference("IronPython")
-    import IronPython
-except Exception as exc:
-    if clr:
-        print('"IronPython" not availible as AddReference') # reminds you
-
+# reminds you
 if clr:
+
+    try:# if you are not standalone catch (do not need if you know)
+        clr.AddReference("IronPython")
+        import IronPython
+    except Exception as exc:
+        print('"IronPython" not availible as AddReference') 
+
+    f_ipy = False
+    try:
+        import ipyver
+        rs = ipyver.ReferenceStatus()
+        f_ipy = rs.RefStatusIPMS()['ipy']['isLocal']
+    except System.IO.IOException as ex:
+        pass
+    
     try:
         clr.AddReference("ipybuild")
     except System.IO.IOException as ex:
-        if clr:
-            print('ipybuild reference error:\n\t' + \
-                  'check file | filepath')
+        try:
+            clr.AddReference("ipybuilder")
+        except System.IO.IOException as ex:
+            if f_ipy:
+                print('IF .exe: ipybuild(er) reference error:\n\t' + \
+                      'check file | filepath')
 
 from version import __version__
 import os
@@ -50,12 +62,14 @@ class GlobalState(object):
         self.INFO = True #set false for debug
         self.IPATH = None
         self.IPYBLDPATH = None
+        self.DELDLLS = None
 
 gsBuild = GlobalState()
 gsBuild.Verbose = False
 gsBuild.INFO = True #set false for debug
 gsBuild.IPATH = None
 gsBuild.IPYBLDPATH = sys.argv[0]
+gsBuild.OK = False
 
 if any('-v' in arg for arg in sys.argv):
     sys.argv.remove('-v')

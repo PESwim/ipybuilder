@@ -50,7 +50,7 @@ class ReferenceStatus(object):
         - subkeys:
             - 'ver' [str]
             - 'isLocal' [bool]
-            - 'isloaded' [bool]
+            - 'isLoaded' [bool]
             - 'path' [str]
             - 'name' [str]
 
@@ -77,19 +77,19 @@ class ReferenceStatus(object):
     _ipms = {'sys': {'name'    :'System',
                      'ver'     :None,
                      'isLocal' :None,
-                     'isloaded':False,
+                     'isLoaded':False,
                      'path'    :None},
              'ipy': {'name'    :'IronPython',
                      'ver'     :None,
                      'isLocal' :None,
-                     'isloaded':False,
+                     'isLoaded':False,
                      'path'    :None}
             }
 
     _aref = {'name'    :None,
              'ver'     :None,
              'isLocal' :None,
-             'isloaded':False,
+             'isLoaded':False,
              'path'    :None
             }
     _stdAss = ['mscorlib', 'System',
@@ -130,7 +130,7 @@ class ReferenceStatus(object):
                     fnp = 'Built-In-Module'
 
             if fnp:
-                self._aref['isloaded'] = True
+                self._aref['isLoaded'] = True
 
             if self.ref in fnp and ':' in fnp:
                 self._aref['isLocal'] = False
@@ -190,7 +190,7 @@ class ReferenceStatus(object):
                 if realass.GetName() and 'System' in realass.GetName().Name and \
                     '.' not in realass.GetName().Name:
     
-                    self._ipms['sys']['isloaded'] = True
+                    self._ipms['sys']['isLoaded'] = True
                     if realassVer:
                         self._ipms['sys']['ver'] = realassVer
                         
@@ -207,7 +207,7 @@ class ReferenceStatus(object):
     
                 if 'IronPython' in realass.GetName().Name and \
                     '.' not in realass.GetName().Name:
-                    self._ipms['ipy']['isloaded'] = True
+                    self._ipms['ipy']['isLoaded'] = True
                     if realassVer:
                         self._ipms['ipy']['ver'] = realassVer
     
@@ -260,7 +260,7 @@ class ReferenceStatus(object):
 
                 if realassVer:
                     self.found = True
-                    self._aref['isloaded'] = True
+                    self._aref['isLoaded'] = True
                     self._aref['ver'] = realassVer
   
                 if realassCode:

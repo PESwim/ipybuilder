@@ -5,7 +5,7 @@
 .. copyright: 2018, Howard Dunn. Apache 2.0 v2 licensed.
 
 """
-
+ 
 from version import __version__
 import os
 from os import path as op
@@ -40,7 +40,11 @@ def FindIronPython():
       :raise: NotImplementedError
 
     '''
-
+    clr = None
+    try:
+        import clr
+    except Exception as ex:
+        pass   
     SEARCHUSER = opn(os.path.expanduser('~'))
 
     SEARCHCWD = opd(os.getcwd())
@@ -65,17 +69,24 @@ def FindIronPython():
     if __name__ == '__main__':
         raise NotImplementedError('Failed to Find/*Access' + \
                      ' loadable IronPython Distribution')
-
-    log.warn(('\nFailed to find loadable IronPython Distribution:\n Used "{}"' + \
-              ' name to search for directory.\n\n' +
-              '   Searched ordered from base:\n {}\n {}\n {}\n {}\n') \
-            .format(gsBuild.IRONPYTHON, *searchList))
-
-    log.info('\nCheck Access and/or install IronPython to loadable path.')
-
-    raise FatalError('NotImplementedError', 'Failed to Find/*Access' + \
-                     ' loadable IronPython Distribution')
-
+    if clr:
+        #print str(clr.References)
+        with open(opn(opab(opj(os.getcwd(), 
+                               'defaults\\ipath.txt'))), 'w') as tw:
+            tw.write('clr')
+            
+    if not clr or (clr and not any('Iron' in clref for clref in str(clr.References).split(','))):
+        log.warn(('\nFailed to find loadable IronPython Distribution:\n Used "{}"' + \
+                  ' name to search for directory.\n\n' +
+                  '   Searched ordered from base:\n {}\n {}\n {}\n {}\n') \
+                .format(gsBuild.IRONPYTHON, *searchList))
+    
+        log.info('\nCheck Access and/or install IronPython to loadable path.')
+    
+        raise FatalError('NotImplementedError', 'Failed to Find/*Access' + \
+                         ' loadable IronPython Distribution')
+    return 
+    
 def checkRequiredIP():
     clr = None
     if gsBuild.IPATH:
@@ -84,30 +95,33 @@ def checkRequiredIP():
         import clr
     except Exception as ex:
         pass
+
     ironPythonPath = None
     userReqBaseLst = None
     userReqLst = None
-    
+  
     gsBuild.HAVELIB
     gsBuild.HAVELIBDLL
 
-    if not clr:
-        ironPythonPath = FindIronPython()
+    ironPythonPath = FindIronPython()
+    
+    if not clr or (clr and ironPythonPath):
+        #ironPythonPath = FindIronPython()
         if opex(ironPythonPath):
             gsBuild.IPATH = ironPythonPath
     
         userReqBaseLst = os.listdir(ironPythonPath)
         userReqLst = [opn(opj(ironPythonPath, urf)) 
                       for urf in  os.listdir(ironPythonPath)]
-        
+
         if opex(opj(ironPythonPath, 'Lib')):
             log.FILE('Exists: {}'.format(opj(ironPythonPath, 'Lib')))
             gsBuild.HAVELIB = True
-    
+
         # TODO check for downloaded StdLib
         if op.isfile(opn(opj(ironPythonPath, 'StdLib.dll'))):
             gsBuild.HAVELIBDLL = True
-    
+            
         if not all(rf in userReqBaseLst for rf in DefaultReqList):
             try:
                 raise NotImplementedError
@@ -130,9 +144,9 @@ def checkRequiredIP():
                      tw.write(opn(os.path.relpath(f)) + '\n')
         log.FILE('Exists {}'.format(gsBuild.requiredPath))
         
-    elif clr:
+    elif clr and not ironPythonPath:
         gsBuild.HAVELIB = False
-        if opex(opj(os.getcwd,'StdLib.dll')):
+        if opex(opj(os.getcwd(),'StdLib.dll')):
             gsBuild.HAVELIBDLL = True
         else:
             gsBuild.HAVELIBDLL = False    
@@ -141,7 +155,7 @@ def checkRequiredIP():
     return
 
 if __name__ == '__main__':
-    
+    print('Please wait (~30 sec) to find IronPython...')
     gsBuild.IRONPYTHON = 'License.StdLib.txt'
     print('IronPyhton found by looking for: "{}"\nInstalled in:\n\t{}' \
            .format(gsBuild.IRONPYTHON, FindIronPython()))

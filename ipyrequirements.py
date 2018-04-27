@@ -7,7 +7,6 @@
 """
 from version import __version__
 REQUIREMENTS = [
-                'idle.bat',
                 'IKVM.Reflection.dll',
                 'ipy.exe',
                 'ipy.exe.config',
@@ -17,9 +16,6 @@ REQUIREMENTS = [
                 'ipyc.exe.config',
                 'IronPython.dll',
                 'IronPython.Modules.dll',
-                'License.html',
-                'License.rst',
-                'License.rtf',
                 'License.StdLib.txt',
                 'License.txt',
                 'Microsoft.Dynamic.dll',

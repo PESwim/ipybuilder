@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 '''
-  **Version:** 0.0.A10 - |today|
+  **Version:** 0.0.A20 - |today|
 
   :created on: Wed Feb 14 19:44:03 2018
   :author: PE LLC peswin@mindspring.com
@@ -195,22 +195,42 @@ try:
 except ImportError as ex:
     pass
 if clr:
+    
     try:
         clr.AddReference("StdLib")
     except System.IO.IOException as ex:
         print('StdLib.dll reference error:\n\t' + \
               'check file | filepath')
     try:
+        clr.AddReference("IronPython")
+    except System.IO.IOException as ex:
+        print('IronPython reference error:\n\t' + \
+              'check file | filepath')
+        
+    f_ipy = False
+    try:
+        import ipyver
+        rs = ipyver.ReferenceStatus()
+        f_ipy = rs.RefStatusIPMS()['ipy']['isLocal']
+    except System.IO.IOException as ex:
+        pass
+    
+    try:
         clr.AddReference("ipybuild")
     except System.IO.IOException as ex:
-        print('ipybuild reference error:\n\t' + \
-              'check file | filepath')    
-    if any(anarg in '-v' for anarg in sys.argv):
-        print
-        print 'clr refs'
-        print
-        print clr.References
-        print
+        try:
+            clr.AddReference("ipybuilder")
+        except System.IO.IOException as ex:
+            if f_ipy:
+                print('IF .exe: ipybuild(er) reference error:\n\t' + \
+                      'check file | filepath')
+        
+#    if any(anarg in '-v' for anarg in sys.argv):
+#        print
+#        print 'clr refs'
+#        print
+#        print clr.References
+#        print
 
 import json
 import time
@@ -257,7 +277,9 @@ def Build(args):
     if gsBuild.Verbose or not gsBuild.INFO:
         log.info('\nInput args:\n {}'.format(json.dumps(args),indent=4))
     CmdConfig(args)
-
+    if gsBuild.DELDLLS:
+        import cleanup
+        cleanup.cleanDll()
     return True
 
 def ScriptBuild(configPath=None, mainName=None, outDir=None,
@@ -279,7 +301,9 @@ def ScriptBuild(configPath=None, mainName=None, outDir=None,
     uconfig = makeload.LoadConfig(uargs)
     checkBuildConfig(uconfig)
     Results(uconfig)
-
+    if gsBuild.DELDLLS:
+        import cleanup
+        cleanup.cleanDll()
     return True
 
 def Results(cnfg):
@@ -306,9 +330,11 @@ def Results(cnfg):
         log.info('\nlogging to file:\n {}' \
                  .format(str(logging.getLogger('').handlers[0].stream.name)))
 
-    if not PartialErrors:
+    if not PartialErrors and gsBuild.OK:
         log.info('\nBuild state OK')
-
+    elif not PartialErrors and not gsBuild.OK:
+        log.warn('\nBuild state ERR - Use Verbose output -v')
+        
 def MainConfig(configPath=None, mainName=None, outDir=None,
                jsonp=None, makeEXE=False, *args, **kwargs):
     '''Unittest intermediates - used for intermediate output checks'''
@@ -392,11 +418,11 @@ def logReport():
         log.error('\nUNITTEST WAS RUN BEFORE IPYBUILD ' + \
                   '- NO FILE LOGGING - RESTART RUN IPYBUILD ')
     if writelog:
-        if gsBuild.Verbose or not gsBuild.INFO:
+        if gsBuild.Verbose or not gsBuild.INFO and writelog:
             log.info(('\nwrite log:' + '\n {}'*len(writelog)) \
                      .format(*writelog))
     if confirmed:
-        if gsBuild.Verbose or not gsBuild.INFO:
+        if gsBuild.Verbose or not gsBuild.INFO and confirmed:
             log.info(('\nconfirmed log:' + '\n {}'*len(confirmed)) \
                      .format(*confirmed))
 

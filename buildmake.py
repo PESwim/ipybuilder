@@ -121,7 +121,7 @@ def makeBuild(config):
          - user assembly flags (f_embed, f_libembed, f_standalone)
 
     '''
-
+    gsBuild.OK = True
     _setCompilerClass(config)
     if gsBuild.Verbose:
         log.info('\n compiler {}'.format(json.dumps(compiler,
@@ -133,7 +133,9 @@ def makeBuild(config):
         return False
 
     gbm = []
-    dllNames = list(createUserLibs(config))
+    dllNames = []
+    if compiler.lstdll:
+        dllNames = list(createUserLibs(config))
         
     # std stub useless unless just an exe way to run a few single python modules
     if  compiler.ext.replace('.', '') == 'exe':
@@ -146,18 +148,27 @@ def makeBuild(config):
         # ADD, SO DELETED
         if compiler.f_embed or compiler.f_standalone:
             dllNames.append(compiler.mainoutdir + '.dll')
-
+        
+        # THIS IS OK
         if os.path.isfile(compiler.mainoutdir + '.IPDLL'):
+#            log.error('\n trying to remove {}'.format(compiler.mainoutdir + '.IPDLL'))
             try:
                 os.remove(compiler.mainoutdir + '.IPDLL')
             except (IOError, Exception) as ex:
+                log.error('\n Failed to del/remove:\n {}'.format(compiler.mainoutdir + '.IPDLL'))
                 if ex == IOError:
-                    pass
+                    print(ex)#pass
                 elif ex == System.IO.IOException:
-                    pass
+                    print(ex)#pass
+                elif ex == WindowsError:
+                    print 'Type Err: {}'.format(type(ex))
+                    print(ex)#pass
                 else:
-                    raise ex
+                    print 'Type Err: {}'.format(type(ex))
+                    print(ex)
+                    #raise ex
                     
+        #TODO checkjust use compiler.f_libembed            
         if (compiler.f_embed or compiler.f_standalone) and compiler.f_libembed:
             if os.path.isfile(opd(compiler.mainoutdir) + 'StdLib.dll'):
                 try:
@@ -174,26 +185,38 @@ def makeBuild(config):
 
             _subprocMove(movestr, compiler.pycdir,
                          compiler.mainoutdir, compiler.ext)
-            
+
             if compiler.f_embed or compiler.f_standalone:
+                notDelDll = []
                 for dll in dllNames:
-                    if os.path.isfile(dll) and '.dll' in dll and\
-                        'IronPython' not in dll: #some ver deleted probably not needed
+                    if os.path.isfile(dll) and dll.find('.dll') != -1 and \
+                        dll.find('IronPython') == -1: #some ver deleted probably not needed
+#                        log.error('\n trying to remove {}'.format(dll))
                         try:
                             os.remove(dll)
+#                            log.error('\n successfully removed {}'.format(dll))
                         except (IOError, Exception) as ex:
                             if ex == IOError:
-                                pass
+                                print(ex)#pass
                             elif ex == System.IO.IOException:
-                                pass
+                                print(ex)#pass
+                            elif ex == WindowsError:
+                                print 'Type Err: {}'.format(type(ex))
+                                print(ex)#pass
                             else:
-                                raise ex
-                                
+                                print 'Type Err: {}'.format(type(ex))
+                                print(ex)
+                            #raise ex
+                            notDelDll.append(dll)
+
+                if notDelDll:
+                    gsBuild.DELDLLS = notDelDll
+                    
     elif compiler.ext.replace('.', '') == 'dll':
         gbm = []
         gbm = gbm + _setupBaseDll(config, dllNames)
         if gsBuild.Verbose: gbm = gbm + ['-v'] # pass verbose to pyc
-        
+
         ipystr = [compiler.ipath + '/ipy '] + [compiler.pycpath] + gbm
         _subprocPYC(ipystr, compiler.mainfile)
 
@@ -390,35 +413,46 @@ def _createStdLib():
     compiler.isStdLib = op.isfile(opabs(compiler.stdlibsource))
 
 def _fetchLib():
-
-    assert compiler.isStdLib, \
-        'need a Stdlib file in:\n {}'.format(compiler.stdlibsource)
+    if gsBuild.IPATH != 'clr':
+        assert compiler.isStdLib, \
+            'need a Stdlib file in:\n {}'.format(compiler.stdlibsource)
 
     if not compiler.f_libembed and not compiler.isReleasedStdLib:
-        copystr = ['cmd', '/C', 'copy', compiler.stdlibsource, \
-                   opd(compiler.stdlibrelease)]
+        if compiler.stdlibsource:
+            copystr = ['cmd', '/C', 'copy', compiler.stdlibsource, \
+                       opd(compiler.stdlibrelease)]
 
-        if _subprocCopy(copystr,compiler.stdlibsource):
-            log.FILE('Copied {}'.format(compiler.stdlibrelease))
+            if _subprocCopy(copystr,compiler.stdlibsource):
+                log.FILE('Copied {}'.format(compiler.stdlibrelease))
 
-    if not compiler.haveStdLib:
+    if not compiler.haveStdLib and compiler.stdlibsource:
         copystr = ['cmd', '/C', 'copy', compiler.stdlibsource, os.getcwd()]
 
         if _subprocCopy(copystr,compiler.stdlibsource):
             log.FILE('Copied {}'.format(opj(os.getcwd(), 'StdLib.dll')))
 
     libsaved = []
-    if op.isfile(compiler.stdlibsource):
+    
+    if compiler.stdlibsource and op.isfile(compiler.stdlibsource):
         libsaved.append(compiler.stdlibsource)
-    if op.isfile(compiler.stdlibrelease):
+    if compiler.stdlibrelease and op.isfile(compiler.stdlibrelease):
         libsaved.append(compiler.stdlibrelease)
     if op.isfile(opj(os.getcwd(), 'StdLib.dll')):
         libsaved.append(opj(os.getcwd(), 'StdLib.dll'))
-    if gsBuild.Verbose:
+    
+    if gsBuild.Verbose and libsaved:
         log.info(('\nStdLib exists/saved in:\n' + '{}\n'*len(libsaved)) \
                  .format(*libsaved))
-    return
-
+        return
+    
+    elif libsaved:
+        return
+    
+    elif clr:
+        log.error("\nCouldn't create StdLib - Continuing, will try " + \
+                  "\ninternal lib: exe fail = Need ironpython 2.7 distribution")
+        return
+    
     raise NotImplementedError('Need ironpython 2.7 distribution ' + \
                               'in something like ../ironpython path')
 
@@ -455,7 +489,12 @@ def _getAssembly(config):
     return gbm
 
 def _setCompilerClass(rconfig):
-
+    clr = None
+    try:
+        import clr
+    except Exception as ex:
+        pass
+    
     config = ndcDict(rconfig)
     f_standalone = None
     f_embed = None
@@ -505,14 +544,21 @@ def _setCompilerClass(rconfig):
         log.warn('\n** Switching to exe /stanalone == true in Assembly:' + \
                  '\n {}\n   Overrides default or makeEXE input arg == False' \
                  .format(config['JSONPATH']))
-
+    
+    STDLIBSOURCE = None
+    LIBPATH = None
     MAINOUT = opn(opj(config['OUTDIR'], ('.').join(opb(config['MAINFILE']) \
                       .split('.')[:-1])) + ext)
+
+    CLRALTLIBPATH = opn(opj(opd(opabs(gsBuild.IPYBLDPATH)), 'StdLib.dll'))
+
+    if gsBuild.Verbose: log.info('\nIPATH {}'.format(gsBuild.IPATH))
     IPATH = gsBuild.IPATH
+    
     if IPATH == 'clr':
         LIBPATH = '/lib'
-        if opex(opabs(opj(os.getcwd(), 'StdLib.dll'))):
-            STDLIBSOURCE = opabs(opj(os.getcwd(), 'StdLib.dll'))
+        if opex(CLRALTLIBPATH):
+            STDLIBSOURCE = CLRALTLIBPATH
     else:
         if opex(opabs(opj(IPATH, 'StdLib.dll'))):
             STDLIBSOURCE = opabs(opj(IPATH, 'StdLib.dll'))
@@ -520,27 +566,34 @@ def _setCompilerClass(rconfig):
             STDLIBSOURCE = 'StdLib.dll' 
         LIBPATH = opabs(opj(IPATH, 'Lib'))
     
+    if gsBuild.Verbose:
+        log.info('\n gsBuild.IPYBLDPATH {}'.format(gsBuild.IPYBLDPATH))
+    
     compiler.pycpath = (opn(opd(opabs(gsBuild.IPYBLDPATH)))) + '\pyc.py'
     compiler.stdlibsource = STDLIBSOURCE
     compiler.ipath = IPATH
     compiler.libpath = LIBPATH
-
-    if not op.isfile(STDLIBSOURCE) and IPATH != 'clr':
+    
+    if STDLIBSOURCE and not op.isfile(STDLIBSOURCE) and IPATH != 'clr':
         _createStdLib()
     
-    elif not op.isfile(STDLIBSOURCE) and IPATH == 'clr':
+    elif STDLIBSOURCE and not op.isfile(STDLIBSOURCE) and IPATH == 'clr':
         if gsBuild.Verbose or not gsBuild.INFO:
             log.info('\n Cannot create StdLib without Ironpython installed.' + \
-                     'Compiling with internal StdLib Ref.')
+                     'Trying compile with internal StdLib Ref.')
     
     MAINOUTDIR = ('.').join(MAINOUT.split('.')[:-1])
     PYCDIR = opn(opj(os.getcwd(), opb(MAINOUTDIR)) + ext)
     STDLIBRELEASE = opj(opd(MAINOUTDIR), 'StdLib.dll')
     MAINFILE = config['MAINFILE']
     isLib = opex(LIBPATH)
-    isStdLib = op.isfile(STDLIBSOURCE)
+    isStdLib = False
+    if STDLIBSOURCE:
+        isStdLib = op.isfile(STDLIBSOURCE)
     haveStdLib = op.isfile(opj(os.getcwd(), 'StdLib.dll'))
-    isReleasedStdLib = op.isfile(STDLIBRELEASE)
+    isReleasedStdLib = False
+    if STDLIBRELEASE:
+        isReleasedStdLib = op.isfile(STDLIBRELEASE)
 
     lstdll = []
     if config['LISTFILES']['dll']:
@@ -621,11 +674,20 @@ def _setCompilerClass(rconfig):
         not compiler.isReleasedStdLib and compiler.isLib:
 
         _createStdLib()
-
-    if not compiler.isStdLib:
-        raise NotImplementedError('StdLib: Need ironpython2.7 distribution' + \
+#    log.error('\n clr refs {}' \
+#              .format(str(clr.References).split(',')))    
+#    log.error('\n stdlib test {}' \
+#              .format(any('StdLib' in clref \
+#                              for clref in str(clr.References).split(','))))
+    f_haveclrStdLib = None
+    if clr:
+        f_haveclrStdLib = any('StdLib' in clref \
+                                  for clref in str(clr.References).split(','))
+    
+    if (not clr and not compiler.isStdLib) or (clr and not f_haveclrStdLib):
+        raise NotImplementedError('StdLib: Need IronPython2.7 distribution' + \
                                   ' in something like ../ironpython path')
-
+    
 def _setupBaseExe(config, dllNames):
     gbm = []
     gbm.append("/main:" + compiler.mainfile)
@@ -687,67 +749,137 @@ def _subprocCopy(copyCmd, source):
     return True
 
 def _subprocMove(moveCmd, source, dest, dotExt):
+    
+    po = None
     rpath = dest
+ 
     if dotExt:
         rpath = rpath + dotExt
-    if os.path.isfile(rpath):
+    
+    clr = None # keep out global clr
+    try:
+        import clr    
+    except Exception as ex:
+        pass
+    
+    if clr:
+        try:
+            clr.AddReference("System")
+            import System
+        except Exception as ex:
+            pass
+
+        if System.IO.File.Exists(rpath):
+            if System.IO.File.Exists(rpath):
+                System.IO.File.Delete(rpath)
+        if System.IO.File.Exists(source):
+            try:
+#                log.error('\n Try noving:\n\t{}\n To:\n\t\n\t{}' \
+#                          .format(source,rpath))
+                System.IO.File.Move(source,rpath)
+                
+            except Exception as ex:
+                print('Failed to Move:\n\t{}'.format(source))
+                print(ex)
+                
+    elif not clr and os.path.isfile(rpath):
         try:
             os.remove(rpath)
         except IOError as ex:
             pass
-    po = None
-
-    try:
-        po = subprocess.check_output(moveCmd)
-
-    except subprocess.CalledProcessError as ex:
-        try:
-            msg = str(ex)
-            raise IOError(msg)
-        except IOError as exc:
-            msg = 'Move failed File | Filepath \n{} ' \
+        if os.path.isfile(source):
+            
+            try:
+#                log.error('\n Try noving:\n\t{}\nTo:\n\t\n{}' \
+#                              .format(source,dest))
+                po = subprocess.check_output(moveCmd)
+            except subprocess.CalledProcessError as ex:
+                try:
+                    msg = str(ex)
+                    raise IOError(msg)
+                except IOError as exc:
+                    msg = 'Move failed File | Filepath \n{} ' \
                           '- access denied or does not exist:\n\t{}' \
                           .format(source, ex.message)
-            partialError(exc, msg)
+                    partialError(exc, msg)
 
-    if 'moved' not in str(po):
+    if po and 'moved' not in str(po):
         log.info('\nRelative path resolution Error:\n {} \nmoving to {}' \
                  .format(source,
                          rpath))
-    else:
-        if op.isfile(rpath):
-            log.FILE('Build Moved: {}'.format(rpath))
+
+    elif (clr or po) and op.isfile(rpath):
+        if gsBuild.Verbose: log.info('Build Moved: {}'.format(rpath))
+        
+        log.FILE('Build Moved: {}'.format(rpath))
 
 def _subprocPYC(strCmd, cmpfile, dotExt='.dll'):
 
     clr = None # keep out global clr
     try:
-        import clr
-        sys.path.append(oprel(compiler.pycpath))
-        import pyc       
-    except Exception as exi:
+        import clr    
+    except Exception as ex:
         pass
-
-    args = None
+    
     if clr:
-        args = strCmd[2:]
         try:
-            pyc.Main(args)
+            sys.path.append(oprel(compiler.pycpath))
+            import pyc
         except Exception as ex:
-            if ex:
-                print('type',type(ex))
-                try:
-                    print(ex)
-                    print(ex.message)
-                except Exception:
-                    pass
+            pass
 
-                log.warn('pyc.Main err:\n' + ex.ToString())
-
-            else:
-                log.warn('pyc.Main err:\n')
+        try:
+            clr.AddReference("StdLib")
+        except System.IO.IOException as ex:
+            print('StdLib.dll reference error:\n\t' + \
+                  'check file | filepath')
+        try:
+            clr.AddReference("IronPython")
+        except System.IO.IOException as ex:
+            print('IronPython reference error:\n\t' + \
+                  'check file | filepath')
             
+        f_ipy = False
+        try:
+            import ipyver
+            rs = ipyver.ReferenceStatus()
+            f_ipy = rs.RefStatusIPMS()['ipy']['isLocal']
+        except System.IO.IOException as ex:
+            pass
+        
+        try:
+            clr.AddReference("ipybuild")
+        except System.IO.IOException as ex:
+            try:
+                clr.AddReference("ipybuilder")
+            except System.IO.IOException as ex:
+                if f_ipy:
+                    print('IF .exe: ipybuild(er) reference error:\n\t' + \
+                          'check file | filepath')
+
+        args = None
+        rslt = None
+        args = strCmd[2:]
+
+        try:
+            rslt = pyc.Main(args)
+        except Exception as ex:
+            errtyp = ''
+            gsBuild.OK = False
+            try:
+                errtyp = ex.GetType().ToString()
+            except Exception as exf:
+                pass
+            if ex:
+                log.warn('pyc.Main err:\n' + ex.ToString())
+                log.warn('type {} or System Type {}'.format(type(ex), errtyp))
+                log.warn('Error: {}'.format(ex))
+                print 'ex-err'
+
             return False
+         
+        if rslt:
+            return True
 
     else:
         
@@ -758,6 +890,7 @@ def _subprocPYC(strCmd, cmpfile, dotExt='.dll'):
         if stderr:
             log.warn('ERR\n {}:\n\t compiling with {}'.format(stderr, cmpfile))
             po.kill()
+            gsBuild.OK=False
             return False
      
         else:
@@ -769,11 +902,10 @@ def _subprocPYC(strCmd, cmpfile, dotExt='.dll'):
     if dotExt and opex(opj(opd(compiler.mainoutdir), 
                            opb(cmpfile).replace('.py', dotExt))):   
         log.FILE('Build Created: {}'.format(cmpfile.replace('.py', dotExt)))
-  
+        return True
     elif opex(cmpfile):
         log.FILE('Build Created: {}'.format(cmpfile))   
-    
+        return True
     else:
+        gsBuild.OK = False
         return False
-     
-    return True

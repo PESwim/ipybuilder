@@ -5,4 +5,4 @@
 .. copyright: 2018, Howard Dunn. Apache 2.0 v2 licensed.
 
 """
-__version__ = '0.0.A10'
+__version__ = '0.0.A20'

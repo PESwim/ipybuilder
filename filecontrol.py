@@ -51,6 +51,9 @@ def checkRequired(path):
         log.FILE('{} {}'.format(tag, path))
         
     reqfs = list(reqfiles)
+    
+    if gsBuild.Verbose: log.info('\ngsBuild.IPATH:\n {}'.format(gsBuild.IPATH))
+    
     if gsBuild.IPATH != 'clr': 
         for f in reqfiles:
             if gsBuild.IPATH and gsBuild.IPATH not in f:
@@ -65,8 +68,10 @@ def checkRequired(path):
                 log.debug('raise partial')
                 partialError(ex, ex.message)
                 continue
-
-    return reqfs
+        return reqfs
+    
+    elif gsBuild.IPATH == 'clr':
+        return []
 
 def delTestFileWrites(dellst):
     '''
