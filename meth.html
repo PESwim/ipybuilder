@@ -183,9 +183,6 @@
 </div>
 <div class="section" id="module-buildlogs">
 <span id="buildlogs-methods"></span><span id="bldlgs"></span><h1>buildlogs methods<a class="headerlink" href="#module-buildlogs" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span><span class="n">logging</span> <span class="k">with</span> <span class="n">termialC</span> <span class="n">stream</span> <span class="n">subclass</span><span class="o">*</span>
-</pre></div>
-</div>
 <dl class="class">
 <dt id="buildlogs.func">
 <em class="property">class </em><code class="descclassname">buildlogs.</code><code class="descname">func</code><span class="sig-paren">(</span><em>hi</em>, <em>lo</em><span class="sig-paren">)</span><a class="headerlink" href="#buildlogs.func" title="Permalink to this definition">¶</a></dt>
@@ -647,22 +644,12 @@ information when the install IronPython path is/is not found.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">dp [str] - user arg path</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><blockquote>
-<div><ul class="simple">
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
 <li>(main, base, basetype, isFile, isdefault) [tuple]</li>
 <li>main [str] - fullpath parent</li>
-</ul>
-</div></blockquote>
-<ul class="simple">
 <li>base [str] - base of path dir or file path</li>
-<li><dl class="first docutils">
-<dt>basetype [basetype [python, json, config, None]]</dt>
-<dd><ul class="first last">
+<li>basetype [basetype [python, json, config, None]]</li>
 <li>isFile [bool]</li>
-</ul>
-</dd>
-</dl>
-</li>
 <li>isdefault [ bool] - True if output is going to UserDefaulted/</li>
 </ul>
 </td>
@@ -735,22 +722,6 @@ reset mainName path to outDir if no arg “outDir”</p>
 <div class="section" id="module-makeload">
 <span id="makeload-methods"></span><span id="mkld"></span><h1>makeload methods<a class="headerlink" href="#module-makeload" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
-<dt id="makeload.pathRead">
-<code class="descclassname">makeload.</code><code class="descname">pathRead</code><span class="sig-paren">(</span><em>fpaths</em><span class="sig-paren">)</span><a class="headerlink" href="#makeload.pathRead" title="Permalink to this definition">¶</a></dt>
-<dd><p>Try to read a file path or or lst of file paths.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Params:</th><td class="field-body">fpath[s] [str][list] - path[s] to check</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">path[s] read [str] or [list]</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
 <dt id="makeload.CheckConfig">
 <code class="descclassname">makeload.</code><code class="descname">CheckConfig</code><span class="sig-paren">(</span><em>uconfig</em><span class="sig-paren">)</span><a class="headerlink" href="#makeload.CheckConfig" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check for valid config entries after parse/loading</p>
@@ -794,13 +765,11 @@ reset mainName path to outDir if no arg “outDir”</p>
 <dd><p>Load user defined “configPath” or start with auto-renamed 
 default configuration as helper, if started with “two quotes” 
 no space (“”) as configPath parameter.</p>
-<blockquote>
-<div>After user adjustments to default_config.config content or</div></blockquote>
-<p>name, or path, user will need to re-run using “auto-renamed” 
+<p>After user adjustments to default_config.config content or
+name, or path, user will need to re-run using “auto-renamed” 
 config path.</p>
-<blockquote>
-<div>The auto-renamed file is <em>shown as output</em> in the output log.</div></blockquote>
-<p>This will finish a build.</p>
+<p>The auto-renamed file is <em>shown as output</em> in the output log. 
+This will finish a build.</p>
 <p>Provides user opportunity to change defaults in an editor 
 before building on default settings and assembly information.</p>
 <p>If you use “two quotes no space (“”) as the first arg then the 
@@ -861,6 +830,22 @@ go to the “/UserDefaulted” directory.</p>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">[str] - path if isfile</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raise:</th><td class="field-body">[IOError] sent to partialError</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="makeload.pathRead">
+<code class="descclassname">makeload.</code><code class="descname">pathRead</code><span class="sig-paren">(</span><em>fpaths</em><span class="sig-paren">)</span><a class="headerlink" href="#makeload.pathRead" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try to read a file path or or lst of file paths.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Params:</th><td class="field-body">fpath[s] [str][list] - path[s] to check</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">path[s] read [str] or [list]</td>
 </tr>
 </tbody>
 </table>
