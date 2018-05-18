@@ -19,21 +19,27 @@
 #####################################################################################
 
 """
-    ::pyc: The Command-Line Python Compiler
+    pyc: The Command-Line Python Compiler
+    \
+       
+    Usage: ipy.exe pyc.py [options] file [file ...]
+    \
+  
     ::
-    ::Usage: ipy.exe pyc.py [options] file [file ...]
-    ::
-    ::Options:
-        /out:output_file                          Output file name (default is main_file.<extenstion>)
-        /target:dll                               Compile only into dll.  Default
-        /target:exe                               Generate console executable stub for startup in addition to dll.
-        /target:winexe           TODO             Generate windows executable stub for startup in addition to dll.
-        @<file>                  NOT TESTED       Specifies a response file to be parsed for input files and command line options (one per line)
-        /file_version:<version>  NOT IMPLEMENTED  Set the file/assembly version
-        /? /h                                     This message
-        -v - in ipybuild args                     Verbose output
+        
+     Options:
+      /out:output_file                          Output file name (default is main_file.<extenstion>)
+      /target:dll                               Compile only into dll.  Default
+      /target:exe                               Generate console executable stub for startup in addition to dll.
+      /target:winexe           TODO             Generate windows executable stub for startup in addition to dll.
+      @<file>                  NOT TESTED       Specifies a response file to be parsed for input files and command line options (one per line)
+      /file_version:<version>  NOT IMPLEMENTED  Set the file/assembly version
+      /? /h                                     This message
+      -v - in ipybuild args                     Verbose output
 
-    ::EXE/WinEXE specific options:
+    ::
+        
+      EXE/WinEXE specific options:
         /main:main_file.py                        Main file of the project (module to be executed first)
         /platform:x86                             Compile for x86 only
         /platform:x64                             Compile for x64 only
@@ -45,8 +51,10 @@
         /file_info_company:<name>                 Set company name in executable meta information
         /file_info_copyright:<info>               Set copyright information in executable meta information
         /file_info_trademark:<info>               Set trademark information in executable meta information
+    
     ::
-    ::Example:
+      
+      Example:
         ipy.exe pyc.py /main:Program.py mian.py /target:exe
 
 """

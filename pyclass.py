@@ -17,6 +17,15 @@ except Exception:
 from version import __version__
 
 class hndlFileStreams():
+    ''' 
+       Used in verbose output to show file handles opened and
+       file handles closed.
+        
+       Used to hold a reference to opened filestreams then close 
+       when appropriate.
+        
+    '''
+    
     _handles = []
     _closes = []
     _fdic = {}
@@ -26,6 +35,10 @@ class hndlFileStreams():
         pass
     
     def fdic(self, key=None, skey=None, val=None):
+        '''
+           Dictionary to hold filestream name:handle key pairs
+        
+        '''
         if key and skey and val:
             if key in self._fdic.keys():
                 if skey in self._fdic[key].keys():
@@ -39,6 +52,7 @@ class hndlFileStreams():
     
     @property
     def handles(self):
+        '''handles property'''
         return self._handles
     
     @handles.setter
@@ -48,9 +62,11 @@ class hndlFileStreams():
 
     @property
     def closed(self):
+        '''closed property'''
         return self._closed
 
     def closes(self, val):
+        '''close handle by val'''
         assert isinstance(val, list), 'need list for handle [name, strm.handle]'
         haveHndl = False
         haveName = False
@@ -74,6 +90,10 @@ class hndlFileStreams():
                     del self.handles[i]
 
     def hndlReport(self, typ='handles'):
+        '''
+          Produce report showing handle opened/closed status
+          
+        '''
         rptTyp = 'Open'
         rpt = ''
         obj = None
