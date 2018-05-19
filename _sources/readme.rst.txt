@@ -253,8 +253,15 @@ known issues
 ------------
 - well none documented so far: Apr 23, 2018 16:51 MST
 
-version issues v0.0.A10
+version issues v0.0.A20
 -----------------------
+  **Version v0.0.A20**
+    - Second alpha release
+    - Added Standalone ipybuilder.exe
+    
+  **Version v0.0.A10**
+    - First alpha release
+     
 see section: work todo continues
   \
 
@@ -262,16 +269,20 @@ see section: work todo continues
 
 Versions
 ========
-**v0.0.A10** - current
-  - well, none so far: Apr 23, 2018 16:51 MST
-
-  **Version v0.0.A10**
+**v0.0.A20** - current
+  - well, none so far: May 18, 2018 01:08 MST
+  
+  **Version v0.0.A20**
     - Alpha release to start
     - Tested:
       - Window 7 64 platform - 32 bit python
     - issues:
-      see: issues v0.0.A10
+      see: issues v0.0.A20
       \  
+  **Version v0.0.A10**
+    - Alpha release to start
+    - Tested:
+      - Window 7 64 platform - 32 bit python
       
 Authors
 =======

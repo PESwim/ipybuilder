@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>buildlogs &mdash; ipybuilder 0.0.A10 documentation</title>
+  <title>buildlogs &mdash; ipybuilder 0.0.A20 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="ipybuilder 0.0.A10 documentation" href="index.html"/>
+    <link rel="top" title="ipybuilder 0.0.A20 documentation" href="index.html"/>
         <link rel="up" title="ipybuilder" href="indxmeth.html"/>
         <link rel="next" title="IronPython™ compiler" href="ipypyc.html"/>
         <link rel="prev" title="ipybuilder" href="indxmeth.html"/> 
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                0.0.A10
+                0.0.A20
               </div>
             
           
@@ -95,6 +95,7 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="TLDR.html"><strong>tldr</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="bld.html"><strong>ipybuild</strong></a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="indxmeth.html">ipybuilder</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">buildlogs</a></li>
@@ -107,6 +108,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-makeload">makeload</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-makeparse">makeparse</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-partialerror">partialerror</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyc">pyc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyclass">pyclass</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-regt">regt</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-required">required</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-terminalcolorlog">terminalcolorlog</a></li>
@@ -347,6 +350,45 @@ in path. AddRef &lt;App&gt;DLL</td>
 <span id="partialerror"></span><h1>partialerror<a class="headerlink" href="#module-partialerror" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference internal" href="meth.html#parerr"><span class="std std-ref">partialerror methods</span></a></p>
 </div>
+<div class="section" id="module-pyc">
+<span id="pyc"></span><h1>pyc<a class="headerlink" href="#module-pyc" title="Permalink to this headline">¶</a></h1>
+<p>pyc: The Command-Line Python Compiler</p>
+<p>Usage: ipy.exe pyc.py [options] file [file …]</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Options:
+ /out:output_file                          Output file name (default is main_file.&lt;extenstion&gt;)
+ /target:dll                               Compile only into dll.  Default
+ /target:exe                               Generate console executable stub for startup in addition to dll.
+ /target:winexe           TODO             Generate windows executable stub for startup in addition to dll.
+ @&lt;file&gt;                  NOT TESTED       Specifies a response file to be parsed for input files and command line options (one per line)
+ /file_version:&lt;version&gt;  NOT IMPLEMENTED  Set the file/assembly version
+ /? /h                                     This message
+ -v - in ipybuild args                     Verbose output
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">EXE</span><span class="o">/</span><span class="n">WinEXE</span> <span class="n">specific</span> <span class="n">options</span><span class="p">:</span>
+  <span class="o">/</span><span class="n">main</span><span class="p">:</span><span class="n">main_file</span><span class="o">.</span><span class="n">py</span>                        <span class="n">Main</span> <span class="n">file</span> <span class="n">of</span> <span class="n">the</span> <span class="n">project</span> <span class="p">(</span><span class="n">module</span> <span class="n">to</span> <span class="n">be</span> <span class="n">executed</span> <span class="n">first</span><span class="p">)</span>
+  <span class="o">/</span><span class="n">platform</span><span class="p">:</span><span class="n">x86</span>                             <span class="n">Compile</span> <span class="k">for</span> <span class="n">x86</span> <span class="n">only</span>
+  <span class="o">/</span><span class="n">platform</span><span class="p">:</span><span class="n">x64</span>                             <span class="n">Compile</span> <span class="k">for</span> <span class="n">x64</span> <span class="n">only</span>
+  <span class="o">/</span><span class="n">embed</span>                                    <span class="n">Embeds</span> <span class="n">the</span> <span class="n">generated</span> <span class="n">DLL</span> <span class="k">as</span> <span class="n">a</span> <span class="n">resource</span> <span class="n">into</span> <span class="n">the</span> <span class="n">executable</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">loaded</span> <span class="n">at</span> <span class="n">runtime</span>
+  <span class="o">/</span><span class="n">libembed</span>                                 <span class="n">Embeds</span> <span class="n">the</span> <span class="n">StdLib</span> <span class="n">DLL</span> <span class="k">as</span> <span class="n">a</span> <span class="n">resource</span> <span class="n">into</span> <span class="n">the</span> <span class="n">executable</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">loaded</span> <span class="n">at</span> <span class="n">runtime</span>
+  <span class="o">/</span><span class="n">mta</span>                                      <span class="n">Set</span> <span class="n">MTAThreadAttribute</span> <span class="n">on</span> <span class="n">Main</span> <span class="n">instead</span> <span class="n">of</span> <span class="n">STAThreadAttribute</span><span class="p">,</span> <span class="n">only</span> <span class="n">valid</span> <span class="k">for</span> <span class="o">/</span><span class="n">target</span><span class="p">:</span><span class="n">winexe</span>
+  <span class="o">/</span><span class="n">file_info_product</span><span class="p">:</span><span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span>                 <span class="n">Set</span> <span class="n">product</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">executable</span> <span class="n">meta</span> <span class="n">information</span>
+  <span class="o">/</span><span class="n">file_info_product_version</span><span class="p">:</span><span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span>      <span class="n">Set</span> <span class="n">product</span> <span class="n">version</span> <span class="ow">in</span> <span class="n">executable</span> <span class="n">meta</span> <span class="n">information</span>
+  <span class="o">/</span><span class="n">file_info_company</span><span class="p">:</span><span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span>                 <span class="n">Set</span> <span class="n">company</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">executable</span> <span class="n">meta</span> <span class="n">information</span>
+  <span class="o">/</span><span class="n">file_info_copyright</span><span class="p">:</span><span class="o">&lt;</span><span class="n">info</span><span class="o">&gt;</span>               <span class="n">Set</span> <span class="n">copyright</span> <span class="n">information</span> <span class="ow">in</span> <span class="n">executable</span> <span class="n">meta</span> <span class="n">information</span>
+  <span class="o">/</span><span class="n">file_info_trademark</span><span class="p">:</span><span class="o">&lt;</span><span class="n">info</span><span class="o">&gt;</span>               <span class="n">Set</span> <span class="n">trademark</span> <span class="n">information</span> <span class="ow">in</span> <span class="n">executable</span> <span class="n">meta</span> <span class="n">information</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Example</span><span class="p">:</span>
+  <span class="n">ipy</span><span class="o">.</span><span class="n">exe</span> <span class="n">pyc</span><span class="o">.</span><span class="n">py</span> <span class="o">/</span><span class="n">main</span><span class="p">:</span><span class="n">Program</span><span class="o">.</span><span class="n">py</span> <span class="n">mian</span><span class="o">.</span><span class="n">py</span> <span class="o">/</span><span class="n">target</span><span class="p">:</span><span class="n">exe</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="meth.html#pycm"><span class="std std-ref">pyc methods</span></a></p>
+</div>
+<div class="section" id="module-pyclass">
+<span id="pyclass"></span><h1>pyclass<a class="headerlink" href="#module-pyclass" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="meth.html#pycl"><span class="std std-ref">pyclass methods</span></a></p>
+</div>
 <div class="section" id="module-regt">
 <span id="regt"></span><h1>regt<a class="headerlink" href="#module-regt" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference internal" href="meth.html#rgt"><span class="std std-ref">regt methods</span></a></p>
@@ -409,7 +451,7 @@ in path. AddRef &lt;App&gt;DLL</td>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.0.A10',
+            VERSION:'0.0.A20',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

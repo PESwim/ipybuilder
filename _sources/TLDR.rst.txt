@@ -1,0 +1,47 @@
+
+.. _ipybuilder source download: https://github.com/HBDunn/readme.git
+
+.. _tldr:
+
+**tldr**
+========
+
+have IronPython
+---------------
+
+  #. `ipybuilder source download`_
+  
+  #. unzip download into a directory named "/builder"
+  
+  #. python or ipy run ipybuilder with no args.
+      if: you don't get output of ``Echo no params - OK``
+      then: no tldr
+  
+  #. have your python code source directory in mind
+  
+  #. modify the default assembly.json file or not.
+  
+  #. run ipybuild with the name of your python file as an argument.
+     see: :ref:`cmd ex`
+  
+  #. see the executable in the /release directory.
+  
+  #. no more tldr.
+  
+no IronPython
+-------------
+  #. `ipybuilder source download`_
+  
+  #. unzip the download ipybuilder.exe under the ipybuilder_ipy_install directory
+      into a directory. 
+  
+  #. run ipybuilder.exe with no args.
+      if: you don't get output of ``Echo no params - OK``
+      then: no tldr
+  
+  #. follow 4-5 above
+      
+  #. run ipybuilder.exe with the name of your python file as an argument.
+     see: :ref:`cmd ex`    
+  
+  #. see above 7 - 8.

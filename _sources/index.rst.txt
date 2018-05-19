@@ -18,6 +18,8 @@ ipybuilder's documentation
    `ipybuilder source download`_
 
    `readme`_
+   
+   :ref:`tldr`
 
 Highlights   
 **********
@@ -33,19 +35,16 @@ Highlights
    
    * *see what work is already a* :ref:`to dos`   
    
-semi-precious gems
-------------------
-  *Cherry pick code as stanalone modules/classes*
+standalone code
+---------------
+  *pick code modoules as stanalone modules/classes*
   
   *add logging colors*
     :download:`TerminalColorlog <../../builder/terminalcolorlog.py>`
   
-  *use your modified config inputs to directly run the pyc.py module*
-    :download:`pyc <../../builder/pyc.py>`
-  
   *simple clr imports debug tool - see how to interact with IronPython/.net*
-  **runs with ipy only**
-  :download:`ipyver <../../builder/ipyver.py>`
+  
+  **runs with ipy only** :download:`ipyver <../../builder/ipyver.py>`
   
   Copy and use any code, but please attribute the author to keep license.
   
@@ -53,6 +52,7 @@ semi-precious gems
    :maxdepth: 3
    :caption: Contents:
    
+   TLDR.rst
    bld.rst
    indxmeth.rst
    ipypyc.rst

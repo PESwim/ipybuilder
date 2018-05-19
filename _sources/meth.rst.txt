@@ -86,6 +86,22 @@ partialerror methods
 .. automodule:: partialerror
    :members: 
 
+.. _pycl:
+
+pyclass methods
++++++++++++++++
+
+.. automodule:: pyclass
+   :members:
+   
+.. _pycm:
+
+pyc methods
++++++++++++
+
+.. automodule:: pyc
+   :members:
+
 .. _rgt:
 
 regt methods
@@ -118,5 +134,4 @@ version methods
 
 .. automodule:: version
    :members: 
-   
-   
+

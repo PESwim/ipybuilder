@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>buildlogs methods &mdash; ipybuilder 0.0.A10 documentation</title>
+  <title>buildlogs methods &mdash; ipybuilder 0.0.A20 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="ipybuilder 0.0.A10 documentation" href="index.html"/> 
+    <link rel="top" title="ipybuilder 0.0.A20 documentation" href="index.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                0.0.A10
+                0.0.A20
               </div>
             
           
@@ -92,6 +92,7 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="TLDR.html"><strong>tldr</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="bld.html"><strong>ipybuild</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="indxmeth.html">ipybuilder</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ipypyc.html">IronPython™ compiler</a></li>
@@ -175,6 +176,8 @@
 <li class="toctree-l1"><a class="reference internal" href="mod.html#module-makeload">makeload</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mod.html#module-makeparse">makeparse</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mod.html#module-partialerror">partialerror</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mod.html#module-pyc">pyc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mod.html#module-pyclass">pyclass</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mod.html#module-regt">regt</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mod.html#module-required">required</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mod.html#module-terminalcolorlog">terminalcolorlog</a></li>
@@ -941,6 +944,135 @@ re-run with fix’</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-pyclass">
+<span id="pyclass-methods"></span><span id="pycl"></span><h1>pyclass methods<a class="headerlink" href="#module-pyclass" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyclass.hndlFileStreams">
+<em class="property">class </em><code class="descclassname">pyclass.</code><code class="descname">hndlFileStreams</code><a class="headerlink" href="#pyclass.hndlFileStreams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used in verbose output to show file handles opened and
+file handles closed.</p>
+<p>Used to hold a reference to opened filestreams then close 
+when appropriate.</p>
+<dl class="method">
+<dt id="pyclass.hndlFileStreams.fdic">
+<code class="descname">fdic</code><span class="sig-paren">(</span><em>key=None</em>, <em>skey=None</em>, <em>val=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyclass.hndlFileStreams.fdic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary to hold filestream name:handle key pairs</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyclass.hndlFileStreams.handles">
+<code class="descname">handles</code><a class="headerlink" href="#pyclass.hndlFileStreams.handles" title="Permalink to this definition">¶</a></dt>
+<dd><p>handles property</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyclass.hndlFileStreams.closed">
+<code class="descname">closed</code><a class="headerlink" href="#pyclass.hndlFileStreams.closed" title="Permalink to this definition">¶</a></dt>
+<dd><p>closed property</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyclass.hndlFileStreams.closes">
+<code class="descname">closes</code><span class="sig-paren">(</span><em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#pyclass.hndlFileStreams.closes" title="Permalink to this definition">¶</a></dt>
+<dd><p>close handle by val</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyclass.hndlFileStreams.hndlReport">
+<code class="descname">hndlReport</code><span class="sig-paren">(</span><em>typ='handles'</em><span class="sig-paren">)</span><a class="headerlink" href="#pyclass.hndlFileStreams.hndlReport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Produce report showing handle opened/closed status</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyc">
+<span id="pyc-methods"></span><span id="pycm"></span><h1>pyc methods<a class="headerlink" href="#module-pyc" title="Permalink to this headline">¶</a></h1>
+<p>pyc: The Command-Line Python Compiler</p>
+<p>Usage: ipy.exe pyc.py [options] file [file …]</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Options:
+ /out:output_file                          Output file name (default is main_file.&lt;extenstion&gt;)
+ /target:dll                               Compile only into dll.  Default
+ /target:exe                               Generate console executable stub for startup in addition to dll.
+ /target:winexe           TODO             Generate windows executable stub for startup in addition to dll.
+ @&lt;file&gt;                  NOT TESTED       Specifies a response file to be parsed for input files and command line options (one per line)
+ /file_version:&lt;version&gt;  NOT IMPLEMENTED  Set the file/assembly version
+ /? /h                                     This message
+ -v - in ipybuild args                     Verbose output
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">EXE</span><span class="o">/</span><span class="n">WinEXE</span> <span class="n">specific</span> <span class="n">options</span><span class="p">:</span>
+  <span class="o">/</span><span class="n">main</span><span class="p">:</span><span class="n">main_file</span><span class="o">.</span><span class="n">py</span>                        <span class="n">Main</span> <span class="n">file</span> <span class="n">of</span> <span class="n">the</span> <span class="n">project</span> <span class="p">(</span><span class="n">module</span> <span class="n">to</span> <span class="n">be</span> <span class="n">executed</span> <span class="n">first</span><span class="p">)</span>
+  <span class="o">/</span><span class="n">platform</span><span class="p">:</span><span class="n">x86</span>                             <span class="n">Compile</span> <span class="k">for</span> <span class="n">x86</span> <span class="n">only</span>
+  <span class="o">/</span><span class="n">platform</span><span class="p">:</span><span class="n">x64</span>                             <span class="n">Compile</span> <span class="k">for</span> <span class="n">x64</span> <span class="n">only</span>
+  <span class="o">/</span><span class="n">embed</span>                                    <span class="n">Embeds</span> <span class="n">the</span> <span class="n">generated</span> <span class="n">DLL</span> <span class="k">as</span> <span class="n">a</span> <span class="n">resource</span> <span class="n">into</span> <span class="n">the</span> <span class="n">executable</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">loaded</span> <span class="n">at</span> <span class="n">runtime</span>
+  <span class="o">/</span><span class="n">libembed</span>                                 <span class="n">Embeds</span> <span class="n">the</span> <span class="n">StdLib</span> <span class="n">DLL</span> <span class="k">as</span> <span class="n">a</span> <span class="n">resource</span> <span class="n">into</span> <span class="n">the</span> <span class="n">executable</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">loaded</span> <span class="n">at</span> <span class="n">runtime</span>
+  <span class="o">/</span><span class="n">mta</span>                                      <span class="n">Set</span> <span class="n">MTAThreadAttribute</span> <span class="n">on</span> <span class="n">Main</span> <span class="n">instead</span> <span class="n">of</span> <span class="n">STAThreadAttribute</span><span class="p">,</span> <span class="n">only</span> <span class="n">valid</span> <span class="k">for</span> <span class="o">/</span><span class="n">target</span><span class="p">:</span><span class="n">winexe</span>
+  <span class="o">/</span><span class="n">file_info_product</span><span class="p">:</span><span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span>                 <span class="n">Set</span> <span class="n">product</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">executable</span> <span class="n">meta</span> <span class="n">information</span>
+  <span class="o">/</span><span class="n">file_info_product_version</span><span class="p">:</span><span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span>      <span class="n">Set</span> <span class="n">product</span> <span class="n">version</span> <span class="ow">in</span> <span class="n">executable</span> <span class="n">meta</span> <span class="n">information</span>
+  <span class="o">/</span><span class="n">file_info_company</span><span class="p">:</span><span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span>                 <span class="n">Set</span> <span class="n">company</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">executable</span> <span class="n">meta</span> <span class="n">information</span>
+  <span class="o">/</span><span class="n">file_info_copyright</span><span class="p">:</span><span class="o">&lt;</span><span class="n">info</span><span class="o">&gt;</span>               <span class="n">Set</span> <span class="n">copyright</span> <span class="n">information</span> <span class="ow">in</span> <span class="n">executable</span> <span class="n">meta</span> <span class="n">information</span>
+  <span class="o">/</span><span class="n">file_info_trademark</span><span class="p">:</span><span class="o">&lt;</span><span class="n">info</span><span class="o">&gt;</span>               <span class="n">Set</span> <span class="n">trademark</span> <span class="n">information</span> <span class="ow">in</span> <span class="n">executable</span> <span class="n">meta</span> <span class="n">information</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Example</span><span class="p">:</span>
+  <span class="n">ipy</span><span class="o">.</span><span class="n">exe</span> <span class="n">pyc</span><span class="o">.</span><span class="n">py</span> <span class="o">/</span><span class="n">main</span><span class="p">:</span><span class="n">Program</span><span class="o">.</span><span class="n">py</span> <span class="n">mian</span><span class="o">.</span><span class="n">py</span> <span class="o">/</span><span class="n">target</span><span class="p">:</span><span class="n">exe</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="pyc.PythonDynamic">
+<em class="property">class </em><code class="descclassname">pyc.</code><code class="descname">PythonDynamic</code><span class="sig-paren">(</span><em>config</em>, <em>assName</em>, <em>intDlls</em><span class="sig-paren">)</span><a class="headerlink" href="#pyc.PythonDynamic" title="Permalink to this definition">¶</a></dt>
+<dd><p>PythonDynamic class - runs detailed check and reource loading
+specifically implemented to run ipybuilder.exe - Stanalone IronPython compiler.</p>
+<p>Use the ipybuilder.exe or ipybuild.py [-v] arg to get full output</p>
+<p>5/26/2018 Copyright 2018 - hdunn. Apache 2.0 licensed.</p>
+<p>Modified Code from original pyc.py</p>
+<dl class="method">
+<dt id="pyc.PythonDynamic.reportDDic">
+<code class="descname">reportDDic</code><span class="sig-paren">(</span><em>DDic</em>, <em>strTitle</em><span class="sig-paren">)</span><a class="headerlink" href="#pyc.PythonDynamic.reportDDic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Nested dict print
+DDic is for double (nested dics)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">DDic [dict] is return from PyDynAssem instance - i.e. pydynassem.ReqDlls()
+strTitle [str] - title caption</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyc.PythonDynamic.reportDic">
+<code class="descname">reportDic</code><span class="sig-paren">(</span><em>Dic</em>, <em>strTitle</em><span class="sig-paren">)</span><a class="headerlink" href="#pyc.PythonDynamic.reportDic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dict print
+Dic is for single (normal dics)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">Dic [dict] is return from PyDynAssem instance - i.e. pydynassem.NotLoadedDlls()
+strTitle [str] - title caption</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="pyc.GenerateExe">
+<code class="descclassname">pyc.</code><code class="descname">GenerateExe</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span><a class="headerlink" href="#pyc.GenerateExe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the stub .EXE file for starting the app</p>
+<p>For an ipybuilder.exe build - Must set &lt;proj&gt;assembly.json flag:
+stanalone: “true” - if IronPython is not installed in loadable path.</p>
+<p>ipybuilde.exe will automatically embed dlls into standalone if IronPython
+is not found.</p>
+<p>see Documentation</p>
+</dd></dl>
+
+</div>
 <div class="section" id="module-regt">
 <span id="regt-methods"></span><span id="rgt"></span><h1>regt methods<a class="headerlink" href="#module-regt" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
@@ -1052,7 +1184,7 @@ No-way to know what tty your running</em></p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.0.A10',
+            VERSION:'0.0.A20',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

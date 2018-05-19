@@ -59,6 +59,18 @@ partialerror
 
    :ref:`parerr`
 
+pyc 
+^^^
+.. automodule:: pyc
+
+   :ref:`pycm`
+
+pyclass
+^^^^^^^
+.. automodule:: pyclass
+
+   :ref:`pycl`
+
 regt
 ^^^^
 .. automodule:: regt

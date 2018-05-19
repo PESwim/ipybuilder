@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ipybuilder’s documentation &mdash; ipybuilder 0.0.A10 documentation</title>
+  <title>ipybuilder’s documentation &mdash; ipybuilder 0.0.A20 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="ipybuilder 0.0.A10 documentation" href="#"/>
-        <link rel="next" title="ipybuild" href="bld.html"/> 
+    <link rel="top" title="ipybuilder 0.0.A20 documentation" href="#"/>
+        <link rel="next" title="tldr" href="TLDR.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                0.0.A10
+                0.0.A20
               </div>
             
           
@@ -93,6 +93,7 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="TLDR.html"><strong>tldr</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="bld.html"><strong>ipybuild</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="indxmeth.html">ipybuilder</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ipypyc.html">IronPython™ compiler</a></li>
@@ -167,9 +168,10 @@
   <div class="section" id="ipybuilder-s-documentation">
 <span id="docs-home"></span><h1>ipybuilder’s documentation<a class="headerlink" href="#ipybuilder-s-documentation" title="Permalink to this headline">¶</a></h1>
 <blockquote>
-<div><p><strong>Version:</strong> 0.0.A10 - Apr 23, 2018</p>
+<div><p><strong>Version:</strong> 0.0.A20 - May 18, 2018</p>
 <p><a class="reference external" href="https://github.com/HBDunn/readme.git">ipybuilder source download</a></p>
 <p><a class="reference external" href="readme.html">readme</a></p>
+<p><a class="reference internal" href="TLDR.html#tldr"><span class="std std-ref">tldr</span></a></p>
 </div></blockquote>
 <div class="section" id="highlights">
 <h2>Highlights<a class="headerlink" href="#highlights" title="Permalink to this headline">¶</a></h2>
@@ -182,29 +184,31 @@ using <em>python 2.7</em>™.</li>
 <li><em>PascalCase</em> - match C#.net™.</li>
 <li><em>Verbose</em> - check build with non-aborting confirming output.</li>
 <li><em>Parse</em> - attempt almost any reasonable full or partial input <em>(no argparse)</em>.</li>
-<li><strong>Alpha</strong> - release 0.0.A10 to get started.</li>
+<li><strong>Alpha</strong> - release 0.0.A20 to get started.</li>
 <li><strong>Not Endorsed by C#.Net, IronPython, or python</strong></li>
 <li><em>see what work is already a</em> <a class="reference internal" href="todo.html#to-dos"><span class="std std-ref">ToDo next steps</span></a></li>
 </ul>
 </div></blockquote>
-<div class="section" id="semi-precious-gems">
-<h3>semi-precious gems<a class="headerlink" href="#semi-precious-gems" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="standalone-code">
+<h3>standalone code<a class="headerlink" href="#standalone-code" title="Permalink to this headline">¶</a></h3>
 <blockquote>
-<div><p><em>Cherry pick code as stanalone modules/classes</em></p>
+<div><p><em>pick code modoules as stanalone modules/classes</em></p>
 <dl class="docutils">
 <dt><em>add logging colors</em></dt>
 <dd><a class="reference download internal" href="_downloads/terminalcolorlog.py" download=""><code class="xref download docutils literal notranslate"><span class="pre">TerminalColorlog</span></code></a></dd>
-<dt><em>use your modified config inputs to directly run the pyc.py module</em></dt>
-<dd><a class="reference download internal" href="_downloads/pyc.py" download=""><code class="xref download docutils literal notranslate"><span class="pre">pyc</span></code></a></dd>
 </dl>
-<p><em>simple clr imports debug tool - see how to interact with IronPython/.net</em>
-<strong>runs with ipy only</strong>
-<a class="reference download internal" href="_downloads/ipyver.py" download=""><code class="xref download docutils literal notranslate"><span class="pre">ipyver</span></code></a></p>
+<p><em>simple clr imports debug tool - see how to interact with IronPython/.net</em></p>
+<p><strong>runs with ipy only</strong> <a class="reference download internal" href="_downloads/ipyver.py" download=""><code class="xref download docutils literal notranslate"><span class="pre">ipyver</span></code></a></p>
 <p>Copy and use any code, but please attribute the author to keep license.</p>
 </div></blockquote>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="TLDR.html"><strong>tldr</strong></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="TLDR.html#have-ironpython">have IronPython</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TLDR.html#no-ironpython">no IronPython</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="bld.html"><strong>ipybuild</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="indxmeth.html">ipybuilder</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="mod.html">buildlogs</a></li>
@@ -217,6 +221,8 @@ using <em>python 2.7</em>™.</li>
 <li class="toctree-l2"><a class="reference internal" href="mod.html#module-makeload">makeload</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mod.html#module-makeparse">makeparse</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mod.html#module-partialerror">partialerror</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mod.html#module-pyc">pyc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mod.html#module-pyclass">pyclass</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mod.html#module-regt">regt</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mod.html#module-required">required</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mod.html#module-terminalcolorlog">terminalcolorlog</a></li>
@@ -284,7 +290,7 @@ using <em>python 2.7</em>™.</li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="bld.html" class="btn btn-neutral float-right" title="ipybuild" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="TLDR.html" class="btn btn-neutral float-right" title="tldr" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>
@@ -316,7 +322,7 @@ using <em>python 2.7</em>™.</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.0.A10',
+            VERSION:'0.0.A20',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
