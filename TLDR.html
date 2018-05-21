@@ -97,6 +97,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#"><strong>tldr</strong></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#have-ironpython">have IronPython</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#no-ironpython">no IronPython</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#checks-on-err"><strong>checks on err</strong></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="bld.html"><strong>ipybuild</strong></a></li>
@@ -172,47 +173,124 @@
             
   <div class="section" id="tldr">
 <span id="id1"></span><h1><strong>tldr</strong><a class="headerlink" href="#tldr" title="Permalink to this headline">¶</a></h1>
+<p>ipybuilder uses:</p>
+<blockquote>
+<div><ul>
+<li><p class="first">First run takes 30-90 sec to find Ironpython path stored in defaults/ipath.txt</p>
+</li>
+<li><p class="first">Example - Smallest input exe compile with one main.py file:</p>
+<p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">ipybuild.py</span> <span class="pre">main.py</span> <span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">ipy.exe</span> <span class="pre">ipybuild.py</span> <span class="pre">main.py</span> <span class="pre">True</span></code></p>
+<p>or</p>
+<p><code class="docutils literal notranslate"><span class="pre">ipybuilder.exe</span> <span class="pre">main.py</span> <span class="pre">True</span></code></p>
+</li>
+<li><p class="first">Example - Samllest input exe compile with two main.py and support.py files:</p>
+<p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">ipybuild.py</span> <span class="pre">main.py</span> <span class="pre">exe=support.py</span> <span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">ipy</span> <span class="pre">ipybuild.py</span> <span class="pre">main.py</span> <span class="pre">True</span> <span class="pre">exe=support.py</span></code></p>
+<p>or</p>
+<p><code class="docutils literal notranslate"><span class="pre">ipybuilder.exe</span> <span class="pre">main.py</span> <span class="pre">exe=support.py</span> <span class="pre">True</span></code></p>
+</li>
+<li><p class="first">The .json file to establish compile options</p>
+</li>
+<li><p class="first">The configuation .config file to direct the directories and user .json input.
+Usually you can just use the auto-named default configutation file by not providing an argument.</p>
+</li>
+<li><p class="first">defaults config and json  saved to directory by order of:</p>
+<p>&lt;mainproj&gt;.py &gt;&gt; &lt;proj&gt;.json &gt;&gt; &lt;proj&gt;.config &gt;&gt; /UserDefaulted</p>
+</li>
+<li><p class="first">bool “True” for exe or No arg for dll</p>
+</li>
+<li><p class="first">output path - defaults to /release</p>
+</li>
+<li><p class="first">The list files contain supporting files with the keys ‘exe’ or ‘dll’ or ‘zip’.</p>
+</li>
+</ul>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">ipybuild.py</span> <span class="pre">&lt;main&gt;.py</span> <span class="pre">&lt;auto-name</span> <span class="pre">default&gt;.json</span> <span class="pre">True</span> <span class="pre">outdirpath/</span> <span class="pre">exe=projpyfilepaths.txt</span> <span class="pre">-v</span></code></p>
 <div class="section" id="have-ironpython">
 <h2>have IronPython<a class="headerlink" href="#have-ironpython" title="Permalink to this headline">¶</a></h2>
 <blockquote>
-<div><ol class="arabic simple">
-<li><a class="reference external" href="https://github.com/HBDunn/readme.git">ipybuilder source download</a></li>
-<li>unzip download into a directory named “/builder”</li>
+<div><ol class="arabic">
+<li><p class="first"><a class="reference external" href="https://github.com/HBDunn/readme.git">ipybuilder source download</a></p>
+</li>
+<li><p class="first">unzip download into a directory named “/builder”</p>
+</li>
 <li><dl class="first docutils">
 <dt>python or ipy run ipybuilder with no args.</dt>
-<dd>if: you don’t get output of <code class="docutils literal notranslate"><span class="pre">Echo</span> <span class="pre">no</span> <span class="pre">params</span> <span class="pre">-</span> <span class="pre">OK</span></code>
-then: no tldr</dd>
+<dd><p class="first last">if: you don’t get output of <code class="docutils literal notranslate"><span class="pre">Echo</span> <span class="pre">no</span> <span class="pre">params</span> <span class="pre">-</span> <span class="pre">OK</span></code>
+then: no tldr</p>
+</dd>
 </dl>
 </li>
-<li>have your python code source directory in mind</li>
-<li>modify the default assembly.json file or not.</li>
-<li>run ipybuild with the name of your python file as an argument.
-see: <a class="reference internal" href="cmd.html#cmd-ex"><span class="std std-ref">cmd shell help</span></a></li>
-<li>see the executable in the /release directory.</li>
-<li>no more tldr.</li>
+<li><p class="first">have your python code source directory in mind</p>
+</li>
+<li><p class="first">modify the default assembly.json file or not:
+found in /Userdefaulted/default_assembly.json</p>
+</li>
+<li><p class="first">run ipybuild with the name of your python file as an argument.</p>
+<p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">ipybuild.py</span> <span class="pre">mytest.py</span> <span class="pre">True</span> <span class="pre">-v</span></code></p>
+<p>use: -v argument to see all output (useful to determine error fixes)
+see: <a class="reference internal" href="cmd.html#cmd-ex"><span class="std std-ref">cmd shell help</span></a></p>
+</li>
+<li><p class="first">see the executable in the /release directory.</p>
+</li>
+<li><p class="first">no more tldr.</p>
+</li>
 </ol>
 </div></blockquote>
 </div>
 <div class="section" id="no-ironpython">
 <h2>no IronPython<a class="headerlink" href="#no-ironpython" title="Permalink to this headline">¶</a></h2>
 <blockquote>
-<div><ol class="arabic simple">
-<li><a class="reference external" href="https://github.com/HBDunn/readme.git">ipybuilder source download</a></li>
+<div><ol class="arabic">
+<li><p class="first"><a class="reference external" href="https://github.com/HBDunn/readme.git">ipybuilder source download</a></p>
+</li>
 <li><dl class="first docutils">
 <dt>unzip the download ipybuilder.exe under the ipybuilder_ipy_install directory</dt>
-<dd>into a directory.</dd>
+<dd><p class="first last">into a directory.</p>
+</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt>run ipybuilder.exe with no args.</dt>
-<dd>if: you don’t get output of <code class="docutils literal notranslate"><span class="pre">Echo</span> <span class="pre">no</span> <span class="pre">params</span> <span class="pre">-</span> <span class="pre">OK</span></code>
-then: no tldr</dd>
+<dd><p class="first last">if: you don’t get output of <code class="docutils literal notranslate"><span class="pre">Echo</span> <span class="pre">no</span> <span class="pre">params</span> <span class="pre">-</span> <span class="pre">OK</span></code>
+then: no tldr</p>
+</dd>
 </dl>
 </li>
-<li>follow 4-5 above</li>
-<li>run ipybuilder.exe with the name of your python file as an argument.
-see: <a class="reference internal" href="cmd.html#cmd-ex"><span class="std std-ref">cmd shell help</span></a></li>
-<li>see above 7 - 8.</li>
+<li><p class="first">follow 4-5 above</p>
+</li>
+<li><p class="first">run ipybuilder.exe with the name of your python file as an argument.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ipybuilder.exe</span> <span class="pre">mytest.py</span> <span class="pre">True</span> <span class="pre">-v</span></code></p>
+<p>use: True to get “exe” or no bool arg to get “dll” - default is “False”
+use: -v argument to see all output (useful to determine error fixes)
+see: <a class="reference internal" href="cmd.html#cmd-ex"><span class="std std-ref">cmd shell help</span></a>
+see: <a class="reference internal" href="cmd.html#cmd-ex"><span class="std std-ref">cmd shell help</span></a></p>
+</li>
+<li><p class="first">see above 7 - 8.</p>
+</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="checks-on-err">
+<h2><strong>checks on err</strong><a class="headerlink" href="#checks-on-err" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first">Run ipybuild.py (IronPython/python) without args.</p>
+</li>
+<li><p class="first">If you have changed ipybuilder directory or installed IronPython since last run:
+- <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">ipybuild.py</span> <span class="pre">-find</span></code>
+or
+- <code class="docutils literal notranslate"><span class="pre">ipy.exe</span> <span class="pre">ipybuild.py</span> <span class="pre">-find</span></code>
+or (no IronPython installed on system)
+- <code class="docutils literal notranslate"><span class="pre">ipybuilder.exe</span> <span class="pre">-find</span></code></p>
+<p>This <strong>first</strong> run takes too long 30-90 secs.</p>
+</li>
+<li><p class="first">Run with the -v option at end of command and see where/what is failing.
+- IronPython.SQLite and IronPython.Wpf not usually needed.</p>
+</li>
+<li><p class="first">Check to make sure the input paths (rel/abs) are correct.</p>
+</li>
+<li><p class="first">running python from non-root drive (usb e:) might work with some output errors.</p>
+</li>
 </ol>
 </div></blockquote>
 </div>

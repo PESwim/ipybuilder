@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-.. _ipybuilder source download: https://github.com/HBDunn/readme.git
+.. _ipybuilder source download: https://github.com/PESwim/ipybuilder.git
 
 .. _readme: readme.html
 

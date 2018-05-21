@@ -270,9 +270,10 @@ see section: work todo continues
 Versions
 ========
 **v0.0.A20** - current
-  - well, none so far: May 18, 2018 01:08 MST
+  May 18, 2018 01:08 MST
   
   **Version v0.0.A20**
+    - ipybuilder.exe Standalone compiler
     - Alpha release to start
     - Tested:
       - Window 7 64 platform - 32 bit python

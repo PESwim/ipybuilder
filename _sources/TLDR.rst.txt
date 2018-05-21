@@ -6,6 +6,43 @@
 **tldr**
 ========
 
+ipybuilder uses:
+
+  - First run takes 30-90 sec to find Ironpython path stored in defaults/ipath.txt
+
+  - Example - Smallest input exe compile with one main.py file:
+  
+    ``python ipybuild.py main.py True`` or ``ipy.exe ipybuild.py main.py True``
+    
+    or
+    
+    ``ipybuilder.exe main.py True``
+    
+  - Example - Samllest input exe compile with two main.py and support.py files:
+    
+    ``python ipybuild.py main.py exe=support.py True`` or ``ipy ipybuild.py main.py True exe=support.py``
+    
+    or
+    
+    ``ipybuilder.exe main.py exe=support.py True`` 
+
+  - The .json file to establish compile options
+  
+  - The configuation .config file to direct the directories and user .json input.
+    Usually you can just use the auto-named default configutation file by not providing an argument.
+  
+  - defaults config and json  saved to directory by order of:
+  
+    <mainproj>.py >> <proj>.json >> <proj>.config >> /UserDefaulted 
+   
+  - bool "True" for exe or No arg for dll 
+  
+  - output path - defaults to /release 
+  
+  - The list files contain supporting files with the keys 'exe' or 'dll' or 'zip'.
+    
+``python ipybuild.py <main>.py <auto-name default>.json True outdirpath/ exe=projpyfilepaths.txt -v``
+    
 have IronPython
 ---------------
 
@@ -16,12 +53,17 @@ have IronPython
   #. python or ipy run ipybuilder with no args.
       if: you don't get output of ``Echo no params - OK``
       then: no tldr
-  
+      
   #. have your python code source directory in mind
   
-  #. modify the default assembly.json file or not.
+  #. modify the default assembly.json file or not:
+     found in /Userdefaulted/default_assembly.json
   
   #. run ipybuild with the name of your python file as an argument.
+     
+     ``python ipybuild.py mytest.py True -v``
+     
+     use: -v argument to see all output (useful to determine error fixes) 
      see: :ref:`cmd ex`
   
   #. see the executable in the /release directory.
@@ -42,6 +84,33 @@ no IronPython
   #. follow 4-5 above
       
   #. run ipybuilder.exe with the name of your python file as an argument.
+     
+     ``ipybuilder.exe mytest.py True -v``
+     
+     use: True to get "exe" or no bool arg to get "dll" - default is "False" 
+     use: -v argument to see all output (useful to determine error fixes) 
+     see: :ref:`cmd ex`
      see: :ref:`cmd ex`    
   
   #. see above 7 - 8.
+
+**checks on err**
+-----------------
+
+  #. Run ipybuild.py (IronPython/python) without args.
+  
+  #. If you have changed ipybuilder directory or installed IronPython since last run:
+     - ``python ipybuild.py -find``
+     or
+     - ``ipy.exe ipybuild.py -find``
+     or (no IronPython installed on system)
+     - ``ipybuilder.exe -find``
+     
+     This **first** run takes too long 30-90 secs.
+      
+  #. Run with the -v option at end of command and see where/what is failing.
+     - IronPython.SQLite and IronPython.Wpf not usually needed.
+     
+  #. Check to make sure the input paths (rel/abs) are correct.
+ 
+  #. running python from non-root drive (usb e:) might work with some output errors.
