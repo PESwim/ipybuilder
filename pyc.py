@@ -63,10 +63,9 @@ clr = None
 import sys
 import pyclass
 from pyclass import hndlFileStreams
-
+import time
 try:
     import clr
-    import time
     clr.AddReference("IronPython")
     clr.AddReference("IronPython.Modules")
     clr.AddReference("System")
@@ -410,7 +409,7 @@ class PythonDynamic(object):
                                            ResourceAttributes.Public)
             
             if self.verbose:
-                print self.reportDDic(self.ResAvail(),
+                print self.reportDic(self.ResAvail()[key],
                                      'Loading Memory Resource - ' + key)
             if key in self.NotLoadedRes().keys():
                 self._NotLoadedResourceCore.pop(key)
@@ -740,16 +739,18 @@ class PythonDynamic(object):
             if (self.NotLoadedDlls().keys() or self.NotLoadedRes().keys) and self.ResNotAvail().keys():
                 nAvail = [res for res in self.NotLoadedRes().keys() if res in self.ResNotAvail().keys()]
                 if nAvail:
-                    print 'Cannot find/load the following required dlls or resources:'
-                    print self.reportDic(self.NotLoadedDlls(), 'Resource/Dlls Not Loaded')
-                    print self.reportDic(self.ResAvail(), 'Internal Resouces Availible')
                     print
-                    print 'Will not be able to load:'
+                    print '\tCannot find/load the following required dlls or resources:'
+                    print self.reportDic(self.NotLoadedDlls(), 'Resource/Dlls Not Loaded')
+                    print self.reportDDic(self.ResAvail(), 'Internal Resouces Availible')
+                    print
+                    print '\tWill not be able to load:'
                     for nar in nAvail:
                         print '\t' + str(nar)
                     print
-                    print 'Try the compiled executable (exe) {}:\n' + \
-                          '- Check that the unloaded resources are required. -'
+                    print '\tTry the compiled executable (exe) {}:\n' + \
+                          '\t  - Check that the unloaded resources are required. -'
+                    print       
         print
         return True
 
@@ -871,15 +872,16 @@ def GenerateExe(config):
         ref = clr.Convert(clrRef, System.Reflection.Assembly)
         clrRefs.append(ref.GetName())
     
-    if config.verbose: print 'Checking IP'
+    if config.verbose: print 'Checking IP - use the -find flag if system IP has changed'
     
+    #backup check should have caught this in buildmake.py
     if clrRefs and not config.standalone and \
         str(sys.argv[0]).find('ipybuilder.exe') != -1:
-        
-        if not any(clref.find('IronPython') != -1 for clref in clrRefs):
-            config.standalone = True
-            print 'WARN - switched to stanalone - No IronPython detected'
-     
+
+            if not any(clref.ToString().find('IronPython') != -1 for clref in clrRefs):
+                config.standalone = True
+                print 'WARN - switched to stanalone - No IronPython detected'
+
     if config.standalone:
         config.embed = True
     
@@ -966,7 +968,7 @@ def GenerateExe(config):
         mainMethod.SetCustomAttribute(clr.GetClrType(System.STAThreadAttribute).GetConstructor(()), System.Array[System.Byte](()))
 
     gen = mainMethod.GetILGenerator()
-
+    mstream = None
     # get the ScriptCode assembly...
     if config.embed:
 
@@ -981,6 +983,7 @@ def GenerateExe(config):
         # comment out System.IO.File.Exists(config.output + ".dll"))
         # w.AddResource("IPDll." + config.output, System.IO.File.ReadAllBytes(config.output + ".IPDLL"))
         # 5/4/2018 Copyright 2018 - hdunn. Apache 2.0 licensed. Modified from original.-----
+        
         try:
             mstream = System.IO.MemoryStream(System.IO.File.ReadAllBytes(config.output + ".dll"))
         except Exception as exs:
@@ -1054,7 +1057,8 @@ def GenerateExe(config):
     pyDynAssm.tb.CreateType()
     pyDynAssm.ab.SetEntryPoint(mainMethod, config.target)
     pyDynAssm.ab.Save(pyDynAssm.Name.Name + ".exe", config.platform, config.machine)
-    del mstream
+    if mstream:
+        del mstream
 
     if pyDynAssm.MemRes:
         for dic in pyDynAssm.MemRes:
@@ -1093,12 +1097,12 @@ def GenerateExe(config):
                 print 'Closing MemStrm: ' \
                       + System.IO.Path.GetFileName(pyDynAssm.MemDlls[idx])
             pyDynAssm.MemStrm[idx].Close()
-
-    try:
-        System.IO.File.Delete(config.output + ".IPDLL")
-    except Exception as exdl:
-        print 'del <{}>.IPDLL'.format(config.output)
-        print(exdl)
+    if System.IO.File.Exists(config.output + ".IPDLL"):
+        try:
+            System.IO.File.Delete(config.output + ".IPDLL")
+        except Exception as exdl:
+            print 'del <{}>.IPDLL'.format(config.output)
+            print(exdl)
 
 class Config(object):
 
@@ -1330,13 +1334,12 @@ def Main(args):
         pre = ('FATAL ERROR - Internal clr.ComplierModules:' + \
               '\n    - possible bad file in config.files:' + \
               '\n    - This Error will cause additional Errors:' + \
-              '\n    - Err like:\n {} - acces denied or does not exist.') \
-                  .format(config.output + '.exe')
-
+              '\n    - Err like:\n {} - acces denied or does not exist.').format(config.output + '.dll')
+        
         print(str(ex)[:255] + ' ...' + '\n' + pre + msg)
 
     if config.target != System.Reflection.Emit.PEFileKinds.Dll:
-        print 'Gen Start at - ' + time.ctime()
+        print 'Gen Start at - ' + str(time.ctime())
         GenerateExe(config)
         print 'Done generating exe ...'
         #pyc Always has file access SO MOVED/COPY In BUILDMAKE

@@ -74,6 +74,7 @@ def checkBuildConfig(usrconfig, show=False):
                   '    *missing {}\n'*len(reqlst)).format(*reqlst))
     if 'Tests' not in os.getcwd():
         StartBuild(userconfig['CONFIGPATH'])
+        
     return True
 
 def showUserConfig(configuration):

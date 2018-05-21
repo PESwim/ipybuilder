@@ -90,12 +90,11 @@ if not os.path.exists(defaultjson):
 DefaultReq = ipyreq
 DefaultReqList = []
 for txtPath in DefaultReq:
-    if gsBuild.IPATH:
+    if gsBuild.IPATH and gsBuild.IPATH != 'clr':
         DefaultReqList.append(opn(opj(gsBuild.IPATH,
                                       opb(opn(txtPath.strip())))))
-#    elif gsBuild.IPATH == 'clr':
-#        DefaultReqList = []
-#        DefaultReq = []
+    elif gsBuild.IPATH == 'clr':
+        pass
     else:
         DefaultReqList.append(os.path.normpath(txtPath.strip()))
         
@@ -121,11 +120,19 @@ if opex(opn(opab(opj(os.getcwd(),'defaults\\ipath.txt')))):
       gsBuild.IPATH = gsipath
 
    else:
-
+      # bad ipath remove
       try: 
           os.remove(opn(opab(opj(os.getcwd(),'defaults\\ipath.txt'))))
       except Exception as ex:
-        pass              
+        pass  
+else:#err debug
+    if gsBuild.IPATH:
+        strwrt = gsBuild.IPATH
+        with open(opn(opab(opj(os.getcwd(),'defaults\\ipath.txt'))), 'w') as tw:
+            tw.write(gsBuild.IPATH)
+    else:
+        with open(opn(opab(opj(os.getcwd(),'defaults\\ipath.txt'))), 'w') as tw:
+            pass
 #---------------------------- code width --------------------------------------
 
 def ndcDict(rdic):
@@ -340,8 +347,11 @@ def setMain(configPath, mainName, jsonarg, argc, argm, argj):
 
     # json with assembly >> main >> if config None
     if isdefaultm:
-       raise IOError('file | filepath not resolved:\n\t' + \
-                     'Python type "main" .py file')
+        name = 'No mainName'
+        if mainName:
+            name = mainName
+        raise IOError('file | filepath not resolved:\n\t' + \
+                      'Python type "main" .py file: {}'.format(name))
 
     if basem and '.' in basem and '.py' in basem:
         mainp = opn(opj(mainp, basem))

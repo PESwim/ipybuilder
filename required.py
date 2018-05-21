@@ -52,7 +52,6 @@ def FindIronPython():
         SEARCHCWD = opd(SEARCHCWD)
     SEARCHMODSRC = opn(opd(opd(os.__file__)))
     SEARCHROOT = os.path.splitdrive(SEARCHCWD)[0]
-
     searchList = [SEARCHCWD, SEARCHUSER, SEARCHMODSRC, SEARCHROOT]
 
     for direct in searchList:
@@ -74,8 +73,10 @@ def FindIronPython():
         with open(opn(opab(opj(os.getcwd(), 
                                'defaults\\ipath.txt'))), 'w') as tw:
             tw.write('clr')
-            
-    if not clr or (clr and not any('Iron' in clref for clref in str(clr.References).split(','))):
+        print 'Err in clr req'
+        return 'clr'
+        
+    if not clr:# or (clr and clr.References and not any('Iron' in clref for clref in str(clr.References).split(','))):
         log.warn(('\nFailed to find loadable IronPython Distribution:\n Used "{}"' + \
                   ' name to search for directory.\n\n' +
                   '   Searched ordered from base:\n {}\n {}\n {}\n {}\n') \
@@ -105,7 +106,12 @@ def checkRequiredIP():
 
     ironPythonPath = FindIronPython()
     
-    if not clr or (clr and ironPythonPath):
+    if clr:
+        gsBuild.HAVELIB = False
+        if opex(opj(os.getcwd(),'StdLib.dll')):
+            gsBuild.HAVELIBDLL = True
+            
+    if not clr or (clr and ironPythonPath and ironPythonPath != 'clr'):
         #ironPythonPath = FindIronPython()
         if opex(ironPythonPath):
             gsBuild.IPATH = ironPythonPath
@@ -144,13 +150,8 @@ def checkRequiredIP():
                      tw.write(opn(os.path.relpath(f)) + '\n')
         log.FILE('Exists {}'.format(gsBuild.requiredPath))
         
-    elif clr and not ironPythonPath:
-        gsBuild.HAVELIB = False
-        if opex(opj(os.getcwd(),'StdLib.dll')):
-            gsBuild.HAVELIBDLL = True
-        else:
-            gsBuild.HAVELIBDLL = False    
-            gsBuild.IPATH = 'clr'
+    elif clr and (not ironPythonPath or ironPythonPath == 'clr'):
+        gsBuild.IPATH = 'clr'
         
     return
 

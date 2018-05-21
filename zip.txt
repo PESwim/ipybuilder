@@ -1,5 +1,4 @@
 C:\Users\PEllc\ipython\Development\builder\assembly.json
-C:\Users\PEllc\ipython\Development\builder\assembly_config.config
 C:\Users\PEllc\ipython\Development\builder\assembly_embed_lib.json
 C:\Users\PEllc\ipython\Development\builder\build.py
 C:\Users\PEllc\ipython\Development\builder\buildcheck.py

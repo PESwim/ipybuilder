@@ -534,17 +534,24 @@ def _setCompilerClass(rconfig):
         str(assemInfo['libembed']).upper() in ['TRUE', 'FALSE']:
         f_libembed = True if str(assemInfo['libembed']).upper() \
                         == 'TRUE' else False
-
+    
+    if gsBuild.IPATH == 'clr' and gsBuild.IPYBLDPATH.find('.exe') != -1 and \
+        config['MAKEEXE'] and not f_standalone:
+        f_standalone = True
+        log.warn('\n** Switching to standalone - IronPython not installed on system.')
+        
+    if f_standalone and not config['MAKEEXE']:
+        config['MAKEEXE'] = True
+        log.warn('\n** Switching to exe compile:  dll compile and /stanalone == true in Assembly:' + \
+                 '\n {}\n' + \
+                 '  Overrides default/makeEXE == False and assembly.json flag: /standalone set to: true.' \
+                 .format(config['JSONPATH']))
+    
     ext = '.dll'
     if config['MAKEEXE'] == True or \
         str(config['MAKEEXE']).upper() == 'TRUE':
         ext = '.exe'
-
-    if f_standalone and not config['MAKEEXE']:
-        log.warn('\n** Switching to exe /stanalone == true in Assembly:' + \
-                 '\n {}\n   Overrides default or makeEXE input arg == False' \
-                 .format(config['JSONPATH']))
-    
+        
     STDLIBSOURCE = None
     LIBPATH = None
     MAINOUT = opn(opj(config['OUTDIR'], ('.').join(opb(config['MAINFILE']) \
@@ -614,7 +621,8 @@ def _setCompilerClass(rconfig):
             lstexe.append(config['LISTFILES']['exe'])
 
         lstexe = nullList(lstexe)
-
+   
+        
     compiler.f_standalone = f_standalone
     compiler.f_embed = f_embed
     compiler.f_libembed = f_libembed
@@ -636,6 +644,7 @@ def _setCompilerClass(rconfig):
     compiler.ext = ext
     compiler.lstexedlls = None
     
+         
     if not opex(opd(compiler.pycdir)):
         raise IOError('FilePath {}:\t Use absolute or relative to:\n\t {}' \
                       .format(opd(compiler.pycdir), os.getcwd()))

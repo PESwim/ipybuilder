@@ -1,10 +1,10 @@
 {
-    "product_version": "0.0.0.1", 
-    "copyright": "Copyright Notice", 
+    "company": "Process Engineering LLC (PE LLC)", 
+    "product_version": "0.0.A.20", 
     "standalone": true, 
-    "company": "Your Identifier", 
-    "file_version": "0.0.0.1", 
+    "file_version": "0.0.11.20", 
+    "embed": true,
     "libembed": false, 
-    "embed": false, 
-    "product_name": "Application exe name"
+    "copyright": "Copyright 2018 - Howard Dunn. Apache 2.0 v2 Licensed.", 
+    "product_name": "PESwim ipybuilder"
 }
