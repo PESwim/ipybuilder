@@ -97,7 +97,7 @@ from makedefault import ndcDict
 from buildlogs import dynfile
 from partialerror import partialError
 from globalstate import gsBuild
-
+import time
 log = dynfile(__name__)
 log.debug('\n---------------- ' + str(__name__) + \
               ' loaded --------------------')
@@ -180,6 +180,7 @@ def makeBuild(config):
 
         #pyc does not send .exe to mainoutdir
         if 'dll' not in compiler.ext:
+
             movestr = ['cmd', '/C', 'move', compiler.pycdir,
                opn(opd(compiler.mainoutdir) + '\\')]
 
@@ -761,10 +762,10 @@ def _subprocMove(moveCmd, source, dest, dotExt):
     
     po = None
     rpath = dest
- 
+   
     if dotExt:
         rpath = rpath + dotExt
-    
+
     clr = None # keep out global clr
     try:
         import clr    
@@ -791,11 +792,13 @@ def _subprocMove(moveCmd, source, dest, dotExt):
                 print('Failed to Move:\n\t{}'.format(source))
                 print(ex)
                 
-    elif not clr and os.path.isfile(rpath):
-        try:
-            os.remove(rpath)
-        except IOError as ex:
-            pass
+    elif not clr:
+        if os.path.isfile(rpath):
+            try:
+                os.remove(rpath)
+            except IOError as ex:
+                pass
+
         if os.path.isfile(source):
             
             try:
